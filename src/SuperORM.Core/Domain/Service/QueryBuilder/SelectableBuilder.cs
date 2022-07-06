@@ -351,5 +351,10 @@ namespace SuperORM.Core.Domain.Service.QueryBuilder
             sqlExpression.EvaluateContext.SetParametersBuilder(_parametersBuilder);
             _whereConditions.Add(sqlExpression.EvaluateWithParameters());
         }
+
+        public IEnumerable<IField> GetFields()
+        {
+            return _selectFields;
+        }
     }
 }

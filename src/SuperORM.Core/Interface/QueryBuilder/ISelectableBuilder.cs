@@ -35,5 +35,6 @@ namespace SuperORM.Core.Interface.QueryBuilder
         bool HasOrderBy();
         bool HasLimit();
         bool HasSelect();
+        IEnumerable<IField> GetFields();
     }
 }

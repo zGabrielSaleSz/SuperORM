@@ -2,6 +2,7 @@
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
 {
@@ -30,6 +31,11 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             return mainTable;
         }
 
+        internal Dictionary<Type, Table> GetTablesReference()
+        {
+            return tables;
+        }
+
         internal bool MainTableHasName()
         {
             return !string.IsNullOrWhiteSpace(mainTable.Name);
@@ -54,6 +60,11 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
         {
             CheckTableReference(type);
             return tables[type];
+        }
+
+        internal Type GetTypeByTable(Table table)
+        {
+            return tables.Where(t => t.Value == table).Select(t => t.Key).FirstOrDefault();
         }
 
         internal bool TableHasReferences(Type type)

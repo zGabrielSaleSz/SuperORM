@@ -93,9 +93,14 @@ namespace SuperORM.Core.Utilities
             return _expression as ConstantExpression;
         }
 
-        public object CompileAndInvoke()
+        public object CompileAndInvoke(params object[] parameters)
         {
-            return Expression.Lambda(_expression).Compile().DynamicInvoke();
+            return Expression.Lambda(_expression).Compile().DynamicInvoke(parameters);
+        }
+
+        public Delegate Compile()
+        {
+            return Expression.Lambda(_expression).Compile();
         }
 
         internal bool IsEnumerable()

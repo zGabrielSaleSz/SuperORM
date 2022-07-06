@@ -18,7 +18,7 @@ namespace SuperORM.Core.Test.Linq
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = new QuerySintax();
-            IDeletable<User> deletable = new Deletable<User>(connectionProvider.GetConnection(), querySintax);
+            IDeletable<User> deletable = new Deletable<User>(connectionProvider.GetNewConnection(), querySintax);
             deletable.From("users").Where(u => u.id == 5);
 
             // Act

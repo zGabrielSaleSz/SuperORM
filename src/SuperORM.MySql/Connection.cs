@@ -10,7 +10,7 @@ namespace SuperORM.MySql
 {
     public class Connection : IBaseConnection
     {
-        private MySqlConnection _mySqlConnection;
+        private readonly MySqlConnection _mySqlConnection;
         private MySqlTransaction _transaction;
         public Connection(MySqlConnection mySqlConnection)
         {

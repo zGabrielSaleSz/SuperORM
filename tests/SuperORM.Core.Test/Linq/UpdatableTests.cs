@@ -18,7 +18,7 @@ namespace SuperORM.Core.Test.Linq
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = new QuerySintax();
-            IUpdatable<User> updatable = new Updatable<User>(connectionProvider.GetConnection(), querySintax);
+            IUpdatable<User> updatable = new Updatable<User>(connectionProvider.GetNewConnection(), querySintax);
             updatable.Update("users").Set(u => u.active, false).Where(u => u.id == 5);
 
             // Act

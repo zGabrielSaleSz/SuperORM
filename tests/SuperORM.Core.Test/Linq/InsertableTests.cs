@@ -18,7 +18,7 @@ namespace SuperORM.Core.Test.Linq
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = connectionProvider.GetQuerySintax();
-            IInsertable<User> insertable = new Insertable<User>(connectionProvider.GetConnection(), querySintax);
+            IInsertable<User> insertable = new Insertable<User>(connectionProvider.GetNewConnection(), querySintax);
 
             User user = new User();
             user.id = 26;
@@ -47,7 +47,7 @@ namespace SuperORM.Core.Test.Linq
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = new QuerySintax();
-            IInsertable<User> insertable = new Insertable<User>(connectionProvider.GetConnection(), querySintax);
+            IInsertable<User> insertable = new Insertable<User>(connectionProvider.GetNewConnection(), querySintax);
 
             User user = new User();
             user.Name = "Gabriel Sales";
