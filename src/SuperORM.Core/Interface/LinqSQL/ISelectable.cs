@@ -1,4 +1,5 @@
-﻿using SuperORM.Core.Interface.QueryBuilder;
+﻿using SuperORM.Core.Domain.Model.LinqSQL;
+using SuperORM.Core.Interface.QueryBuilder;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -38,7 +39,7 @@ namespace SuperORM.Core.Interface
         ISelectable<T> Limit(uint rows);
         ISelectable<T> Limit(uint startIndex, uint amount);
         IEnumerable<T> AsEnumerable();
-        IEnumerable<T2> GetResultAs<T2>(params Expression<Func<T, T2>>[] expressions) where T2 : class;
+        IEnumerable<ResultPicker> GetResult();
         T FirstOrDefault();
     }
 }

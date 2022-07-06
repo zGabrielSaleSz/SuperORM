@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SuperORM.Core.Domain.Model.Sql
 {
-    public class SuperTransaction : IConnection, IDisposable
+    public class SuperTransaction : ITransactionConnection, IDisposable
     {
         private readonly IBaseConnection _transactionConnection;
         private bool _finishedConnection = false;

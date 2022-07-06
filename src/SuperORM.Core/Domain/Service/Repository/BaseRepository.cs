@@ -34,7 +34,7 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public ISelectable<Target> Select()
         {
-            return new Selectable<Target>(ConnectionProvider.GetConnection(), QuerySintax)
+            return new Selectable<Target>(ConnectionProvider.GetNewConnection(), QuerySintax)
                 .From(TableName);
         }
 
@@ -77,7 +77,7 @@ namespace SuperORM.Core.Domain.Service.Repository
         private IConnection GetConnection()
         {
             if (_connection == null)
-                return ConnectionProvider.GetConnection();
+                return ConnectionProvider.GetNewConnection();
             else
                 return _connection;
         }

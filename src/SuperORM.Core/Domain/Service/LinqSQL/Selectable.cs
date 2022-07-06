@@ -24,7 +24,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IConnection _connection;
         private readonly ISelectableBuilder _selectableBuilder;
         private readonly IQuerySintax _querySintax;
-        private ColumnAssimilator columnAssimilation = ColumnAssimilator.Empty;
+        private ColumnAssimilator columnAssimilator = ColumnAssimilator.Empty;
 
         public Selectable(IConnection connection, IQuerySintax querySintax)
         {
@@ -42,7 +42,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public void AddColumnAssimilation(ColumnAssimilator columnAssimilation)
         {
-            this.columnAssimilation = columnAssimilation;
+            this.columnAssimilator = columnAssimilation;
         }
 
         public ISelectable<T> SelectAll()
@@ -181,19 +181,37 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             CommandReaderContext readerContext = new CommandReaderContext(parameterizedQuery);
             foreach (Dictionary<string, object> columnsAndValues in _connection.ExecuteReader(readerContext))
             {
-                yield return EntityBuilder.Build<T>(columnsAndValues, columnAssimilation);
+                yield return EntityBuilder.Build<T>(columnsAndValues, columnAssimilator);
             }
         }
 
-        public IEnumerable<TResult> GetResultAs<TResult>(params Expression<Func<T, TResult>>[] expressions) where TResult : class
+        public IEnumerable<ResultPicker> GetResult()
         {
-            ParameterizedQuery parameterizedQuery = GetQueryWithParameters();
+            MultipleFieldAssimilator multipleFieldAssimilator = new MultipleFieldAssimilator(_selectableBuilder.GetFields());
+            multipleFieldAssimilator.UpdateUniqueAlias();
 
+            ParameterizedQuery parameterizedQuery = GetQueryWithParameters();
             CommandReaderContext readerContext = new CommandReaderContext(parameterizedQuery);
+      
             foreach (Dictionary<string, object> columnsAndValues in _connection.ExecuteReader(readerContext))
             {
-                yield return (TResult)EntityBuilder.Build<object>(columnsAndValues, columnAssimilation);
+                ResultPickerHeader resultPickerHeader = BuildResultPickerHeader(multipleFieldAssimilator, columnsAndValues);
+                ResultPicker resultPicker = new ResultPicker(resultPickerHeader);
+                yield return resultPicker;
             }
+        }
+
+        private ResultPickerHeader BuildResultPickerHeader(MultipleFieldAssimilator multipleFieldAssimilator, Dictionary<string, object> columnsAndValues)
+        {
+            ResultPickerHeader resultPickerHeader = new(columnAssimilator);
+            foreach (var columnAndValue in columnsAndValues)
+            {
+                IField field = multipleFieldAssimilator.GetFieldByAlias(columnAndValue.Key);
+                Table table = field.GetTable();
+                Type type = _tableAssimilator.GetTypeByTable(table);
+                resultPickerHeader.Add(type, field.GetFieldName(), columnAndValue.Value);
+            }
+            return resultPickerHeader;
         }
 
         public T FirstOrDefault()
