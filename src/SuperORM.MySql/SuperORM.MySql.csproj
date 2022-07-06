@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Description>MySQL distribution of SuperORM</Description>
+    <RepositoryUrl>https://github.com/zGabrielSaleSz/SuperORM.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>1.0.0-beta</PackageTags>
+    <Company>$(Authors)</Company>
+    <Authors>zGabrielSaleSz</Authors>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

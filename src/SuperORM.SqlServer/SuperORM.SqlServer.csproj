@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Description>SQL Server distribution of SuperORM</Description>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/zGabrielSaleSz/SuperORM.git</RepositoryUrl>
+    <PackageTags>1.0.0-beta</PackageTags>
+    <Company>zGabrielSaleSz</Company>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
