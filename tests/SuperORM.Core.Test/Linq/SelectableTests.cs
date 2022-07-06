@@ -25,7 +25,7 @@ namespace SuperORM.Core.Test.Linq
                 "WHERE ([users].[Name] LIKE '%Gabriel%')";
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = new QuerySintax();
-            ISelectable<User> selectable = new Selectable<User>(connectionProvider.GetConnection(), querySintax);
+            ISelectable<User> selectable = new Selectable<User>(connectionProvider.GetNewConnection(), querySintax);
             selectable
                 .Select(
                     a => a.id,

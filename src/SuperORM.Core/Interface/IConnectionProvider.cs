@@ -4,7 +4,8 @@ namespace SuperORM.Core.Interface
 {
     public interface IConnectionProvider
     {
-        IConnection GetConnection(bool transacation = false);
+        IConnection GetNewConnection();
+        ITransactionConnection GetNewTransaction();
         IBaseConnection GetBaseConnection();
         IQuerySintax GetQuerySintax();
     }

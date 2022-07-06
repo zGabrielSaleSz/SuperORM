@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RepositoryUrl>https://github.com/zGabrielSaleSz/SuperORM.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>1.0.0-beta</PackageTags>
+    <Description>Core project for Sql distribution </Description>
   </PropertyGroup>
 
 </Project>

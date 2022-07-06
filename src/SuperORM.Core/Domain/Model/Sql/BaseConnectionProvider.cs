@@ -9,12 +9,14 @@ namespace SuperORM.Core.Domain.Model.Sql
 {
     public abstract class BaseConnectionProvider : IConnectionProvider
     {
-        public IConnection GetConnection(bool transacation = false)
+        public IConnection GetNewConnection()
         {
-            if (transacation)
-                return new SuperTransaction(this);
-            else
-                return new RepositoryConnection(this);
+            return new RepositoryConnection(this);
+        }
+
+        public ITransactionConnection GetNewTransaction()
+        {
+            return new SuperTransaction(this);
         }
 
         public abstract IBaseConnection GetBaseConnection();

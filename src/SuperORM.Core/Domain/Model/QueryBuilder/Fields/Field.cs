@@ -40,6 +40,16 @@ namespace SuperORM.Core.Domain.Model.QueryBuilder.Fields
             _table = table;
         }
 
+        public void SetAlias(string alias)
+        {
+            _alias = alias;
+        }
+
+        public string GetAlias()
+        {
+            return _alias;
+        }
+
         public Table GetTable()
         {
             return _table;

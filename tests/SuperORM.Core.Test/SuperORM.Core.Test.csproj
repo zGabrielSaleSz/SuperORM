@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\src\SuperORM.SqlServer\SuperORM.SqlServer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Complement\Connections\" />
+  </ItemGroup>
+
 </Project>
