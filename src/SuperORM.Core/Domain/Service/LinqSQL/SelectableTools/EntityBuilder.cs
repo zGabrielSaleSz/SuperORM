@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Utilities.Reflection;
+using System;
 using System.Collections.Generic;
 
 namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
@@ -13,7 +14,10 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             {
                 ReflectionHandler<T> reflectionHandler = new Utilities.Reflection.ReflectionHandler<T>(entity);
                 string propertyName = columnAssimilator.GetRespective(propertyEquivalent.Key);
-                reflectionHandler.SetPropertyValue(propertyName, propertyEquivalent.Value);
+                if (propertyEquivalent.Value is not DBNull)
+                {
+                    reflectionHandler.SetPropertyValue(propertyName, propertyEquivalent.Value);
+                }
             }
             return entity;
         }
