@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace SuperORM.Core.Domain.Exceptions
+﻿namespace SuperORM.Core.Domain.Exceptions
 {
-    public class TableReferenceException : Exception
+    public class TableReferenceException : SuperOrmException
     {
         public TableReferenceException(string message) : base(message)
         {

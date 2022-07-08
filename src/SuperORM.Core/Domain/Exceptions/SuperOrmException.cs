@@ -17,6 +17,5 @@ namespace SuperORM.Core.Domain.Exceptions
         {
 
         }
-
     }
 }
