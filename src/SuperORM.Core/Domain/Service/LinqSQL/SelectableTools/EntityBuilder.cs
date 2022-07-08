@@ -1,4 +1,5 @@
-﻿using SuperORM.Core.Utilities.Reflection;
+﻿using SuperORM.Core.Domain.Exceptions;
+using SuperORM.Core.Utilities.Reflection;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +18,10 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
                 if (propertyEquivalent.Value is not DBNull)
                 {
                     reflectionHandler.SetPropertyValue(propertyName, propertyEquivalent.Value);
+                }
+                else if (!reflectionHandler.IsNullableProperty(propertyName))
+                {
+                    throw new InvalidNonNullableTypeException($"Class: {reflectionHandler.GetTypeName()} Property: {propertyName} should be a nullable property.");
                 }
             }
             return entity;

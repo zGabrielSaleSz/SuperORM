@@ -14,6 +14,10 @@ namespace SuperORM.Core.Utilities.Reflection
             _type = typeof(T);
             _src = source;
         }
+        public string GetTypeName()
+        {
+            return _type.Name;
+        }
 
         public object GetPropertyValue(string propertyName)
         {
@@ -24,6 +28,19 @@ namespace SuperORM.Core.Utilities.Reflection
         {
             PropertyInfo property = _type.GetProperty(propertyName);
             property.SetMethod.Invoke(_src, new object[] { Convert.ChangeType(value, property.PropertyType) });
+        }
+
+        public bool IsNullableProperty(string propertyName)
+        {
+            PropertyInfo property = _type.GetProperty(propertyName);
+            if (property == null)
+                return true;
+
+            Type propertyType = property.PropertyType;
+            if (!propertyType.IsValueType) 
+                return true;
+
+            return Nullable.GetUnderlyingType(property.PropertyType) != null;
         }
 
         public IEnumerable<string> GetPropertiesName()
