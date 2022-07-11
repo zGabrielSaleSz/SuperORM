@@ -14,7 +14,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             foreach (var propertyEquivalent in entityInformation)
             {
                 ReflectionHandler<T> reflectionHandler = new Utilities.Reflection.ReflectionHandler<T>(entity);
-                string propertyName = columnAssimilator.GetRespective(propertyEquivalent.Key);
+                string propertyName = columnAssimilator.GetByProperty<T>(propertyEquivalent.Key);
                 if (propertyEquivalent.Value is not DBNull)
                 {
                     reflectionHandler.SetPropertyValue(propertyName, propertyEquivalent.Value);

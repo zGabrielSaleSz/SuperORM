@@ -2,6 +2,8 @@
 using SuperORM.ConsoleTests.Repositories;
 using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Model.Sql;
+using SuperORM.Core.Domain.Service.LinqSQL;
+using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Test.Complement.Model;

@@ -19,6 +19,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IQuerySintax _querySintax;
         private readonly Table _table;
         private readonly TableAssimilator _tableAssimilator;
+        private readonly ColumnAssimilator _columnAssimilator;
 
         public Deletable(IConnection connection, IQuerySintax querySintax)
         {
@@ -28,6 +29,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _table = new Table();
             _deletableBuilder = new DeletableBuilder(querySintax);
             _tableAssimilator = new TableAssimilator(typeof(T));
+            _columnAssimilator = ColumnAssimilator.Empty;
         }
 
         public IDeletable<T> From(string tableName)
@@ -40,7 +42,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public IDeletable<T> Where(Expression<Func<T, bool>> expression)
         {
-            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(_tableAssimilator, _querySintax);
+            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(_tableAssimilator, _querySintax, _columnAssimilator);
             _deletableBuilder.SetWhereCondition(expression, evaluateColumn);
             return this;
         }

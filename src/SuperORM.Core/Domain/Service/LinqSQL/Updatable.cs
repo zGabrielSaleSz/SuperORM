@@ -20,20 +20,22 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IUpdatableBuilder _updatableBuilder;
         private readonly IQuerySintax _querySintax;
         private readonly Table _table;
-        private readonly TableAssimilator tableAssimilator;
+        private readonly TableAssimilator _tableAssimilator;
+        private readonly ColumnAssimilator _columnAssimilator;
         public Updatable(IConnection connection, IQuerySintax querySintax)
         {
             _connection = connection;
             _updatableBuilder = new UpdatableBuilder(querySintax);
             _querySintax = querySintax;
             _table = new Table();
-            tableAssimilator = new TableAssimilator(typeof(T));
+            _tableAssimilator = new TableAssimilator(typeof(T));
+            _columnAssimilator = ColumnAssimilator.Empty;
         }
 
         public IUpdatable<T> Update(string tableName)
         {
             _table.Name = tableName;
-            tableAssimilator.SetMainTableName(_table);
+            _tableAssimilator.SetMainTableName(_table);
             _updatableBuilder.Update(_table);
             return this;
         }
@@ -62,7 +64,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public IUpdatable<T> Where(Expression<Func<T, bool>> expression)
         {
-            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(tableAssimilator, _querySintax);
+            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(_tableAssimilator, _querySintax, _columnAssimilator);
             _updatableBuilder.SetWhereCondition(expression, evaluateColumn);
             return this;
         }

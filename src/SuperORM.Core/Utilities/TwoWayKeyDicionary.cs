@@ -30,6 +30,20 @@ namespace SuperORM.Core.Utilities
             _dicionaryTwo[b] = a;
         }
 
+        public T GetValueFromRightAsKey(T key)
+        {
+            if (_dicionaryTwo.ContainsKey(key))
+                return _dicionaryTwo[key];
+            return key;
+        }
+
+        public T GetValueFromLeftKey(T key)
+        {
+            if (_dicionary.ContainsKey(key))
+                return _dicionary[key];
+            return key;
+        }
+
         public T GetRespective(T key)
         {
             if (_dicionary.ContainsKey(key))
