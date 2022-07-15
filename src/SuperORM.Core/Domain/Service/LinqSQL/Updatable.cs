@@ -21,7 +21,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IQuerySintax _querySintax;
         private readonly Table _table;
         private readonly TableAssimilator _tableAssimilator;
-        private readonly ColumnAssimilator _columnAssimilator;
+        private ColumnAssimilator _columnAssimilator;
         public Updatable(IConnection connection, IQuerySintax querySintax)
         {
             _connection = connection;
@@ -30,6 +30,12 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _table = new Table();
             _tableAssimilator = new TableAssimilator(typeof(T));
             _columnAssimilator = ColumnAssimilator.Empty;
+        }
+
+        public IUpdatable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation)
+        {
+            _columnAssimilator = columnAssimilation;
+            return this;
         }
 
         public IUpdatable<T> Update(string tableName)
@@ -57,7 +63,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public IUpdatable<T> Set<TResult>(string attributeName, TResult value)
         {
-            IField fieldOne = _table.AddField<Column>(attributeName);
+            IField fieldOne = AddField(attributeName);
             _updatableBuilder.Set(fieldOne, value);
             return this;
         }
@@ -82,7 +88,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private IField GetFieldByExpression<TResult>(Expression<Func<T, TResult>> attribute)
         {
             SqlExpressionEvaluator sqlEvaluator = new SqlExpressionEvaluator(attribute.Body, _querySintax);
-            IField field = _table.AddField<Column>(sqlEvaluator.Evaluate());
+            IField field = AddField(sqlEvaluator.Evaluate());
             return field;
         }
 
@@ -92,8 +98,14 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
             CommandContext commandContext = new CommandContext();
             commandContext.AddQuery(parameterizedQuery);
-
+            
             return _connection.ExecuteNonQuery(commandContext);
+        }
+
+        private IField AddField(string attributeName)
+        {
+            string respectiveColumn = _columnAssimilator.GetByProperty<T>(attributeName);
+            return _table.AddField<Column>(respectiveColumn);
         }
     }
 }

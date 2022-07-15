@@ -221,7 +221,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             {
                 _selectableBuilder.Limit(1);
             }
-            return AsEnumerable().FirstOrDefault();
+            return AsEnumerable().ToArray().FirstOrDefault();
         }
 
         public ISelectable<T> From(string tableName)

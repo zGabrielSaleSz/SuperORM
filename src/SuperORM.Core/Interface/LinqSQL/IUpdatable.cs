@@ -1,4 +1,5 @@
-﻿using SuperORM.Core.Interface.QueryBuilder;
+﻿using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
+using SuperORM.Core.Interface.QueryBuilder;
 using System;
 using System.Linq.Expressions;
 
@@ -6,6 +7,7 @@ namespace SuperORM.Core.Interface.LinqSQL
 {
     public interface IUpdatable<T> : IQueryBuilder
     {
+        IUpdatable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation);
         IUpdatable<T> Update(string tableName);
         IUpdatable<T> Set<TResult>(Expression<Func<T, TResult>> attribute, TResult value);
         IUpdatable<T> Set<TResult>(Expression<Func<T, TResult>> attribute, Expression<Func<T, TResult>> attribute2);
