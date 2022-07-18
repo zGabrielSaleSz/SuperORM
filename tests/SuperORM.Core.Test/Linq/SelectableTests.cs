@@ -53,7 +53,7 @@ namespace SuperORM.Core.Test.Linq
         }
 
         [Fact]
-        public void Shold_BuildSelect_WhenUsingColumnAssimilator()
+        public void Shold_BuildCustomFields_When_UsingColumnAssimilator()
         {
             // Arrange
             string expected = "SELECT " +
