@@ -1,6 +1,7 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Insertable;
 using SuperORM.Core.Domain.Model.Sql;
+using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.QueryBuilder;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.LinqSQL;
@@ -20,6 +21,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IQuerySintax _querySintax;
         private readonly List<string> _ignoredColumns;
         private readonly List<T> _valuesInsert;
+        private ColumnAssimilator _columnAssimilator;
 
         public Insertable(IConnection connection, IQuerySintax querySintax)
         {
@@ -28,6 +30,13 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _insertableBuilder = new InsertableBuilder(querySintax);
             _ignoredColumns = new List<string>();
             _valuesInsert = new List<T>();
+            _columnAssimilator = ColumnAssimilator.Empty;
+        }
+
+        public IInsertable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation)
+        {
+            _columnAssimilator = columnAssimilation;
+            return this;
         }
 
         public IInsertable<T> Into(string tableName)
@@ -87,6 +96,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             {
                 AddValue(value);
             }
+            this._valuesInsert.Clear();
         }
 
         private void AddValue(T value)
@@ -95,7 +105,8 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             ReflectionHandler<T> reflectionHandler = new ReflectionHandler<T>(value);
             foreach (string property in GetPropertiesInsert())
             {
-                newValue.Add(property, reflectionHandler.GetPropertyValue(property));
+                string respectiveColumn = _columnAssimilator.GetByProperty<T>(property);
+                newValue.Add(respectiveColumn, reflectionHandler.GetPropertyValue(property));
             }
             _insertableBuilder.Values(newValue);
         }

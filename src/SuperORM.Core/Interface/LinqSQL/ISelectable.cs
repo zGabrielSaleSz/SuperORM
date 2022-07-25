@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
+using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface.QueryBuilder;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace SuperORM.Core.Interface
 {
     public interface ISelectable<T> : IQueryBuilder
     {
+        ISelectable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation);
         //ISelectable<T2> Select<T2, TResult>(this ISelectable<T2> query, Expression<Func<T2, TResult>> expression);
         ISelectable<T> From(string tableName);
         ISelectable<T> SelectAll();

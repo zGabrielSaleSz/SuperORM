@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL;
+using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Utilities.Reflection;
@@ -10,22 +11,29 @@ using System.Reflection;
 
 namespace SuperORM.Core.Domain.Service.Repository
 {
-    public class RepositoryDelete<Target, PrimaryKeyType>
+    internal class RepositoryDelete<Target, PrimaryKeyType>
     {
         private readonly IConnection _connection;
         private readonly IQuerySintax _querySintax;
 
-        public RepositoryDelete(IConnection connection, IQuerySintax querySintax)
+        private ColumnAssimilator _columnAssimilator;
+
+        internal RepositoryDelete(IConnection connection, IQuerySintax querySintax)
         {
             _connection = connection;
             _querySintax = querySintax;
+            _columnAssimilator = ColumnAssimilator.Empty;
+        }
+        internal void AddColumnAssimilator(ColumnAssimilator columnAssimilator)
+        {
+            _columnAssimilator = columnAssimilator;
         }
 
-        public int Delete(string primaryKey, string tableName, params Target[] targets)
+        internal int Delete(string primaryKey, string tableName, params Target[] targets)
         {
             Expression<Func<Target, bool>> lambda = GetWhereExpressionByPrimaryKey(primaryKey, targets);
-
             IDeletable<Target> deletable = new Deletable<Target>(_connection, _querySintax)
+                .AddColumnAssimilation(_columnAssimilator)
                 .From(tableName)
                 .Where(lambda);
 
@@ -39,13 +47,12 @@ namespace SuperORM.Core.Domain.Service.Repository
             MethodInfo methodContains = ReflectionUtils.BuildEnumerableGenericMethod<PrimaryKeyType>("Contains", 2);
 
             ExpressionHandler<Target> expressionHandler = new ExpressionHandler<Target>("e");
-
             ParameterExpression entityExpressionParameter = expressionHandler.BuildTargetParameter();
 
             ConstantExpression primaryKeyValuesExpression = Expression.Constant(primaryKeyValues);
             MemberExpression primaryKeyProperty = expressionHandler.BuildMemberExpressionFromProperty(primaryKeyPropertyName);
-
             MethodCallExpression call = Expression.Call(methodContains, primaryKeyValuesExpression, primaryKeyProperty);
+
             Expression<Func<Target, bool>> lambda = Expression.Lambda<Func<Target, bool>>(call, entityExpressionParameter);
             return lambda;
         }

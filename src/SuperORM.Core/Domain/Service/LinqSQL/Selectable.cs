@@ -40,9 +40,10 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _selectableBuilder.From(_tableAssimilator.GetMainTable());
         }
 
-        public void AddColumnAssimilation(ColumnAssimilator columnAssimilation)
+        public ISelectable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation)
         {
             this.columnAssimilator = columnAssimilation;
+            return this;
         }
 
         public ISelectable<T> SelectAll()
@@ -220,7 +221,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             {
                 _selectableBuilder.Limit(1);
             }
-            return AsEnumerable().FirstOrDefault();
+            return AsEnumerable().ToArray().FirstOrDefault();
         }
 
         public ISelectable<T> From(string tableName)
@@ -238,7 +239,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> Where(Expression<Func<T, bool>> expression)
         {
-            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(_tableAssimilator, _querySintax);
+            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(_tableAssimilator, _querySintax, columnAssimilator);
             _selectableBuilder.SetWhereCondition(expression, evaluateColumn);
             return this;
         }
@@ -351,11 +352,15 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return _tableAssimilator.GetTableReference(type);
         }
 
-        private static IField GetFieldReferenceOf(Table table, string column)
+        private IField GetFieldReferenceOf(Table table, string column)
         {
             IField field = table.GetFieldsBuilder().Find(column);
             if (field == null)
-                field = table.AddField<Column>(column);
+            {
+                Type type = _tableAssimilator.GetTypeByTable(table);
+                string respectiveName = columnAssimilator.GetByProperty(type, column);
+                field = table.AddField<Column>(respectiveName);
+            }
             return field;
         }
 

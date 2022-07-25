@@ -8,7 +8,12 @@
     <PackageTags>1.0.0-beta</PackageTags>
     <Company>zGabrielSaleSz</Company>
     <Version>1.0.1</Version>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />

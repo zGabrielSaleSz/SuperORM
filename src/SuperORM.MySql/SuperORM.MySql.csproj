@@ -9,7 +9,12 @@
     <Company>$(Authors)</Company>
     <Authors>zGabrielSaleSz</Authors>
     <Version>1.0.1</Version>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.29" />
