@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+	<icon>images\icon.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <!-- <icon>icon.png</icon> -->
+    <projectUrl>https://github.com/zGabrielSaleSz/SuperORM</projectUrl>
+    <description>This is the base code of an ORM allowing implementation of any SQL Driver, such as MySql, SQLServer and others</description>
+    <releaseNotes>Please check into GitHub repository -> Tags</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>SQL SQLServer MySQL ORM</tags>
+  </metadata>
+  <files>
+    <file src="..\..\assets\super_icon.png" target="images\" />
+  </files>
+</package>

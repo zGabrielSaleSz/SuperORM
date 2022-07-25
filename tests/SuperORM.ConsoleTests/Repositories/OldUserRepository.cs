@@ -1,4 +1,5 @@
-﻿using SuperORM.Core.Domain.Service.Repository;
+﻿using SuperORM.Core.Domain.Model.Repository;
+using SuperORM.Core.Domain.Service.Repository;
 using SuperORM.Core.Test.Complement.Model;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,19 @@ namespace SuperORM.ConsoleTests.Repositories
     {
         public override void Configurate()
         {
-            SetTable("oldUser");
+            SetTable("oldUsers");
             SetPrimaryKey(u => u.ID);
+        }
+
+        public override void ConfigurateColumns(IPropertyConfiguration<OldUser> propertyConfiguration)
+        {
+            propertyConfiguration
+                .SetColumnName(u => u.ID, "id")
+                .SetColumnName(u => u.Name, "strName")
+                .SetColumnName(u => u.Email, "strEmail")
+                .SetColumnName(u => u.Password, "strPassword")
+                .SetColumnName(u => u.Active, "blnActive")
+                .SetColumnName(u => u.ApprovedDate, "approvedDt");
         }
     }
 }

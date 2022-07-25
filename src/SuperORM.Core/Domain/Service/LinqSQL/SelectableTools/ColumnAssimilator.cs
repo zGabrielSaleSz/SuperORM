@@ -11,12 +11,12 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             Add<T>(column, respectiveColumn);
         }
 
-        public string GetByProperty(string column)
+        internal string GetByProperty(string column)
         {
             return GetByProperty<T>(column);
         }
 
-        public string GetByColumnValue(string columnValue)
+        internal string GetByColumnValue(string columnValue)
         {
             return GetByColumnValue<T>(columnValue);
         }
@@ -46,7 +46,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             Add(type, column, respectiveColumn);
         }
 
-        public void Add(Type type, string column, string respectiveColumn)
+        internal void Add(Type type, string column, string respectiveColumn)
         {
             if (!columnsEquivalent.ContainsKey(type))
             {
@@ -61,7 +61,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             return GetByProperty(type, property);
         }
 
-        public string GetByProperty(Type type, string property)
+        internal string GetByProperty(Type type, string property)
         {
             if (!columnsEquivalent.ContainsKey(type))
                 return property;
@@ -75,37 +75,11 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             return GetByColumnValue(type, columnValue);
         }
 
-        public string GetByColumnValue(Type type, string columnValue)
+        internal string GetByColumnValue(Type type, string columnValue)
         {
             if (!columnsEquivalent.ContainsKey(type))
                 return columnValue;
             return columnsEquivalent[type].GetByColumnValue(columnValue);
-        }
-    }
-
-    internal class ColumnRelation
-    {
-        internal Type Type { get; set; }
-        private readonly TwoWayKeyDicionary<string> _columnsEquivalent;
-        public ColumnRelation(Type type)
-        {
-            Type = type;
-            _columnsEquivalent = new TwoWayKeyDicionary<string>();
-        }
-
-        public void Add(string column, string respectiveColumn)
-        {
-            _columnsEquivalent.Add(column, respectiveColumn);
-        }
-
-        public string GetByProperty(string property)
-        {
-            return _columnsEquivalent.GetValueFromLeftKey(property);
-        }
-
-        public string GetByColumnValue(string column)
-        {
-            return _columnsEquivalent.GetValueFromRightAsKey(column);
         }
     }
 }

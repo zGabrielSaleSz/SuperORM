@@ -5,7 +5,6 @@ namespace SuperORM.Core.Domain.Service.Settings
     public class Setting
     {
         public IConnectionProvider ConnectionProvider { get; private set; }
-        public IQuerySintax QuerySintax { get; private set; }
         private static Setting _instance;
         private Setting()
         {
@@ -22,7 +21,6 @@ namespace SuperORM.Core.Domain.Service.Settings
         public Setting SetConnection(IConnectionProvider connection)
         {
             ConnectionProvider = connection;
-            QuerySintax = connection.GetQuerySintax();
             return this;
         }
     }
