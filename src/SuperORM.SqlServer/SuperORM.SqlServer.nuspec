@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>SuperORM.Core</id>
-    <version>1.0.3</version>
-    <title>SuperORM.Core</title>
+    <id>SuperORM.SqlServer</id>
+    <version>1.0.2</version>
+    <title>SuperORM.SqlServer</title>
     <authors>zGabrielSaleSz</authors>
 	<icon>assets\super_icon.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/zGabrielSaleSz/SuperORM</projectUrl>
-    <description>This is the base code of an ORM allowing implementation of any SQL Driver, such as MySql, SQLServer and others</description>
+    <description>Sql Server distribution of SuperORM</description>
     <releaseNotes>Please check into GitHub repository -> Tags</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>SQL SQLServer MySQL ORM</tags>
+    <tags>SQL Server SQLServer ORM</tags>
+	<dependencies>
+		<dependency id="SuperORM.Core" version="1.0.3"/>
+	</dependencies>
   </metadata>
   <files>
     <file src="..\..\assets\super_icon.png" target="assets\" />
