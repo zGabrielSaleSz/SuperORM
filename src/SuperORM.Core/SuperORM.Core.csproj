@@ -8,6 +8,8 @@
     <Description>Core project for Sql distribution </Description>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <PackageIcon>super_icon.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
