@@ -10,6 +10,9 @@
     <Authors>zGabrielSaleSz</Authors>
     <Version>1.0.3</Version>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <PackageIcon>super_icon.png</PackageIcon>
+    <PackageIconUrl />
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
