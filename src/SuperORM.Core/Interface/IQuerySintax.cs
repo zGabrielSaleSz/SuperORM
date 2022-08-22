@@ -5,21 +5,21 @@ namespace SuperORM.Core.Interface
 {
     public interface IQuerySintax
     {
-        public bool IsTopAvailable();
-        public string GetTableSchema(string schema);
-        public string GetTableName(string tableName);
-        public string GetTableAlias(string alias);
-        public string GetColumnName(string column);
-        public string GetColumnAlias(string alias);
-        public string GetParameterKey(string parameterName);
-        public IEvaluateResult GetValue(long value);
-        public IEvaluateResult GetValue(bool value);
-        public IEvaluateResult GetValue(string value);
-        public IEvaluateResult GetValue(char value);
-        public IEvaluateResult GetValue(byte value);
-        public IEvaluateResult GetValue(DateTime value);
-        public string GetPaginationSintax(uint rowsTake);
-        public string GetPaginationSintax(uint rowsSkip, uint rowsTake);
+        bool IsTopAvailable();
+        string GetTableSchema(string schema);
+        string GetTableName(string tableName);
+        string GetTableAlias(string alias);
+        string GetColumnName(string column);
+        string GetColumnAlias(string alias);
+        string GetParameterKey(string parameterName);
+        IEvaluateResult GetValue(long value);
+        IEvaluateResult GetValue(bool value);
+        IEvaluateResult GetValue(string value);
+        IEvaluateResult GetValue(char value);
+        IEvaluateResult GetValue(byte value);
+        IEvaluateResult GetValue(DateTime value);
+        string GetPaginationSintax(uint rowsTake);
+        string GetPaginationSintax(uint rowsSkip, uint rowsTake);
         string GetInsertComplementRetrievePrimaryKey();
     }
 }

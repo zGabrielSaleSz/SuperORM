@@ -20,7 +20,7 @@ namespace SuperORM.Core.Domain.Model.LinqSQL
         internal void Add(Type type, string fieldName, object value)
         {
             if (!ValuesByType.ContainsKey(type))
-                ValuesByType.Add(type, new());
+                ValuesByType.Add(type, new Dictionary<string, object>());
             ValuesByType[type].Add(fieldName, value);
         }
     }

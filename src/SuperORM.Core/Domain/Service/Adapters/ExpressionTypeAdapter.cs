@@ -7,16 +7,23 @@ namespace SuperORM.Core.Domain.Service.Adapters
     {
         public static ExpressionType GetExpressionType(SqlComparator sqlOperator)
         {
-            return sqlOperator switch
+            switch(sqlOperator)
             {
-                SqlComparator.Equal => ExpressionType.Equal,
-                SqlComparator.GreaterThan => ExpressionType.GreaterThan,
-                SqlComparator.NotEqual => ExpressionType.NotEqual,
-                SqlComparator.GreaterThanOrEqual => ExpressionType.GreaterThanOrEqual,
-                SqlComparator.LessThan => ExpressionType.LessThan,
-                SqlComparator.LessThanOrEqual => ExpressionType.LessThanOrEqual,
-                _ => throw new System.Exception("Enum not founded"),
-            };
+                case SqlComparator.Equal:
+                    return ExpressionType.Equal;
+                case SqlComparator.GreaterThan:
+                    return ExpressionType.GreaterThan;
+                case SqlComparator.NotEqual:
+                    return ExpressionType.NotEqual;
+                case SqlComparator.GreaterThanOrEqual:
+                    return ExpressionType.GreaterThanOrEqual;
+                case SqlComparator.LessThan:
+                    return ExpressionType.LessThan;
+                case SqlComparator.LessThanOrEqual:
+                    return ExpressionType.LessThanOrEqual;
+                default:
+                    throw new System.Exception("Enum not founded");
+            }
         }
     }
 }

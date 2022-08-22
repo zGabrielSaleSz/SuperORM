@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Description>SQL Server distribution of SuperORM</Description>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/zGabrielSaleSz/SuperORM.git</RepositoryUrl>

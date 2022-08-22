@@ -61,21 +61,21 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public void Insert(params Target[] targets)
         {
-            RepositoryInsert<Target, PrimaryKeyType> repositoryInsert = new(GetConnection(), QuerySintax);
+            RepositoryInsert<Target, PrimaryKeyType> repositoryInsert = new RepositoryInsert<Target, PrimaryKeyType>(GetConnection(), QuerySintax);
             repositoryInsert.AddColumnAssimilator(_columnAssimilator);
             repositoryInsert.Insert(GetPrimaryKey(), TableName, targets);
         }
 
         public int Delete(params Target[] targets)
         {
-            RepositoryDelete<Target, PrimaryKeyType> repositoryDeletable = new(GetConnection(), QuerySintax);
+            RepositoryDelete<Target, PrimaryKeyType> repositoryDeletable = new RepositoryDelete<Target, PrimaryKeyType>(GetConnection(), QuerySintax);
             repositoryDeletable.AddColumnAssimilator(_columnAssimilator);
             return repositoryDeletable.Delete(GetPrimaryKey(), TableName, targets);
         }
 
         public int Update(params Target[] targets)
         {
-            RepositoryUpdate<Target, PrimaryKeyType> repositoryUpdatable = new(GetConnection(), QuerySintax);
+            RepositoryUpdate<Target, PrimaryKeyType> repositoryUpdatable = new RepositoryUpdate<Target, PrimaryKeyType>(GetConnection(), QuerySintax);
             repositoryUpdatable.AddColumnAssimilator(_columnAssimilator);
             return repositoryUpdatable.Update(GetPrimaryKey(), TableName, targets);
         }

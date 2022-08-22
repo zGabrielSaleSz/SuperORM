@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Description>MySQL distribution of SuperORM</Description>
     <RepositoryUrl>https://github.com/zGabrielSaleSz/SuperORM.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>1.0.0-beta</PackageTags>
+    <PackageTags>1.0.3</PackageTags>
     <Company>$(Authors)</Company>
     <Authors>zGabrielSaleSz</Authors>
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -23,6 +23,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuperORM.Core\SuperORM.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\assets\super_icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

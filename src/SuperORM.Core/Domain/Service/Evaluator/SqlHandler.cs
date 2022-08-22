@@ -23,29 +23,45 @@ namespace SuperORM.Core.Domain.Service.Evaluator
 
         internal static string GetByNodeType(ExpressionType type)
         {
-            return type switch
+            switch (type)
             {
-                ExpressionType.Equal => "=",
-                ExpressionType.NotEqual => "!=",
-                ExpressionType.GreaterThan => ">",
-                ExpressionType.GreaterThanOrEqual => ">=",
-                ExpressionType.LessThan => "<",
-                ExpressionType.LessThanOrEqual => "<=",
-                ExpressionType.And => "AND",
-                ExpressionType.Or => "OR",
-                ExpressionType.AndAlso => "AND",
-                ExpressionType.OrElse => "OR",
-                ExpressionType.Not => "NOT",
-                ExpressionType.Multiply => "*",
-                ExpressionType.Divide => "/",
-                ExpressionType.Modulo => "%",
-                ExpressionType.Add => "+",
-                ExpressionType.Subtract => "-",
-
-                // Ignored ones
-                ExpressionType.Convert => "",
-                _ => throw new ArgumentException("", nameof(type)),
-            };
+                case ExpressionType.Equal:
+                    return "=";
+                case ExpressionType.NotEqual:
+                    return "!=";
+                case ExpressionType.GreaterThan:
+                    return ">";
+                case ExpressionType.GreaterThanOrEqual:
+                    return ">=";
+                case ExpressionType.LessThan:
+                    return "<";
+                case ExpressionType.LessThanOrEqual:
+                    return "<=";
+                case ExpressionType.And:
+                    return "AND";
+                case ExpressionType.Or:
+                    return "OR";
+                case ExpressionType.AndAlso:
+                    return "AND";
+                case ExpressionType.OrElse:
+                    return "OR";
+                case ExpressionType.Not:
+                    return "NOT";
+                case ExpressionType.Multiply:
+                    return "*";
+                case ExpressionType.Divide:
+                    return "/";
+                case ExpressionType.Modulo:
+                    return "%";
+                case ExpressionType.Add:
+                    return "+";
+                case ExpressionType.Subtract:
+                    return "-";
+                case ExpressionType.Convert:
+                    return "";
+                default:
+                    throw new ArgumentException("", nameof(type));
+            }
         }
         internal static string GetComparatorNull(ExpressionType type)
         {

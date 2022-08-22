@@ -204,7 +204,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         private ResultPickerHeader BuildResultPickerHeader(MultipleFieldAssimilator multipleFieldAssimilator, Dictionary<string, object> columnsAndValues)
         {
-            ResultPickerHeader resultPickerHeader = new(columnAssimilator);
+            ResultPickerHeader resultPickerHeader = new ResultPickerHeader(columnAssimilator);
             foreach (var columnAndValue in columnsAndValues)
             {
                 IField field = multipleFieldAssimilator.GetFieldByAlias(columnAndValue.Key);

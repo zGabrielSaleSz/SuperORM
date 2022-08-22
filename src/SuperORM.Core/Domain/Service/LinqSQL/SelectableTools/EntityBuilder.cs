@@ -10,12 +10,12 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
         public static T Build<T>(Dictionary<string, object> entityInformation, ColumnAssimilator columnAssimilator)
             where T : new()
         {
-            T entity = new();
+            T entity = new T();
             foreach (var propertyEquivalent in entityInformation)
             {
                 ReflectionHandler<T> reflectionHandler = new Utilities.Reflection.ReflectionHandler<T>(entity);
                 string propertyName = columnAssimilator.GetByColumnValue<T>(propertyEquivalent.Key);
-                if (propertyEquivalent.Value is not DBNull)
+                if (propertyEquivalent.Value.GetType() != typeof(DBNull))
                 {
                     reflectionHandler.SetPropertyValue(propertyName, propertyEquivalent.Value);
                 }
