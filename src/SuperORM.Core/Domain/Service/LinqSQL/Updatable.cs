@@ -20,20 +20,28 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IUpdatableBuilder _updatableBuilder;
         private readonly IQuerySintax _querySintax;
         private readonly Table _table;
-        private readonly TableAssimilator tableAssimilator;
+        private readonly TableAssimilator _tableAssimilator;
+        private ColumnAssimilator _columnAssimilator;
         public Updatable(IConnection connection, IQuerySintax querySintax)
         {
             _connection = connection;
             _updatableBuilder = new UpdatableBuilder(querySintax);
             _querySintax = querySintax;
             _table = new Table();
-            tableAssimilator = new TableAssimilator(typeof(T));
+            _tableAssimilator = new TableAssimilator(typeof(T));
+            _columnAssimilator = ColumnAssimilator.Empty;
+        }
+
+        public IUpdatable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation)
+        {
+            _columnAssimilator = columnAssimilation;
+            return this;
         }
 
         public IUpdatable<T> Update(string tableName)
         {
             _table.Name = tableName;
-            tableAssimilator.SetMainTableName(_table);
+            _tableAssimilator.SetMainTableName(_table);
             _updatableBuilder.Update(_table);
             return this;
         }
@@ -55,14 +63,14 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public IUpdatable<T> Set<TResult>(string attributeName, TResult value)
         {
-            IField fieldOne = _table.AddField<Column>(attributeName);
+            IField fieldOne = AddField(attributeName);
             _updatableBuilder.Set(fieldOne, value);
             return this;
         }
 
         public IUpdatable<T> Where(Expression<Func<T, bool>> expression)
         {
-            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(tableAssimilator, _querySintax);
+            IEvaluateColumn evaluateColumn = new EvaluateColumnQueryBuilder<T>(_tableAssimilator, _querySintax, _columnAssimilator);
             _updatableBuilder.SetWhereCondition(expression, evaluateColumn);
             return this;
         }
@@ -80,7 +88,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private IField GetFieldByExpression<TResult>(Expression<Func<T, TResult>> attribute)
         {
             SqlExpressionEvaluator sqlEvaluator = new SqlExpressionEvaluator(attribute.Body, _querySintax);
-            IField field = _table.AddField<Column>(sqlEvaluator.Evaluate());
+            IField field = AddField(sqlEvaluator.Evaluate());
             return field;
         }
 
@@ -90,8 +98,14 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
             CommandContext commandContext = new CommandContext();
             commandContext.AddQuery(parameterizedQuery);
-
+            
             return _connection.ExecuteNonQuery(commandContext);
+        }
+
+        private IField AddField(string attributeName)
+        {
+            string respectiveColumn = _columnAssimilator.GetByProperty<T>(attributeName);
+            return _table.AddField<Column>(respectiveColumn);
         }
     }
 }

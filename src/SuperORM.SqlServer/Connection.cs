@@ -1,6 +1,7 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Interface;
+using SuperORM.Core.Utilities;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -45,7 +46,10 @@ namespace SuperORM.SqlServer
         public T ExecuteScalarImplementation<T>(ParameterizedQuery query)
         {
             SqlCommand command = BuildCommand(query);
-            return (T)command.ExecuteScalar();
+            object result = command.ExecuteScalar();
+
+            TypeQualifier typeQualifier = new TypeQualifier(result);
+            return typeQualifier.GetAs<T>();
         }
 
         public IEnumerable<IDictionary<string, object>> ExecuteReaderImplementation(ParameterizedQuery query)
@@ -80,7 +84,7 @@ namespace SuperORM.SqlServer
             SqlCommand command = new SqlCommand(parameterizedQuery.Query, _sqlConnection, _transaction);
             foreach (var parameter in parameterizedQuery.Parameters)
             {
-                command.Parameters.AddWithValue($"@{parameter.Key}", parameter.Value);
+                command.Parameters.AddWithValue($"{parameter.Key}", parameter.Value);
             }
             return command;
         }

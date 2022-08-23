@@ -4,6 +4,6 @@ namespace SuperORM.Core.Domain.Service.Evaluator.Expressions
 {
     internal interface IExpressionEvaluator
     {
-        public IEvaluateResult Build();
+        IEvaluateResult Build();
     }
 }

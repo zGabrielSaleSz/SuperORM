@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL;
+using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Test.Complement.Model;
@@ -65,6 +66,39 @@ namespace SuperORM.Core.Test.Linq
             // Assert
             Assert.Equal(expected, actual);
 
+        }
+
+        [Fact]
+        public void Shold_BuildCustomFields_When_UsingColumnAssimilator()
+        {
+            // Arrange
+            string expected = "INSERT INTO `users`(name, email, password, active) " +
+                              "VALUES('Gabriel Sales', 'gabriel@superorm.com', 'SuperSecretPassW0rd!', false)";
+
+            ConnectionProvider connectionProvider = new ConnectionProvider("");
+            IQuerySintax querySintax = new QuerySintax();
+            IConnection connection = connectionProvider.GetNewConnection();
+
+            ColumnAssimilator<User> columnAssimilator = new ColumnAssimilator<User>();
+            columnAssimilator.Add("Name", "name");
+            IInsertable<User> insertable = new Insertable<User>(connectionProvider.GetNewConnection(), querySintax);
+
+            User user = new User();
+            user.Name = "Gabriel Sales";
+            user.email = "gabriel@superorm.com";
+            user.password = "SuperSecretPassW0rd!";
+            user.active = false;
+            insertable.AddColumnAssimilation(columnAssimilator)
+                .Into("users")
+                .Values(user)
+                .Ignore(u => u.id)
+                .Ignore(u => u.approvedDate);
+
+            // Act
+            string actual = insertable.GetQuery();
+
+            // Assert
+            Assert.Equal(expected, actual);
         }
     }
 }

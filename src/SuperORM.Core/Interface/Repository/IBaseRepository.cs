@@ -2,6 +2,6 @@
 {
     public interface IBaseRepository
     {
-        public void UseConnection(IConnection connection);
+        void UseConnection(IConnection connection);
     }
 }

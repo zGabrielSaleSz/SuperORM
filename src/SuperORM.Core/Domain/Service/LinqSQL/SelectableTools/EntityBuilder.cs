@@ -1,4 +1,6 @@
-﻿using SuperORM.Core.Utilities.Reflection;
+﻿using SuperORM.Core.Domain.Exceptions;
+using SuperORM.Core.Utilities.Reflection;
+using System;
 using System.Collections.Generic;
 
 namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
@@ -8,12 +10,19 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
         public static T Build<T>(Dictionary<string, object> entityInformation, ColumnAssimilator columnAssimilator)
             where T : new()
         {
-            T entity = new();
+            T entity = new T();
             foreach (var propertyEquivalent in entityInformation)
             {
                 ReflectionHandler<T> reflectionHandler = new Utilities.Reflection.ReflectionHandler<T>(entity);
-                string propertyName = columnAssimilator.GetRespective(propertyEquivalent.Key);
-                reflectionHandler.SetPropertyValue(propertyName, propertyEquivalent.Value);
+                string propertyName = columnAssimilator.GetByColumnValue<T>(propertyEquivalent.Key);
+                if (propertyEquivalent.Value.GetType() != typeof(DBNull))
+                {
+                    reflectionHandler.SetPropertyValue(propertyName, propertyEquivalent.Value);
+                }
+                else if (!reflectionHandler.IsNullableProperty(propertyName))
+                {
+                    throw new InvalidNonNullableTypeException($"Class: {reflectionHandler.GetTypeName()} Property: {propertyName} should be a nullable property.");
+                }
             }
             return entity;
         }

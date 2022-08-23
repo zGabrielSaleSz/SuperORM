@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL;
+using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Utilities.Reflection;
@@ -9,18 +10,26 @@ using System.Linq.Expressions;
 
 namespace SuperORM.Core.Domain.Service.Repository
 {
-    public class RepositoryUpdate<Target, PrimaryKeyType>
+    internal class RepositoryUpdate<Target, PrimaryKeyType>
     {
         private readonly IConnection _connection;
         private readonly IQuerySintax _querySintax;
 
-        public RepositoryUpdate(IConnection connection, IQuerySintax querySintax)
+        private ColumnAssimilator _columnAssimilator;
+
+        internal RepositoryUpdate(IConnection connection, IQuerySintax querySintax)
         {
             _connection = connection;
             _querySintax = querySintax;
+            _columnAssimilator = ColumnAssimilator.Empty;
         }
 
-        public int Update(string primaryKey, string tableName, params Target[] targets)
+        internal void AddColumnAssimilator(ColumnAssimilator columnAssimilator)
+        {
+            _columnAssimilator = columnAssimilator;
+        }
+
+        internal int Update(string primaryKey, string tableName, params Target[] targets)
         {
             int changes = 0;
             foreach (Target target in targets)
@@ -35,6 +44,7 @@ namespace SuperORM.Core.Domain.Service.Repository
             Expression<Func<Target, bool>> lambda = GetWhereExpressionByPrimaryKey(target, primaryKey);
             ReflectionHandler<Target> reflectionHandler = new ReflectionHandler<Target>(target);
             IUpdatable<Target> updatable = new Updatable<Target>(_connection, _querySintax)
+                .AddColumnAssimilation(_columnAssimilator)
                 .Update(tableName);
 
             IEnumerable<string> properties = reflectionHandler.GetPropertiesName().Where(p => p != primaryKey);

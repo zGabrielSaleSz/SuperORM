@@ -1,11 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RepositoryUrl>https://github.com/zGabrielSaleSz/SuperORM.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>1.0.0-beta</PackageTags>
+    <PackageTags>1.0.4</PackageTags>
     <Description>Core project for Sql distribution </Description>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <PackageIcon>super_icon.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Version>1.0.2</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\assets\super_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
