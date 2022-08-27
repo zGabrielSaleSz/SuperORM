@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SuperORM.SqlServer</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <title>SuperORM.SqlServer</title>
     <authors>zGabrielSaleSz</authors>
 	<icon>assets\super_icon.png</icon>
@@ -15,7 +15,7 @@
     <tags>SQL Server SQLServer ORM</tags>
 	<dependencies>
 		<group targetFramework=".NETStandard2.0">
-			<dependency id="SuperORM.Core" version="[1.1.0]"/>
+			<dependency id="SuperORM.Core" version="[1.1.1]"/>
 			<dependency id="System.Data.SqlClient" version="4.8.3"/>
 		</group>
 	</dependencies>

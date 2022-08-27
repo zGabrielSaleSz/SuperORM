@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SuperORM.Core</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <title>SuperORM.Core</title>
     <authors>zGabrielSaleSz</authors>
 	<icon>assets\super_icon.png</icon>
