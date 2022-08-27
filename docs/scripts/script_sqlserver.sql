@@ -67,3 +67,10 @@ VALUES
 SELECT * FROM oldUsers;
 INSERT INTO oldUsers([strName], [strEmail], [strPassword], [blnActive], [approvedDt])
 VALUES ('gabriel', 'sales.g479@hotmail.com', 'SuperSecret', 1, '2019-06-10');
+
+ALTER TABLE users
+ADD [height] DECIMAL(8, 4);
+
+GO
+
+UPDATE users SET [height] = '1.75' WHERE ID < 5;
