@@ -10,30 +10,21 @@ namespace SuperORM.Core.Domain.Service.Repository
 {
     public abstract class BaseRepository<Target, PrimaryKeyType> : IBaseRepository where Target : new()
     {
-        public string TableName;
-        private Expression<Func<Target, PrimaryKeyType>> PrimaryKeyExpression;
+        public string TableName { get; private set; }
 
-        public readonly IConnectionProvider ConnectionProvider;
-        public readonly IQuerySintax QuerySintax;
-
+        private Expression<Func<Target, PrimaryKeyType>> _primaryKeyExpression;
+        private IConnectionProvider _connectionProvider;
         private IConnection _connection;
+
         private ColumnAssimilator<Target> _columnAssimilator;
         private IPropertyConfiguration<Target> _propertyConfiguration;
 
         public BaseRepository(IConnectionProvider connectionProvider = null)
         {
-            if(connectionProvider == null)
+            if(connectionProvider != null)
             {
-                ConnectionProvider = Settings.Setting
-                    .GetInstance()
-                    .ConnectionProvider;
+                _connectionProvider = connectionProvider;
             }
-            else
-            {
-                ConnectionProvider = connectionProvider;
-            }
-
-            QuerySintax = ConnectionProvider.GetQuerySintax();
             _columnAssimilator = new ColumnAssimilator<Target>();
             _propertyConfiguration = new PropertyConfiguration<Target>(_columnAssimilator);
 
@@ -49,40 +40,40 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public void SetPrimaryKey(Expression<Func<Target, PrimaryKeyType>> attribute)
         {
-            this.PrimaryKeyExpression = attribute;
+            this._primaryKeyExpression = attribute;
         }
 
         public ISelectable<Target> Select()
         {
-            return new Selectable<Target>(ConnectionProvider.GetNewConnection(), QuerySintax)
+            return new Selectable<Target>(GetConnectionProvider().GetNewConnection(), GetQuerySintax())
                 .AddColumnAssimilation(_columnAssimilator)
                 .From(TableName);
         }
 
         public void Insert(params Target[] targets)
         {
-            RepositoryInsert<Target, PrimaryKeyType> repositoryInsert = new RepositoryInsert<Target, PrimaryKeyType>(GetConnection(), QuerySintax);
+            RepositoryInsert<Target, PrimaryKeyType> repositoryInsert = new RepositoryInsert<Target, PrimaryKeyType>(GetConnection(), GetQuerySintax());
             repositoryInsert.AddColumnAssimilator(_columnAssimilator);
             repositoryInsert.Insert(GetPrimaryKey(), TableName, targets);
         }
 
         public int Delete(params Target[] targets)
         {
-            RepositoryDelete<Target, PrimaryKeyType> repositoryDeletable = new RepositoryDelete<Target, PrimaryKeyType>(GetConnection(), QuerySintax);
+            RepositoryDelete<Target, PrimaryKeyType> repositoryDeletable = new RepositoryDelete<Target, PrimaryKeyType>(GetConnection(), GetQuerySintax());
             repositoryDeletable.AddColumnAssimilator(_columnAssimilator);
             return repositoryDeletable.Delete(GetPrimaryKey(), TableName, targets);
         }
 
         public int Update(params Target[] targets)
         {
-            RepositoryUpdate<Target, PrimaryKeyType> repositoryUpdatable = new RepositoryUpdate<Target, PrimaryKeyType>(GetConnection(), QuerySintax);
+            RepositoryUpdate<Target, PrimaryKeyType> repositoryUpdatable = new RepositoryUpdate<Target, PrimaryKeyType>(GetConnection(), GetQuerySintax());
             repositoryUpdatable.AddColumnAssimilator(_columnAssimilator);
             return repositoryUpdatable.Update(GetPrimaryKey(), TableName, targets);
         }
 
         private string GetPrimaryKey()
         {
-            SqlExpressionEvaluator sqlEvaluator = new SqlExpressionEvaluator(PrimaryKeyExpression.Body, QuerySintax);
+            SqlExpressionEvaluator sqlEvaluator = new SqlExpressionEvaluator(_primaryKeyExpression.Body, GetQuerySintax());
             string primaryKey = sqlEvaluator.Evaluate();
             return primaryKey;
         }
@@ -97,12 +88,29 @@ namespace SuperORM.Core.Domain.Service.Repository
             _connection = connection;
         }
 
+        public void UseConnectionProvider(IConnectionProvider connectionProvider)
+        {
+            _connectionProvider = connectionProvider;
+        }
+
+        private IConnectionProvider GetConnectionProvider()
+        {
+            if (_connectionProvider != null)
+                return _connectionProvider;
+
+            return Settings.Setting.GetInstance().ConnectionProvider;
+        }
+
         private IConnection GetConnection()
         {
-            if (_connection == null)
-                return ConnectionProvider.GetNewConnection();
-            else
+            if (_connection != null)
                 return _connection;
+            return GetConnectionProvider().GetNewConnection();
+        }
+
+        private IQuerySintax GetQuerySintax()
+        {
+            return GetConnectionProvider().GetQuerySintax();
         }
     }
 }

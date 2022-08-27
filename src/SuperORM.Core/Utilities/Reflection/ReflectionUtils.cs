@@ -40,6 +40,25 @@ namespace SuperORM.Core.Utilities.Reflection
             return src.GetType().GetProperties().Where(x => x.Name == propertyName).Select(x => x.PropertyType).First();
         }
 
+        public static bool IsNullableType(Type type)
+        {
+            return type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
+        }
+
+        public static T GetAsType<T>(object value)
+        {
+            if(value == null)
+                return default(T);
+
+            Type type = typeof(T);
+            if (IsNullableType(type))
+            {
+                type = Nullable.GetUnderlyingType(type);
+                return (T)Convert.ChangeType(value, type);
+            }
+            return (T)Convert.ChangeType(value, type);
+        }
+
         public static MethodInfo BuildEnumerableGenericMethod<GenericMethodType>(string methodName, int parametersAmount)
         {
             return typeof(Enumerable).GetMethods()

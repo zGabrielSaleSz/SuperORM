@@ -70,6 +70,21 @@ namespace SuperORM.SqlServer
             return EvaluateResultFactory.AsValue(value.ToString(), value);
         }
 
+        public IEvaluateResult GetValue(decimal value)
+        {
+            return EvaluateResultFactory.AsValue(value.ToString(), value);
+        }
+
+        public IEvaluateResult GetValue(double value)
+        {
+            return EvaluateResultFactory.AsValue(value.ToString(), value);
+        }
+
+        public IEvaluateResult GetValue(float value)
+        {
+            return EvaluateResultFactory.AsValue(value.ToString(), value);
+        }
+
         public IEvaluateResult GetValue(DateTime value)
         {
             return EvaluateResultFactory.AsValue(value.ToString("yyyy-MM-dd HH:mm:ss"), value);

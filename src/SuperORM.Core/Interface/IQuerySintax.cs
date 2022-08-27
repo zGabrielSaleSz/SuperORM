@@ -13,6 +13,9 @@ namespace SuperORM.Core.Interface
         string GetColumnAlias(string alias);
         string GetParameterKey(string parameterName);
         IEvaluateResult GetValue(long value);
+        IEvaluateResult GetValue(decimal value);
+        IEvaluateResult GetValue(double value);
+        IEvaluateResult GetValue(float value);
         IEvaluateResult GetValue(bool value);
         IEvaluateResult GetValue(string value);
         IEvaluateResult GetValue(char value);

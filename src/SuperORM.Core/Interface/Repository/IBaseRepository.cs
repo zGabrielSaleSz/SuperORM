@@ -3,5 +3,6 @@
     public interface IBaseRepository
     {
         void UseConnection(IConnection connection);
+        void UseConnectionProvider(IConnectionProvider connectionProvider);
     }
 }

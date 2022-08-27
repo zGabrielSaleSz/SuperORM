@@ -31,6 +31,15 @@ namespace SuperORM.Core.Domain.Service.Evaluator
             if (typeQualifier.IsTypeOf<char>())
                 return querySintax.GetValue(typeQualifier.GetAs<char>());
 
+            if (typeQualifier.IsTypeOf<decimal>())
+                return querySintax.GetValue(typeQualifier.GetAs<decimal>());
+
+            if (typeQualifier.IsTypeOf<double>())
+                return querySintax.GetValue(typeQualifier.GetAs<double>());
+
+            if (typeQualifier.IsTypeOf<float>())
+                return querySintax.GetValue(typeQualifier.GetAs<float>());
+
             if (typeQualifier.IsTypeOf<DateTime>())
                 return querySintax.GetValue(typeQualifier.GetAs<DateTime>());
 

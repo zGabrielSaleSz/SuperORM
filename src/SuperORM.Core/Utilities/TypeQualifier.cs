@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SuperORM.Core.Utilities.Reflection;
+using System;
 using System.Collections;
 
 namespace SuperORM.Core.Utilities
@@ -33,12 +34,20 @@ namespace SuperORM.Core.Utilities
 
         public bool IsTypeOf<T>()
         {
+            if (IsNull())
+                if (ReflectionUtils.IsNullableType(typeof(T)))
+                    return true;
+                else 
+                    return false;
+
             return _variable.GetType().Equals(typeof(T));
         }
+
         public bool IsNull()
         {
             return _variable == null;
         }
+
         public bool IsEnumerable()
         {
             if (IsNull())
@@ -47,17 +56,20 @@ namespace SuperORM.Core.Utilities
             }
             return typeof(IEnumerable).IsAssignableFrom(GetVariableType()) && !IsTypeOf<string>();
         }
+
         public IEnumerable GetAsEnumerable()
         {
             return _variable as IEnumerable;
         }
+
         public Type GetVariableType()
         {
             return _variable.GetType();
         }
+
         public T GetAs<T>()
         {
-            return (T)Convert.ChangeType(_variable, typeof(T));
+            return ReflectionUtils.GetAsType<T>(_variable);
         }
     }
 }

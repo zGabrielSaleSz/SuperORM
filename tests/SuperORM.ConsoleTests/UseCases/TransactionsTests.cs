@@ -12,7 +12,7 @@ namespace SuperORM.ConsoleTests.UseCases
 {
     internal class TransactionsTests
     {
-        internal static void Run(IConnectionProvider connectionProvider)
+        internal static void RunInsertUpdate(IConnectionProvider connectionProvider)
         {
             using (SuperTransaction transaction = new SuperTransaction(connectionProvider))
             {
@@ -25,12 +25,28 @@ namespace SuperORM.ConsoleTests.UseCases
                 newUser.password = "NotThatSecret";
                 newUser.email = "gabriel.s479@hotmail.com";
                 newUser.approvedDate = DateTime.Now;
+                newUser.height = 1.7001f;
                 userRepository.Insert(newUser);
 
                 newUser.active = false;
                 newUser.approvedDate = DateTime.Now.AddDays(-1);
                 userRepository.Update(newUser);
 
+                transaction.Commit();
+            }
+        }
+
+        internal static void RunSelectUpdate(IConnectionProvider connectionProvider)
+        {
+            using (SuperTransaction transaction = new SuperTransaction(connectionProvider))
+            {
+                transaction.BeginTransaction();
+                UserRepository userRepository = transaction.Use<UserRepository>();
+
+                User existentUser = userRepository.Select().Where(u => u.id == 1).FirstOrDefault();
+                existentUser.height = 1.91;
+            
+                userRepository.Update(existentUser);
                 transaction.Commit();
             }
         }

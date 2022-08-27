@@ -14,8 +14,8 @@ namespace SuperORM.Core.Test.Linq
         public void Shold_BuildInsert_WhenUsingInsertable()
         {
             // Arrange
-            string expected = "INSERT INTO `users`(id, Name, email, password, active, approvedDate) " +
-                              "VALUES(26, 'Gabriel Sales', 'gabriel@superorm.com', 'SuperSecretPassW0rd!', false, '2019-05-10 22:05:19')";
+            string expected = "INSERT INTO `users`(id, Name, email, password, active, height, approvedDate) " +
+                              "VALUES(26, 'Gabriel Sales', 'gabriel@superorm.com', 'SuperSecretPassW0rd!', false, NULL, '2019-05-10 22:05:19')";
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = connectionProvider.GetQuerySintax();
@@ -43,8 +43,8 @@ namespace SuperORM.Core.Test.Linq
         public void Shold_IgnoreFields_WhenUsingInsertableWithIgnore()
         {
             // Arrange
-            string expected = "INSERT INTO `users`(Name, email, password, active) " +
-                              "VALUES('Gabriel Sales', 'gabriel@superorm.com', 'SuperSecretPassW0rd!', false)";
+            string expected = "INSERT INTO `users`(Name, email, password, active, height) " +
+                              "VALUES('Gabriel Sales', 'gabriel@superorm.com', 'SuperSecretPassW0rd!', false, NULL)";
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = new QuerySintax();
@@ -72,8 +72,8 @@ namespace SuperORM.Core.Test.Linq
         public void Shold_BuildCustomFields_When_UsingColumnAssimilator()
         {
             // Arrange
-            string expected = "INSERT INTO `users`(name, email, password, active) " +
-                              "VALUES('Gabriel Sales', 'gabriel@superorm.com', 'SuperSecretPassW0rd!', false)";
+            string expected = "INSERT INTO `users`(name, email, password, active, height) " +
+                              "VALUES('Gabriel Sales', 'gabriel@superorm.com', 'SuperSecretPassW0rd!', false, NULL)";
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = new QuerySintax();

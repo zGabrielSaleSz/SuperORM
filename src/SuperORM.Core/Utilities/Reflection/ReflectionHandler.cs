@@ -27,7 +27,8 @@ namespace SuperORM.Core.Utilities.Reflection
         public void SetPropertyValue(string propertyName, object value)
         {
             PropertyInfo property = _type.GetProperty(propertyName);
-            property.SetMethod.Invoke(_src, new object[] { Convert.ChangeType(value, property.PropertyType) });
+            Type type = GetActualType(property);
+            property.SetMethod.Invoke(_src, new object[] { Convert.ChangeType(value, type) });
         }
 
         public bool IsNullableProperty(string propertyName)
@@ -41,6 +42,16 @@ namespace SuperORM.Core.Utilities.Reflection
                 return true;
 
             return Nullable.GetUnderlyingType(property.PropertyType) != null;
+        }
+
+        internal Type GetActualType(PropertyInfo property)
+        {
+            Type propertyType = property.PropertyType;
+            if (ReflectionUtils.IsNullableType(propertyType))
+            {
+                propertyType = Nullable.GetUnderlyingType(propertyType);
+            }
+            return propertyType;
         }
 
         public IEnumerable<string> GetPropertiesName()

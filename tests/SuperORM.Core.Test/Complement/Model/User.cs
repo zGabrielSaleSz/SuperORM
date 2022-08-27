@@ -14,6 +14,7 @@ namespace SuperORM.Core.Test.Complement.Model
         public string email { get; set; }
         public string password { get; set; }
         public bool active { get; set; }
+        public double? height { get; set; }
         public DateTime approvedDate { get; set; }
     }
 }
