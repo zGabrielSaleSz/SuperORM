@@ -1,5 +1,6 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
+using SuperORM.Core.Domain.Service.Repository;
 using SuperORM.Core.Interface.QueryBuilder;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace SuperORM.Core.Interface
 {
     public interface ISelectable<T> : IQueryBuilder
     {
+        //ISelectable<T> Include<T2, T3>(Expression<Func<T, T2>> expression, BaseRepository<T2, T3> baseRepository) where T2 : new();
         ISelectable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation);
         //ISelectable<T2> Select<T2, TResult>(this ISelectable<T2> query, Expression<Func<T2, TResult>> expression);
         ISelectable<T> From(string tableName);
@@ -19,6 +21,9 @@ namespace SuperORM.Core.Interface
         ISelectable<T> Top(uint rows);
         ISelectable<T> Skip(uint rows);
         ISelectable<T> Take(uint rows);
+        ISelectable<T> InnerJoin<T1, T2>(BaseRepository<T1, T2> repository, Expression<Func<T, object>> attributeRoot, Expression<Func<T1, object>> attributeJoined)
+            where T1 : new();
+
         ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> LeftJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);

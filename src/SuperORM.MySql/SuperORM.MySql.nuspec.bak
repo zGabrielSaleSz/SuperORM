@@ -15,7 +15,7 @@
     <tags>SQL MySQL ORM</tags>
 	<dependencies>
 		<group targetFramework=".NETStandard2.0">
-			<dependency id="SuperORM.Core" version="[1.1.2]"/>
+			<dependency id="SuperORM.Core" version="[1.1.1]"/>
 			<dependency id="System.Data.SqlClient" version="4.8.3"/>
 			<dependency id="MySql.Data" version="8.0.29"/>
 		</group>

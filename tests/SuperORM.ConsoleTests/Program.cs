@@ -31,13 +31,14 @@ namespace SuperORM.ConsoleTests
             string sqlServerConnectionString = configuration["SqlServerConnection"];
             SqlServer.ConnectionProvider connectionProviderSqlServer = new SqlServer.ConnectionProvider(sqlServerConnectionString);
 
-            //Setting setting = Setting.GetInstance();
-            //setting.SetConnection(connectionProviderMySql);
+            Setting setting = Setting.GetInstance();
+            setting.SetConnection(connectionProviderMySql);
 
             //ColumnAssimilationTests.RunRepository();
             //SelectableJoins.Run();
-            TransactionsTests.RunInsertUpdate(connectionProviderSqlServer);
+            //TransactionsTests.RunInsertUpdate(connectionProviderSqlServer);
             //TransactionsTests.RunSelectUpdate(connectionProviderMySql);
+            RepositoryJoins.Run(connectionProviderMySql);
         }
     }
 }

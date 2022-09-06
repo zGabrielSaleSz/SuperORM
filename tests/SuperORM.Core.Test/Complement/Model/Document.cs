@@ -9,5 +9,6 @@ namespace SuperORM.Core.Test.Complement.Model
         public int idDocumentType { get; set; }
         public string number { get; set; }
         public DateTime issueDate { get; set; }
+        public User user { get; set; }
     }
 }

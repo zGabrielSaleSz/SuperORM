@@ -43,7 +43,7 @@ namespace SuperORM.ConsoleTests.UseCases
                 transaction.BeginTransaction();
                 UserRepository userRepository = transaction.Use<UserRepository>();
 
-                User existentUser = userRepository.Select().Where(u => u.id == 1).FirstOrDefault();
+                User existentUser = userRepository.GetSelectable().Where(u => u.id == 1).FirstOrDefault();
                 existentUser.height = 1.91;
             
                 userRepository.Update(existentUser);

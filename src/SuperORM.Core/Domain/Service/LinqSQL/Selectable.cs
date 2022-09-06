@@ -8,8 +8,10 @@ using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;
 using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.QueryBuilder;
+using SuperORM.Core.Domain.Service.Repository;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.QueryBuilder;
+using SuperORM.Core.Interface.Repository;
 using SuperORM.Core.Utilities.Reflection;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,8 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IConnection _connection;
         private readonly ISelectableBuilder _selectableBuilder;
         private readonly IQuerySintax _querySintax;
+        private readonly HashSet<Type> _joinEntities;
+        private readonly HashSet<Type> _entitiesSpecifiedInSelectClause;
         private ColumnAssimilator columnAssimilator = ColumnAssimilator.Empty;
 
         public Selectable(IConnection connection, IQuerySintax querySintax)
@@ -32,6 +36,8 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _querySintax = querySintax;
             _selectableBuilder = new SelectableBuilder(querySintax);
             _tableAssimilator = new TableAssimilator(typeof(T));
+            _joinEntities = new HashSet<Type>();
+            _entitiesSpecifiedInSelectClause = new HashSet<Type>();
             ConfigureMainTable();
         }
 
@@ -48,13 +54,18 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> SelectAll()
         {
-            ReflectionHandler<T> reflectionHandler = new Utilities.Reflection.ReflectionHandler<T>(new T());
-            foreach (string propertyName in reflectionHandler.GetPropertiesName())
+            SelectAllFrom(typeof(T));
+            return this;
+        }
+
+        private void SelectAllFrom(Type type)
+        {
+            string[] propertiesName = ReflectionUtils.GetColumnProperties(type).Select(c => c.Name).ToArray();
+            foreach (string propertyName in propertiesName)
             {
-                IField field = GetFieldByType<T>(propertyName);
+                IField field = GetFieldByType(type, propertyName);
                 _selectableBuilder.Select(field);
             }
-            return this;
         }
 
         public ISelectable<T> Select(params Expression<Func<T, object>>[] expressions)
@@ -64,6 +75,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> Select<T2>(params Expression<Func<T2, object>>[] expressions)
         {
+            _entitiesSpecifiedInSelectClause.Add(typeof(T2));
             foreach (var expression in expressions)
             {
                 IField field = GetFieldByExpression(expression);
@@ -89,6 +101,15 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _selectableBuilder.Take(rows);
             return this;
         }
+
+        public ISelectable<T> InnerJoin<T2, PrimaryKeyType>(BaseRepository<T2, PrimaryKeyType> repository, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            where T2 : new()
+        {
+            _joinEntities.Add(typeof(T2));
+            var result = InnerJoin<T, T2>(repository.GetTableName(), attributeRoot, attributeJoined);
+            return result;
+        }
+
         public ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
             return InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined);
@@ -188,6 +209,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public IEnumerable<ResultPicker> GetResult()
         {
+            FillEmptySelect();
             MultipleFieldAssimilator multipleFieldAssimilator = new MultipleFieldAssimilator(_selectableBuilder.GetFields());
             multipleFieldAssimilator.UpdateUniqueAlias();
 
@@ -321,8 +343,18 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         private void FillEmptySelect()
         {
-            if (!_selectableBuilder.HasSelect())
-                SelectAll();
+            FillSelectClauseForType(typeof(T));
+            foreach (var entitiesSelect in _joinEntities)
+            {
+                FillSelectClauseForType(entitiesSelect);
+            }
+        }
+
+        private void FillSelectClauseForType(Type type)
+        {
+            if (!_entitiesSpecifiedInSelectClause.Contains(type))
+                SelectAllFrom(type);
+            _entitiesSpecifiedInSelectClause.Add(type);
         }
 
         private void CheckRequiredMainTable()
@@ -375,6 +407,13 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private IField GetFieldByType<T2>(string propertyName)
         {
             Table table = GetTableReferenceOf(typeof(T2));
+            IField field = GetFieldReferenceOf(table, propertyName);
+            return field;
+        }
+
+        private IField GetFieldByType(Type type, string propertyName)
+        {
+            Table table = GetTableReferenceOf(type);
             IField field = GetFieldReferenceOf(table, propertyName);
             return field;
         }

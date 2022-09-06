@@ -19,7 +19,7 @@ namespace SuperORM.ConsoleTests.UseCases
             OldUserRepository oldUserRepository = new OldUserRepository();
 
             List<OldUser> result = oldUserRepository
-                .Select()
+                .GetSelectable()
                 .OrderBy(u => u.ID)
                 .AsEnumerable()
                 .ToList();

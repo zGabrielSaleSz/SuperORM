@@ -43,7 +43,12 @@ namespace SuperORM.Core.Domain.Service.Repository
             this._primaryKeyExpression = attribute;
         }
 
-        public ISelectable<Target> Select()
+        public void SetRelationShip<T2>(Expression<Func<Target, object>> attribute, Expression<Func<Target, T2>> targetExpression, Expression<Func<T2, object>> targetAttribute)
+        {
+
+        }
+
+        public ISelectable<Target> GetSelectable()
         {
             return new Selectable<Target>(GetConnectionProvider().GetNewConnection(), GetQuerySintax())
                 .AddColumnAssimilation(_columnAssimilator)
@@ -111,6 +116,11 @@ namespace SuperORM.Core.Domain.Service.Repository
         private IQuerySintax GetQuerySintax()
         {
             return GetConnectionProvider().GetQuerySintax();
+        }
+
+        public string GetTableName()
+        {
+            return TableName;
         }
     }
 }

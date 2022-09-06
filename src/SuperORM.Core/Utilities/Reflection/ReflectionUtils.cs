@@ -35,9 +35,20 @@ namespace SuperORM.Core.Utilities.Reflection
             return typeof(T).GetProperties().Select(x => x.Name);
         }
 
+        public static IEnumerable<string> GetObjectProperties(Type type)
+        {
+            return type.GetProperties().Select(x => x.Name);
+        }
+
         public static Type GetPropertyType(object src, string propertyName)
         {
             return src.GetType().GetProperties().Where(x => x.Name == propertyName).Select(x => x.PropertyType).First();
+        }
+
+        public static IEnumerable<PropertyInfo> GetColumnProperties(Type type)
+        {
+            return type.GetProperties()
+                .Where(p => p.PropertyType.IsValueType || p.PropertyType == typeof(string));
         }
 
         public static bool IsNullableType(Type type)

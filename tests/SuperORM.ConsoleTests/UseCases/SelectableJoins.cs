@@ -17,7 +17,7 @@ namespace SuperORM.ConsoleTests.UseCases
             UserRepository userRepository = new UserRepository();
 
             ISelectable<User> selectable =
-                userRepository.Select()
+                userRepository.GetSelectable()
                 .Select<User>(
                     u => u.id,
                     u => u.Name

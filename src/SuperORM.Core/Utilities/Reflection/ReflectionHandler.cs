@@ -31,6 +31,14 @@ namespace SuperORM.Core.Utilities.Reflection
             property.SetMethod.Invoke(_src, new object[] { Convert.ChangeType(value, type) });
         }
 
+        internal bool IsEntity(string propertyName)
+        {
+            PropertyInfo property = _type.GetProperty(propertyName);
+            if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
+                return false;
+            return true;
+        }
+
         public bool IsNullableProperty(string propertyName)
         {
             PropertyInfo property = _type.GetProperty(propertyName);
@@ -38,7 +46,7 @@ namespace SuperORM.Core.Utilities.Reflection
                 return true;
 
             Type propertyType = property.PropertyType;
-            if (!propertyType.IsValueType) 
+            if (!propertyType.IsValueType)
                 return true;
 
             return Nullable.GetUnderlyingType(property.PropertyType) != null;
@@ -57,6 +65,11 @@ namespace SuperORM.Core.Utilities.Reflection
         public IEnumerable<string> GetPropertiesName()
         {
             return _type.GetProperties().Select(p => p.Name);
+        }
+
+        public IEnumerable<PropertyInfo> GetColumnProperties()
+        {
+            return ReflectionUtils.GetColumnProperties(_type);
         }
 
         public static TResult GetPropertyValue<TResult>(T entity, string propertyName)

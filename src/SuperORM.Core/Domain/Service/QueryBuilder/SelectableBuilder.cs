@@ -344,6 +344,11 @@ namespace SuperORM.Core.Domain.Service.QueryBuilder
             return _selectFields.Any();
         }
 
+        public bool HasSelect(Table table)
+        {
+            return _selectFields.Where(s => s.GetTable() == table).Count() > 0;
+        }
+
         public void SetWhereCondition<T>(Expression<Func<T, bool>> expression, IEvaluateColumn evaluateColumn)
         {
             var sqlExpression = new SqlExpressionEvaluator(expression.Body, _querySintax);
