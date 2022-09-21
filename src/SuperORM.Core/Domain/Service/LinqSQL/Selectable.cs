@@ -89,6 +89,15 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _selectableBuilder.Take(rows);
             return this;
         }
+
+        public ISelectable<T> InnerJoin<T2, PrimaryKeyType>(IBaseRepository repository, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            where T2 : new()
+        {
+            _joinEntities.Add(typeof(T2));
+            var result = InnerJoin<T, T2>(repository.GetTableName(), attributeRoot, attributeJoined);
+            return result;
+        }
+
         public ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
             return InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined);

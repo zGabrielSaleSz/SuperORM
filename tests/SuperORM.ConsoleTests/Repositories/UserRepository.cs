@@ -8,6 +8,10 @@ namespace SuperORM.ConsoleTests.Repositories
 {
     public class UserRepository : BaseRepository<User, int>
     {
+        public UserRepository()
+        {
+
+        }
         public override void Configurate()
         {
             SetTable("users");

@@ -5,11 +5,14 @@ using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
+using SuperORM.Core.Domain.Service.Repository;
 using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.LinqSQL;
+using SuperORM.Core.Interface.Repository;
 using SuperORM.Core.Test.Complement.Model;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -34,9 +37,27 @@ namespace SuperORM.ConsoleTests
             Setting setting = Setting.GetInstance();
             setting.SetConnection(connectionProviderMySql);
 
-            ColumnAssimilationTests.RunRepository();
-            SelectableJoins.Run();
-            TransactionsTests.Run(connectionProviderSqlServer);
+            //ColumnAssimilationTests.RunRepository();
+            //SelectableJoins.Run();
+            //TransactionsTests.RunInsertUpdate(connectionProviderSqlServer);
+            //TransactionsTests.RunSelectUpdate(connectionProviderMySql);
+            RepositoryRegistry.GetInstance().UseAllRepositories();
+            RepositoryJoins.Run(connectionProviderMySql);
+
+
+
+
+            var typeBaseRepository = typeof(IBaseRepository);
+            List<Type> response = AppDomain.CurrentDomain
+                                .GetAssemblies()
+                                .SelectMany(a => a.GetTypes())
+                                .Where(p => typeBaseRepository.IsAssignableFrom(p)
+                                    && !p.IsAbstract
+                                    && !p.IsInterface)
+                                .ToList();
+            var testeInstancia = response.LastOrDefault();
+            var instaciated = (IBaseRepository)Activator.CreateInstance(testeInstancia);
+
         }
     }
 }

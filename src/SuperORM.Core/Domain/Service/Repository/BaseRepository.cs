@@ -54,9 +54,20 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public ISelectable<Target> Select()
         {
-            return new Selectable<Target>(ConnectionProvider.GetNewConnection(), QuerySintax)
-                .AddColumnAssimilation(_columnAssimilator)
-                .From(TableName);
+
+        }
+
+        public ISelectable<Target> GetSelectable()
+        {
+            RepositorySelect<Target, PrimaryKeyType> repositorySelect = 
+                new Repository.RepositorySelect<Target, PrimaryKeyType>(GetConnectionProvider().GetNewConnection(), GetQuerySintax());
+
+            return null;
+            //repositorySelect.Include()
+
+            //return new Selectable<Target>(GetConnectionProvider().GetNewConnection(), GetQuerySintax())
+            //    .AddColumnAssimilation(_columnAssimilator)
+            //    .From(TableName);
         }
 
         public void Insert(params Target[] targets)

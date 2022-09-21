@@ -1,6 +1,7 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface.QueryBuilder;
+using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -19,6 +20,9 @@ namespace SuperORM.Core.Interface
         ISelectable<T> Top(uint rows);
         ISelectable<T> Skip(uint rows);
         ISelectable<T> Take(uint rows);
+        ISelectable<T> InnerJoin<T1, T2>(IBaseRepository repository, Expression<Func<T, object>> attributeRoot, Expression<Func<T1, object>> attributeJoined)
+            where T1 : new();
+
         ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> LeftJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
