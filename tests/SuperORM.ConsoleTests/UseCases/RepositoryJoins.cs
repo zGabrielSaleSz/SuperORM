@@ -1,6 +1,5 @@
-﻿using SuperORM.ConsoleTests.Repositories;
+﻿using SuperORM.TestsResource.Repositories;
 using SuperORM.Core.Interface;
-using SuperORM.Core.Test.Complement.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +13,13 @@ namespace SuperORM.ConsoleTests.UseCases
         public static void Run(IConnectionProvider connectionProvider)
         {
             UserRepository userRepository = new UserRepository();
-            userRepository.UseConnectionProvider(connectionProvider);
+            //userRepository.UseConnectionProvider(connectionProvider);
 
             DocumentRepository documentRepository = new DocumentRepository();
-            documentRepository.UseConnectionProvider(connectionProvider);
 
-            ISelectable<Document> query = documentRepository.GetSelectable();
-            //var result = query.InnerJoin(userRepository, a => a.user)
+
+            //ISelectable<Document> query = documentRepository.GetSelectable();
+            //var result = query.InnerJoin<User>(a => a.idUser = )
             //    //.SelectAll()
             //    .Where(u => u.id == 1)
             //    .GetResult()

@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
-using SuperORM.Core.Test.Complement.Model;
+using SuperORM.TestsResource.Entities;
 using Xunit;
 
 namespace SuperORM.Core.Test.Others

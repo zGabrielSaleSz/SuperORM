@@ -66,3 +66,18 @@ VALUES
 SELECT * FROM oldUsers;
 INSERT INTO oldUsers(`strName`, `strEmail`, `strPassword`, `blnActive`, `approvedDt`)
 VALUES ('gabriel', 'sales.g479@hotmail.com', 'SuperSecret', 1, '2019-06-10');
+
+CREATE TABLE documentTypes
+(
+    id INT NOT NULL PRIMARY KEY,
+    `description` VARCHAR(100)
+);
+
+INSERT INTO documentTypes(id, `description`)
+VALUES(1, 'Birth Certificate'),
+(2, 'Social Security Card'),
+(12, 'Driver License');
+
+ALTER TABLE documents
+ADD CONSTRAINT FK_documents_documentTypes 
+FOREIGN KEY (idDocumentType) REFERENCES documentTypes(id)

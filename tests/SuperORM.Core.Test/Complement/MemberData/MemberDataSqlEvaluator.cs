@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Test.Complement.Model;
+﻿using SuperORM.TestsResource.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

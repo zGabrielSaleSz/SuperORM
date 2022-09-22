@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SuperORM.Core.Test.Complement.Model
+﻿namespace SuperORM.TestsResource.Entities
 {
     public class User
     {

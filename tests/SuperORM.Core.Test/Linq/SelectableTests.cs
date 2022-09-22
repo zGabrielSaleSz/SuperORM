@@ -1,8 +1,8 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
-using SuperORM.Core.Test.Complement.Model;
 using SuperORM.SqlServer;
+using SuperORM.TestsResource.Entities;
 using Xunit;
 
 namespace SuperORM.Core.Test.Linq
@@ -19,7 +19,7 @@ namespace SuperORM.Core.Test.Linq
                 "[users].[email], " +
                 "[users].[active], " +
                 "[documents].[issueDate], " +
-                "[documentTypes].[name] " +
+                "[documentTypes].[description] " +
                 "FROM [users] " +
                 "INNER JOIN [documents] ON [users].[id] = [documents].[idUser] " +
                 "LEFT JOIN [documentTypes] ON [documents].[idDocumentType] = [documentTypes].[id] " +
@@ -38,7 +38,7 @@ namespace SuperORM.Core.Test.Linq
                     d => d.issueDate
                 )
                 .Select<DocumentType>(
-                    t => t.name
+                    t => t.description
                 )
                 .From("users")
                 .InnerJoin<Document>("documents", a => a.id, b => b.idUser)
@@ -77,7 +77,7 @@ namespace SuperORM.Core.Test.Linq
             columnAssimilator.Add<Document>("idUser", "IDUser");
             columnAssimilator.Add<Document>("idDocumentType", "IDDocumentType");
             columnAssimilator.Add<Document>("issueDate", "IssueDate");
-            columnAssimilator.Add<DocumentType>("name", "Name");
+            columnAssimilator.Add<DocumentType>("description", "Name");
 
             ConnectionProvider connectionProvider = new ConnectionProvider("");
             IQuerySintax querySintax = new QuerySintax();
@@ -94,7 +94,7 @@ namespace SuperORM.Core.Test.Linq
                     d => d.issueDate
                 )
                 .Select<DocumentType>(
-                    t => t.name
+                    t => t.description
                 )
                 .From("users")
                 .InnerJoin<Document>("documents", a => a.id, b => b.idUser)

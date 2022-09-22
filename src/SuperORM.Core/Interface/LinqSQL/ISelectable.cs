@@ -20,21 +20,29 @@ namespace SuperORM.Core.Interface
         ISelectable<T> Top(uint rows);
         ISelectable<T> Skip(uint rows);
         ISelectable<T> Take(uint rows);
-        ISelectable<T> InnerJoin<T1, T2>(IBaseRepository repository, Expression<Func<T, object>> attributeRoot, Expression<Func<T1, object>> attributeJoined)
-            where T1 : new();
 
+        ISelectable<T> InnerJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+        ISelectable<T> InnerJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+
+        ISelectable<T> LeftJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+        ISelectable<T> LeftJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> LeftJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> LeftJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+
         ISelectable<T> RightJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> RightJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+
         ISelectable<T> CrossJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> CrossJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+
         ISelectable<T> FullJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> FullJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+
         ISelectable<T> SelfJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
         ISelectable<T> SelfJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined);
+
         ISelectable<T> Where(Expression<Func<T, bool>> expression);
         ISelectable<T> GroupBy(params Expression<Func<T, object>>[] attributes);
         ISelectable<T> GroupBy<T1>(params Expression<Func<T1, object>>[] attributes);
@@ -47,5 +55,6 @@ namespace SuperORM.Core.Interface
         IEnumerable<T> AsEnumerable();
         IEnumerable<ResultPicker> GetResult();
         T FirstOrDefault();
+        string GetTableOfType<T1>();
     }
 }

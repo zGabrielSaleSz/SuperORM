@@ -1,10 +1,8 @@
 ﻿using SuperORM.Core.Domain.Model.Repository;
 using SuperORM.Core.Domain.Service.Repository;
-using SuperORM.Core.Interface;
-using SuperORM.Core.Test.Complement.Model;
-using System.Transactions;
+using SuperORM.TestsResource.Entities;
 
-namespace SuperORM.ConsoleTests.Repositories
+namespace SuperORM.TestsResource.Repositories
 {
     public class UserRepository : BaseRepository<User, int>
     {

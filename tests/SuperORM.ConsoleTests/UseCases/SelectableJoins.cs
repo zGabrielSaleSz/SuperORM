@@ -1,12 +1,8 @@
-﻿using SuperORM.ConsoleTests.Repositories;
-using SuperORM.Core.Domain.Model.LinqSQL;
+﻿using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Interface;
-using SuperORM.Core.Test.Complement.Model;
-using System;
-using System.Collections.Generic;
+using SuperORM.TestsResource.Entities;
+using SuperORM.TestsResource.Repositories;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperORM.ConsoleTests.UseCases
 {
@@ -17,7 +13,7 @@ namespace SuperORM.ConsoleTests.UseCases
             UserRepository userRepository = new UserRepository();
 
             ISelectable<User> selectable =
-                userRepository.Select()
+                userRepository.GetSelectable()
                 .Select<User>(
                     u => u.id,
                     u => u.Name
@@ -26,7 +22,11 @@ namespace SuperORM.ConsoleTests.UseCases
                     d => d.id,
                     d => d.number
                 )
-                .InnerJoin<Document>("documents", a => a.id, d => d.idUser)
+                .Select<DocumentType>(
+                    dt => dt.description
+                )
+                .InnerJoin<Document>(a => a.id, d => d.idUser)
+                .InnerJoin<Document, DocumentType>(a => a.idDocumentType, dt => dt.id)
                 .Where(u => u.id == 1)
                 .OrderByDescending(u => u.id);
 
@@ -37,7 +37,8 @@ namespace SuperORM.ConsoleTests.UseCases
             var handledResult = result.Select(r => new
             {
                 user = r.From<User>(),
-                document = r.From<Document>()
+                document = r.From<Document>(),
+                documentName = r.From<DocumentType>().description
             }).ToArray();
         }
     }

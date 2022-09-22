@@ -1,14 +1,12 @@
-﻿using SuperORM.ConsoleTests.Repositories;
-using SuperORM.Core.Domain.Service.LinqSQL;
+﻿using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.LinqSQL;
-using SuperORM.Core.Test.Complement.Model;
+using SuperORM.TestsResource.Entities;
+using SuperORM.TestsResource.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperORM.ConsoleTests.UseCases
 {
@@ -19,7 +17,7 @@ namespace SuperORM.ConsoleTests.UseCases
             OldUserRepository oldUserRepository = new OldUserRepository();
 
             List<OldUser> result = oldUserRepository
-                .Select()
+                .GetSelectable()
                 .OrderBy(u => u.ID)
                 .AsEnumerable()
                 .ToList();

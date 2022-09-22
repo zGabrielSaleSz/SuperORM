@@ -8,8 +8,10 @@ using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;
 using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.QueryBuilder;
+using SuperORM.Core.Domain.Service.Repository;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.QueryBuilder;
+using SuperORM.Core.Interface.Repository;
 using SuperORM.Core.Utilities.Reflection;
 using System;
 using System.Collections.Generic;
@@ -90,19 +92,15 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
-        public ISelectable<T> InnerJoin<T2, PrimaryKeyType>(IBaseRepository repository, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            where T2 : new()
-        {
-            _joinEntities.Add(typeof(T2));
-            var result = InnerJoin<T, T2>(repository.GetTableName(), attributeRoot, attributeJoined);
-            return result;
-        }
+        public ISelectable<T> InnerJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => InnerJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
+        public ISelectable<T> InnerJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => InnerJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
 
         public ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-        {
-            return InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        }
-
+            => InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined);
+        
         public ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
             var joinResult = GetJoinFields(tableName, attributeRoot, attributeJoined);
@@ -110,10 +108,14 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
+        public ISelectable<T> LeftJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => LeftJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
+        public ISelectable<T> LeftJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+           => LeftJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
         public ISelectable<T> LeftJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-        {
-            return LeftJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        }
+            => LeftJoin<T, T2>(tableName, attributeRoot, attributeJoined);
 
         public ISelectable<T> LeftJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
@@ -386,6 +388,11 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             Table table = GetTableReferenceOf(typeof(T2));
             IField field = GetFieldReferenceOf(table, propertyName);
             return field;
+        }
+
+        public string GetTableOfType<Type>()
+        {
+            return RepositoryRegistry.GetInstance().GetRepository(typeof(Type)).GetTableName();
         }
     }
 }

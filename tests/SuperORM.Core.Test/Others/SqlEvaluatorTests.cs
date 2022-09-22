@@ -1,5 +1,5 @@
 using SuperORM.Core.Domain.Service;
-using SuperORM.Core.Test.Complement.Model;
+using SuperORM.TestsResource.Entities;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

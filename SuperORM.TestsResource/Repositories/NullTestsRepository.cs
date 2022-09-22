@@ -1,13 +1,8 @@
 ﻿using SuperORM.Core.Domain.Model.Repository;
 using SuperORM.Core.Domain.Service.Repository;
-using SuperORM.Core.Test.Complement.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SuperORM.TestsResource.Entities;
 
-namespace SuperORM.ConsoleTests.Repositories
+namespace SuperORM.TestsResource.Repositories
 {
     public class NullTestsRepository : BaseRepository<NullTest, int>
     {

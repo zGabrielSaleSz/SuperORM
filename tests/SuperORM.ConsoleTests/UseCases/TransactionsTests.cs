@@ -1,12 +1,8 @@
-﻿using SuperORM.ConsoleTests.Repositories;
-using SuperORM.Core.Domain.Model.Sql;
+﻿using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Interface;
-using SuperORM.Core.Test.Complement.Model;
+using SuperORM.TestsResource.Entities;
+using SuperORM.TestsResource.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperORM.ConsoleTests.UseCases
 {
