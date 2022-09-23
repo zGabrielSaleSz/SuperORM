@@ -113,7 +113,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             => LeftJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
 
         public ISelectable<T> LeftJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-           => LeftJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+            => LeftJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
 
         public ISelectable<T> LeftJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => LeftJoin<T, T2>(tableName, attributeRoot, attributeJoined);
@@ -125,10 +125,15 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
+        public ISelectable<T> RightJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => RightJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
+        public ISelectable<T> RightJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => RightJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
         public ISelectable<T> RightJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-        {
-            return RightJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        }
+            => RightJoin<T, T2>(tableName, attributeRoot, attributeJoined);
+        
 
         public ISelectable<T> RightJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
@@ -137,10 +142,15 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
+        public ISelectable<T> CrossJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => CrossJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
+        public ISelectable<T> CrossJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => CrossJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
         public ISelectable<T> CrossJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-        {
-            return CrossJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        }
+            => CrossJoin<T, T2>(tableName, attributeRoot, attributeJoined);
+        
 
         public ISelectable<T> CrossJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
@@ -149,10 +159,14 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
+        public ISelectable<T> FullJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => FullJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
+        public ISelectable<T> FullJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+           => FullJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
         public ISelectable<T> FullJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-        {
-            return FullJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        }
+            => FullJoin<T, T2>(tableName, attributeRoot, attributeJoined);
 
         public ISelectable<T> FullJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
@@ -161,10 +175,15 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
+        public ISelectable<T> SelfJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => SelfJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
+        public ISelectable<T> SelfJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+            => SelfJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+
         public ISelectable<T> SelfJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-        {
-            return SelfJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        }
+            => SelfJoin<T, T2>(tableName, attributeRoot, attributeJoined);
+        
 
         public ISelectable<T> SelfJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {

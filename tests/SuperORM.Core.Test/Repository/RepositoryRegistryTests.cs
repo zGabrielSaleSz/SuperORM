@@ -20,15 +20,15 @@ namespace SuperORM.Core.Test.Repository
     public class RepositoryRegistryTests
     {
 
-        private IConnectionProvider GetIConnectionProviderMock()
+        private RepositoryRegistry GetNewRepositoryRegistry()
         {
-            return new ConnectionProviderMock();
+            return new RepositoryRegistry(new ConnectionProviderMock());
         }
         [Fact]
         public void Should_ReturnNewInstance_When_GetConfiguredRepository()
         {
             // Arrange
-            RepositoryRegistry repositoryRegistry = new RepositoryRegistry(GetIConnectionProviderMock());
+            RepositoryRegistry repositoryRegistry = GetNewRepositoryRegistry();
 
             // Act
             repositoryRegistry.AddRepository<UserRepository>();
@@ -42,7 +42,7 @@ namespace SuperORM.Core.Test.Repository
         public void Should_ThrowException_When_NotPreviouslyConfigured()
         {
             // Arrange
-            RepositoryRegistry repositoryRegistry = new RepositoryRegistry(GetIConnectionProviderMock());
+            RepositoryRegistry repositoryRegistry = GetNewRepositoryRegistry();
 
             // Act
             Action action = () =>
@@ -58,7 +58,7 @@ namespace SuperORM.Core.Test.Repository
         public void Should_ReplaceRepository_When_SameRepositoryTargetIsAdded()
         {
             // Arrange
-            RepositoryRegistry repositoryRegistry = new RepositoryRegistry(GetIConnectionProviderMock());
+            RepositoryRegistry repositoryRegistry = GetNewRepositoryRegistry();
 
             // Act
             repositoryRegistry.AddRepository<UserRepository>();
@@ -74,12 +74,15 @@ namespace SuperORM.Core.Test.Repository
         public void Should_ThrowException_When_UsingAllRepositoriesIsNotIgnoringDuplicates()
         {
             // Arrange
-            RepositoryRegistry repositoryRegistry = new RepositoryRegistry(GetIConnectionProviderMock());
+            RepositoryRegistry repositoryRegistry = GetNewRepositoryRegistry();
 
             // Act
             Action action = () =>
             {
-                repositoryRegistry.UseAllRepositories();
+                repositoryRegistry.UseAllRepositories(
+                    ignoreDuplicate: false,
+                    assemblies: AppDomain.CurrentDomain.GetAssemblies()
+                );
             };
 
             // Assert
@@ -90,16 +93,16 @@ namespace SuperORM.Core.Test.Repository
         public void Should_AddAllRepositoriesImplementations_When_UsingAllRepositoriesIgnoringDuplicates()
         {
             // Arrange
-            RepositoryRegistry repositoryRegistry = new RepositoryRegistry(GetIConnectionProviderMock());
+            RepositoryRegistry repositoryRegistry = GetNewRepositoryRegistry();
 
             // Act
-
             //[add all except the duplicates]
-            repositoryRegistry.UseAllRepositories(ignoreDuplicate: true);
-
-            //[Add the one I want from duplicates]
+            repositoryRegistry.UseAllRepositories(
+                ignoreDuplicate: true,
+                assemblies: AppDomain.CurrentDomain.GetAssemblies()
+            );
+            //[add the one I want from duplicates]
             repositoryRegistry.AddRepository<UserRepository>();
-
 
             // Assert
             Assert.NotNull(repositoryRegistry.GetRepository<Document>());
@@ -107,7 +110,6 @@ namespace SuperORM.Core.Test.Repository
             Assert.NotNull(repositoryRegistry.GetRepository<NullTest>());
             Assert.NotNull(repositoryRegistry.GetRepository<OldUser>());
             Assert.NotNull(repositoryRegistry.GetRepository<User>());
-
         }
     }
 }

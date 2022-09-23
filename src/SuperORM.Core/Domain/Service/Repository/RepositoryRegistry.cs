@@ -4,6 +4,7 @@ using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -34,9 +35,9 @@ namespace SuperORM.Core.Domain.Service.Repository
             return (IBaseRepository)Activator.CreateInstance(_repositories[type], _connectionProvider);
         }
 
-        public void UseAllRepositories(bool ignoreDuplicate = false)
+        public void UseAllRepositories(bool ignoreDuplicate, params Assembly[] assemblies)
         {
-            List<Type> response = GetAllRepositoriesImplementation();
+            List<Type> response = GetAllRepositoriesImplementation(assemblies);
             if (ignoreDuplicate)
             {
                 response = response
@@ -77,11 +78,11 @@ namespace SuperORM.Core.Domain.Service.Repository
             return message.ToString();
         }
 
-        private List<Type> GetAllRepositoriesImplementation()
+        private List<Type> GetAllRepositoriesImplementation(params Assembly[] assemblies)
         {
             var typeBaseRepository = typeof(IBaseRepository);
-            return AppDomain.CurrentDomain
-                .GetAssemblies()
+            return
+                assemblies
                 .SelectMany(a => a.GetTypes())
                 .Where(p => typeBaseRepository.IsAssignableFrom(p)
                     && !p.IsAbstract

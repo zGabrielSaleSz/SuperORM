@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace SuperORM.ConsoleTests
 {
@@ -31,7 +32,13 @@ namespace SuperORM.ConsoleTests
             setting.SetConnection(connectionProviderMySql);
 
             RepositoryRegistry repositoryRegistry = setting.GetRepositoryRegistry();
-            repositoryRegistry.UseAllRepositories();
+
+            Assembly assemblyRepositories = typeof(UserRepository).Assembly;
+            repositoryRegistry.UseAllRepositories(
+                ignoreDuplicate: false, 
+                assemblies: assemblyRepositories
+            );
+
             //repositoryRegistry.AddRepository<UserRepository>();
             //repositoryRegistry.AddRepository<DocumentRepository>();
             //repositoryRegistry.AddRepository<DocumentTypeRepository>();
@@ -44,7 +51,6 @@ namespace SuperORM.ConsoleTests
             SelectableJoins.Run();
 
             //RepositoryJoins.Run(connectionProviderMySql);
-
             //var typeBaseRepository = typeof(IBaseRepository);
             //List<Type> response = AppDomain.CurrentDomain
             //                    .GetAssemblies()
