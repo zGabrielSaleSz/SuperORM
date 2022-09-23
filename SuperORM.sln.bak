@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperORM.Core.Test", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperORM.ConsoleTests", "tests\SuperORM.ConsoleTests\SuperORM.ConsoleTests.csproj", "{C5661FF7-B38A-45E3-994E-952825F79FF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperORM.TestsResource", "src\SuperORM.TestsResource\SuperORM.TestsResource.csproj", "{43482AE4-F5EB-4FA7-8525-C1A9FC1B269F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperORM.TestsResource", "SuperORM.TestsResource\SuperORM.TestsResource.csproj", "{43482AE4-F5EB-4FA7-8525-C1A9FC1B269F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
