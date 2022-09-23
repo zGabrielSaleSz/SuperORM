@@ -1,5 +1,6 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
+using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
 using System;
@@ -32,9 +33,10 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public RepositorySelect<Target, PrimaryKeyType> Include<T, T2>(T joinEntity, Expression<Func<T, T2>> attribute)
         {
-            IBaseRepository baseRepository = RepositoryRegistry.GetInstance().GetRepository(typeof(T));
-            //_selectable.InnerJoin<T>(baseRepository.GetTableName(), );
-            //attribute.
+            IBaseRepository baseRepository = Setting.GetInstance()
+                .GetRepositoryRegistry()
+                .GetRepository(typeof(T));
+
             return null;
         }
     }

@@ -12,10 +12,8 @@ namespace SuperORM.ConsoleTests.UseCases
     {
         public static void Run(IConnectionProvider connectionProvider)
         {
-            UserRepository userRepository = new UserRepository();
-            //userRepository.UseConnectionProvider(connectionProvider);
-
-            DocumentRepository documentRepository = new DocumentRepository();
+            UserRepository userRepository = new UserRepository(connectionProvider);
+            DocumentRepository documentRepository = new DocumentRepository(connectionProvider);
 
 
             //ISelectable<Document> query = documentRepository.GetSelectable();

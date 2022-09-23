@@ -22,10 +22,9 @@ namespace SuperORM.Core.Domain.Service.Repository
         private readonly IPropertyConfiguration<Target> _propertyConfiguration;
         private readonly Type _targetType;
 
-        public BaseRepository(IConnectionProvider connectionProvider = null)
+        public BaseRepository(IConnectionProvider connectionProvider)
         {
-            ConnectionProvider = connectionProvider ?? null;
-
+            ConnectionProvider = connectionProvider;
             _columnAssimilator = new ColumnAssimilator<Target>();
             _propertyConfiguration = new PropertyConfiguration<Target>(_columnAssimilator);
             _targetType = typeof(Target);
@@ -44,6 +43,12 @@ namespace SuperORM.Core.Domain.Service.Repository
         {
             this._primaryKeyExpression = attribute;
         }
+
+        public void SetTable(string tableName)
+        {
+            TableName = tableName;
+        }
+
         public string GetTableName()
         {
             return TableName;
@@ -54,10 +59,7 @@ namespace SuperORM.Core.Domain.Service.Repository
             return _targetType;
         }
 
-        public void SetTable(string tableName)
-        {
-            this.TableName = tableName;
-        }
+        
 
         public ISelectable<Target> GetSelectable()
         {

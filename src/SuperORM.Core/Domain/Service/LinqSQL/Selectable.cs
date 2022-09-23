@@ -9,6 +9,7 @@ using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.QueryBuilder;
 using SuperORM.Core.Domain.Service.Repository;
+using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.QueryBuilder;
 using SuperORM.Core.Interface.Repository;
@@ -392,7 +393,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public string GetTableOfType<Type>()
         {
-            return RepositoryRegistry.GetInstance().GetRepository(typeof(Type)).GetTableName();
+            return Setting.GetInstance().GetRepositoryRegistry().GetRepository(typeof(Type)).GetTableName();
         }
     }
 }

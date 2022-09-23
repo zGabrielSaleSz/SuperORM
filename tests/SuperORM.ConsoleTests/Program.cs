@@ -3,6 +3,7 @@ using SuperORM.ConsoleTests.UseCases;
 using SuperORM.Core.Domain.Service.Repository;
 using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface.Repository;
+using SuperORM.TestsResource.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,16 +29,20 @@ namespace SuperORM.ConsoleTests
 
             Setting setting = Setting.GetInstance();
             setting.SetConnection(connectionProviderMySql);
-            
+
+            RepositoryRegistry repositoryRegistry = setting.GetRepositoryRegistry();
+            repositoryRegistry.UseAllRepositories();
+            //repositoryRegistry.AddRepository<UserRepository>();
+            //repositoryRegistry.AddRepository<DocumentRepository>();
+            //repositoryRegistry.AddRepository<DocumentTypeRepository>();
+
+
             //ColumnAssimilationTests.RunRepository();
             //SelectableJoins.Run();
             //TransactionsTests.RunInsertUpdate(connectionProviderSqlServer);
             //TransactionsTests.RunSelectUpdate(connectionProviderMySql);
-            RepositoryRegistry instanceRepositoryRegistry = RepositoryRegistry.GetInstance();
-            //instanceRepositoryRegistry.AddRepository<UserRepository>();
-            instanceRepositoryRegistry.UseAllRepositories();
-
             SelectableJoins.Run();
+
             //RepositoryJoins.Run(connectionProviderMySql);
 
             //var typeBaseRepository = typeof(IBaseRepository);

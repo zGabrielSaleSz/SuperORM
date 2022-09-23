@@ -12,10 +12,12 @@ namespace SuperORM.Core.Domain.Model.Sql
 {
     public class SuperTransaction : ITransactionConnection, IDisposable
     {
+        private readonly IConnectionProvider _connectionProvider;
         private readonly IBaseConnection _transactionConnection;
         private bool _finishedConnection = false;
         public SuperTransaction(IConnectionProvider connectionProvider)
         {
+            _connectionProvider = connectionProvider;
             _transactionConnection = connectionProvider.GetBaseConnection();
         }
 
@@ -25,9 +27,9 @@ namespace SuperORM.Core.Domain.Model.Sql
             _transactionConnection.OpenTransactionAttachedToConnection();
         }
 
-        public T Use<T>() where T : IBaseRepository, new()
+        public T Use<T>() where T : IBaseRepository
         {
-            T repository = new T();
+            T repository = (T)Activator.CreateInstance(typeof(T), _connectionProvider);
             repository.UseConnection(this);
             return repository;
         }

@@ -1,11 +1,17 @@
 ﻿using SuperORM.Core.Domain.Model.Repository;
 using SuperORM.Core.Domain.Service.Repository;
+using SuperORM.Core.Interface;
 using SuperORM.TestsResource.Entities;
 
 namespace SuperORM.TestsResource.Repositories
 {
     public class OldUserRepository : BaseRepository<OldUser, int>
     {
+        public OldUserRepository(IConnectionProvider connectionProvider) : base(connectionProvider)
+        {
+
+        }
+
         public override void Configurate()
         {
             SetTable("oldUsers");

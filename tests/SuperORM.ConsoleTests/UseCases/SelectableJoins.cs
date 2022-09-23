@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
+using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
 using SuperORM.TestsResource.Entities;
 using SuperORM.TestsResource.Repositories;
@@ -10,7 +11,7 @@ namespace SuperORM.ConsoleTests.UseCases
     {
         internal static void Run()
         {
-            UserRepository userRepository = new UserRepository();
+            UserRepository userRepository = new UserRepository(Setting.GetInstance().ConnectionProvider);
 
             ISelectable<User> selectable =
                 userRepository.GetSelectable()

@@ -12,9 +12,9 @@ namespace SuperORM.ConsoleTests.UseCases
 {
     internal class ColumnAssimilationTests
     {
-        internal static void RunRepository()
+        internal static void RunRepository(IConnectionProvider connectionProvider)
         {
-            OldUserRepository oldUserRepository = new OldUserRepository();
+            OldUserRepository oldUserRepository = new OldUserRepository(connectionProvider);
 
             List<OldUser> result = oldUserRepository
                 .GetSelectable()

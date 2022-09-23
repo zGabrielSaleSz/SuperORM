@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Exceptions;
+using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,15 @@ namespace SuperORM.Core.Domain.Service.Repository
 {
     public class RepositoryRegistry
     {
-        private Dictionary<Type, Type> repositories;
-        private static bool registryLodaded = false;
-        private static RepositoryRegistry instance;
-        private RepositoryRegistry()
+        private IConnectionProvider _connectionProvider;
+        private Dictionary<Type, Type> _repositories;
+        public RepositoryRegistry(IConnectionProvider connectionProvider)
         {
-            repositories = new Dictionary<Type, Type>();
-        }
+            if (connectionProvider == null)
+                throw new MissingConnectionProviderException("Please set the ConnectionProvider!");
 
-        public static RepositoryRegistry GetInstance()
-        {
-            if (instance == null)
-                instance = new RepositoryRegistry();
-            return instance;
+            _connectionProvider = connectionProvider;
+            _repositories = new Dictionary<Type, Type>();
         }
 
         public IBaseRepository GetRepository<T>()
@@ -32,23 +29,15 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public IBaseRepository GetRepository(Type type)
         {
-            if (!repositories.ContainsKey(type))
+            if (!_repositories.ContainsKey(type))
                 throw new EntityNotConfiguredException($"Repository could not be found for '{type.AssemblyQualifiedName}'");
-            return (IBaseRepository)Activator.CreateInstance(repositories[type]);
+            return (IBaseRepository)Activator.CreateInstance(_repositories[type], _connectionProvider);
         }
 
-        public void UseAllRepositories(bool doNotIncludeDuplicates = false)
+        public void UseAllRepositories(bool ignoreDuplicate = false)
         {
-            var typeBaseRepository = typeof(IBaseRepository);
-            List<Type> response = AppDomain.CurrentDomain
-                                .GetAssemblies()
-                                .SelectMany(a => a.GetTypes())
-                                .Where(p => typeBaseRepository.IsAssignableFrom(p)
-                                    && !p.IsAbstract
-                                    && !p.IsInterface)
-                                .ToList();
-
-            if(doNotIncludeDuplicates)
+            List<Type> response = GetAllRepositoriesImplementation();
+            if (ignoreDuplicate)
             {
                 response = response
                     .GroupBy(r => GetEntity(r))
@@ -63,10 +52,9 @@ namespace SuperORM.Core.Domain.Service.Repository
                     .GroupBy(r => GetEntity(r))
                     .Where(v => v.Count() > 1)
                     .ToDictionary(k => k.Key, v => v.ToArray());
-                  
 
                 if (duplicatedRepositories.Any())
-                    throw new Exception(GenerateDuplicatedMessage(duplicatedRepositories));
+                    throw new DuplicatedRepositoryImplementation(GenerateDuplicatedMessage(duplicatedRepositories));
             }
 
             foreach (Type type in response)
@@ -89,9 +77,19 @@ namespace SuperORM.Core.Domain.Service.Repository
             return message.ToString();
         }
 
+        private List<Type> GetAllRepositoriesImplementation()
+        {
+            var typeBaseRepository = typeof(IBaseRepository);
+            return AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(p => typeBaseRepository.IsAssignableFrom(p)
+                    && !p.IsAbstract
+                    && !p.IsInterface)
+                .ToList();
+        }
 
-
-        /// <returns>returns if some entity repository was replaced</returns>
+        /// <returns>if some entity repository was replaced</returns>
         public bool AddRepository<RepositoryType>()
             where RepositoryType : IBaseRepository
         {
@@ -99,16 +97,16 @@ namespace SuperORM.Core.Domain.Service.Repository
             return AddRepository(type);
         }
 
-        /// <returns>returns if some entity repository was replaced</returns>
+        /// <returns>if some entity repository was replaced</returns>
         public bool AddRepository(Type type)
         {
             Type entity = GetEntity(type);
-            if (repositories.ContainsKey(entity))
+            if (_repositories.ContainsKey(entity))
             {
-                repositories[entity] = type;
+                _repositories[entity] = type;
                 return true;
             }
-            repositories.Add(entity, type);
+            _repositories.Add(entity, type);
             return false;
         }
 
