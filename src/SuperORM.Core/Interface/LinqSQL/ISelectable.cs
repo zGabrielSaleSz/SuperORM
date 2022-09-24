@@ -13,6 +13,7 @@ namespace SuperORM.Core.Interface
         ISelectable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation);
         //ISelectable<T2> Select<T2, TResult>(this ISelectable<T2> query, Expression<Func<T2, TResult>> expression);
         ISelectable<T> From(string tableName);
+        ISelectable<T> From<T2>();
         ISelectable<T> SelectAll();
         ISelectable<T> Select(string field);
         ISelectable<T> Select(params Expression<Func<T, object>>[] attributes);

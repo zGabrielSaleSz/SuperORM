@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
+using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
 using SuperORM.TestsResource.Entities;
@@ -11,10 +12,11 @@ namespace SuperORM.ConsoleTests.UseCases
     {
         internal static void Run()
         {
-            UserRepository userRepository = new UserRepository(Setting.GetInstance().ConnectionProvider);
+            IConnectionProvider connectionProvider = Setting.GetInstance().ConnectionProvider;
+            UserRepository userRepository = new UserRepository(connectionProvider);
 
-            ISelectable<User> selectable =
-                userRepository.GetSelectable()
+            ISelectable<User> selectable = new Selectable<User>(connectionProvider.GetNewConnection(), connectionProvider.GetQuerySintax())
+                //userRepository.GetSelectable()
                 .Select<User>(
                     u => u.id,
                     u => u.Name
@@ -26,6 +28,7 @@ namespace SuperORM.ConsoleTests.UseCases
                 .Select<DocumentType>(
                     dt => dt.description
                 )
+                .From<User>()
                 .InnerJoin<Document>(a => a.id, d => d.idUser)
                 .InnerJoin<Document, DocumentType>(a => a.idDocumentType, dt => dt.id)
                 .Where(u => u.id == 1)

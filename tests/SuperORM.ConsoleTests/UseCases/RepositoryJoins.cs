@@ -13,9 +13,7 @@ namespace SuperORM.ConsoleTests.UseCases
         public static void Run(IConnectionProvider connectionProvider)
         {
             UserRepository userRepository = new UserRepository(connectionProvider);
-            DocumentRepository documentRepository = new DocumentRepository(connectionProvider);
-
-
+          
             //ISelectable<Document> query = documentRepository.GetSelectable();
             //var result = query.InnerJoin<User>(a => a.idUser = )
             //    //.SelectAll()
