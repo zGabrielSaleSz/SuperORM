@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -25,7 +25,6 @@
     <ProjectReference Include="..\..\src\SuperORM.MySql\SuperORM.MySql.csproj" />
     <ProjectReference Include="..\..\src\SuperORM.SqlServer\SuperORM.SqlServer.csproj" />
     <ProjectReference Include="..\..\src\SuperORM.TestsResource\SuperORM.TestsResource.csproj" />
-    <ProjectReference Include="..\..\SuperORM.TestsResource\SuperORM.TestsResource.csproj" />
   </ItemGroup>
 
   <ItemGroup>

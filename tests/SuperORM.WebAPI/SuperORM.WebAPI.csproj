@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SuperORM.TestsResource\SuperORM.TestsResource.csproj" />
+    <ProjectReference Include="..\..\src\SuperORM.TestsResource\SuperORM.TestsResource.csproj" />
   </ItemGroup>
 
   <ItemGroup>
