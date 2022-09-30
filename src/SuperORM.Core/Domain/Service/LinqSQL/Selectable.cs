@@ -152,7 +152,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> CrossJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => CrossJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        
 
         public ISelectable<T> CrossJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
@@ -185,7 +184,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> SelfJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => SelfJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        
 
         public ISelectable<T> SelfJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
@@ -263,6 +261,10 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _selectableBuilder.From(_tableAssimilator.GetMainTable());
             return this;
         }
+
+        public ISelectable<T> From<T2>()
+            => From(GetTableOfType<T2>());
+        
 
         public ISelectable<T> Select(string field)
         {

@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
+using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
