@@ -27,7 +27,9 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IConnection _connection;
         private readonly ISelectableBuilder _selectableBuilder;
         private readonly IQuerySintax _querySintax;
+
         private ColumnAssimilator columnAssimilator = ColumnAssimilator.Empty;
+        private IRepositoryRegistry repositoryRegistry;
 
         public Selectable(IConnection connection, IQuerySintax querySintax)
         {
@@ -331,6 +333,12 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
+        public ISelectable<T> UseRepositoryRegistry(IRepositoryRegistry repositoryRegistry)
+        {
+            this.repositoryRegistry = repositoryRegistry;
+            return this;
+        }
+
         public string GetQuery()
         {
             CheckRequired();
@@ -412,7 +420,9 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public string GetTableOfType<Type>()
         {
-            return Setting.GetInstance().GetRepositoryRegistry().GetRepository(typeof(Type)).GetTableName();
+            if (repositoryRegistry == null)
+                throw new NotFoundedRepositoryRegistry();
+            return repositoryRegistry.GetRepository(typeof(Type)).GetTableName();
         }
     }
 }

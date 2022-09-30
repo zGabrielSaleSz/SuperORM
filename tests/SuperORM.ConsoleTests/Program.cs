@@ -31,11 +31,28 @@ namespace SuperORM.ConsoleTests
             Setting setting = Setting.GetInstance();
             setting.SetConnection(connectionProviderMySql);
 
-            RepositoryRegistry repositoryRegistry = setting.GetRepositoryRegistry();
-
             Assembly assemblyRepositories = typeof(UserRepository).Assembly;
-            repositoryRegistry.UseAllRepositories(
-                ignoreDuplicate: false, 
+            setting.SetRepositoryRegistry("MySql", new RepositoryRegistry(connectionProviderMySql));
+            setting.SetRepositoryRegistry("SqlServer", new RepositoryRegistry(connectionProviderSqlServer));
+
+            //IRepositoryRegistry repositoryRegistry = setting.GetDefaultRepositoryRegistry();
+            IRepositoryRegistry repositoryRegistryMySql = setting.GetRepositoryRegistry("MySql");
+            IRepositoryRegistry repositoryRegistrySqlServer = setting.GetRepositoryRegistry("SqlServer");
+
+
+
+            //repositoryRegistry.UseAllRepositories(
+            //    ignoreDuplicate: false,
+            //    assemblies: assemblyRepositories
+            //);
+
+            repositoryRegistryMySql.UseAllRepositories(
+                ignoreDuplicate: false,
+                assemblies: assemblyRepositories
+            );
+
+            repositoryRegistrySqlServer.UseAllRepositories(
+                ignoreDuplicate: false,
                 assemblies: assemblyRepositories
             );
 
@@ -48,7 +65,9 @@ namespace SuperORM.ConsoleTests
             //SelectableJoins.Run();
             //TransactionsTests.RunInsertUpdate(connectionProviderSqlServer);
             //TransactionsTests.RunSelectUpdate(connectionProviderMySql);
-            SelectableJoins.Run();
+
+
+            SelectableJoins.Run(repositoryRegistryMySql);
 
             //RepositoryJoins.Run(connectionProviderMySql);
             //var typeBaseRepository = typeof(IBaseRepository);

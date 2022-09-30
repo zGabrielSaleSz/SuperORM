@@ -16,9 +16,11 @@ namespace SuperORM.Core.Domain.Service.Repository
         private readonly IConnection _connection;
         private readonly IQuerySintax _querySintax;
 
+        private readonly IRepositoryRegistry _repositoryRegistry;
+
         private ColumnAssimilator _columnAssimilator;
 
-        internal RepositorySelect(IConnection connection, IQuerySintax querySintax)
+        internal RepositorySelect(IConnection connection, IQuerySintax querySintax, IRepositoryRegistry repositoryRegistry)
         {
             _connection = connection;
             _querySintax = querySintax;
@@ -33,9 +35,8 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public RepositorySelect<Target, PrimaryKeyType> Include<T, T2>(T joinEntity, Expression<Func<T, T2>> attribute)
         {
-            IBaseRepository baseRepository = Setting.GetInstance()
-                .GetRepositoryRegistry()
-                .GetRepository(typeof(T));
+            IBaseRepository baseRepository = _repositoryRegistry
+                .GetRepositoryOf<T>();
 
             return null;
         }

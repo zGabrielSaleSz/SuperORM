@@ -10,6 +10,7 @@ namespace SuperORM.Core.Interface
 {
     public interface ISelectable<T> : IQueryBuilder
     {
+        ISelectable<T> UseRepositoryRegistry(IRepositoryRegistry repositoryRegistry);
         ISelectable<T> AddColumnAssimilation(ColumnAssimilator columnAssimilation);
         //ISelectable<T2> Select<T2, TResult>(this ISelectable<T2> query, Expression<Func<T2, TResult>> expression);
         ISelectable<T> From(string tableName);

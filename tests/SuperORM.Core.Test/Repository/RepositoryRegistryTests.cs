@@ -32,7 +32,7 @@ namespace SuperORM.Core.Test.Repository
 
             // Act
             repositoryRegistry.AddRepository<UserRepository>();
-            IBaseRepository baseRepository = repositoryRegistry.GetRepository<User>();
+            IBaseRepository baseRepository = repositoryRegistry.GetRepositoryOf<User>();
 
             // Assert
             Assert.IsType<UserRepository>(baseRepository);
@@ -47,7 +47,7 @@ namespace SuperORM.Core.Test.Repository
             // Act
             Action action = () =>
             {
-                IBaseRepository baseRepository = repositoryRegistry.GetRepository<User>();
+                IBaseRepository baseRepository = repositoryRegistry.GetRepositoryOf<User>();
             };
 
             // Assert
@@ -64,7 +64,7 @@ namespace SuperORM.Core.Test.Repository
             repositoryRegistry.AddRepository<UserRepository>();
             repositoryRegistry.AddRepository<UserRepositoryNewImplementation>();
 
-            IBaseRepository baseRepository = repositoryRegistry.GetRepository<User>();
+            IBaseRepository baseRepository = repositoryRegistry.GetRepositoryOf<User>();
 
             // Assert
             Assert.IsAssignableFrom<UserRepositoryNewImplementation>(baseRepository);
@@ -105,11 +105,11 @@ namespace SuperORM.Core.Test.Repository
             repositoryRegistry.AddRepository<UserRepository>();
 
             // Assert
-            Assert.NotNull(repositoryRegistry.GetRepository<Document>());
-            Assert.NotNull(repositoryRegistry.GetRepository<DocumentType>());
-            Assert.NotNull(repositoryRegistry.GetRepository<NullTest>());
-            Assert.NotNull(repositoryRegistry.GetRepository<OldUser>());
-            Assert.NotNull(repositoryRegistry.GetRepository<User>());
+            Assert.NotNull(repositoryRegistry.GetRepositoryOf<Document>());
+            Assert.NotNull(repositoryRegistry.GetRepositoryOf<DocumentType>());
+            Assert.NotNull(repositoryRegistry.GetRepositoryOf<NullTest>());
+            Assert.NotNull(repositoryRegistry.GetRepositoryOf<OldUser>());
+            Assert.NotNull(repositoryRegistry.GetRepositoryOf<User>());
         }
     }
 }

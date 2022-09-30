@@ -10,7 +10,7 @@ using System.Text;
 
 namespace SuperORM.Core.Domain.Service.Repository
 {
-    public class RepositoryRegistry
+    public class RepositoryRegistry : IRepositoryRegistry
     {
         private IConnectionProvider _connectionProvider;
         private Dictionary<Type, Type> _repositories;
@@ -23,16 +23,26 @@ namespace SuperORM.Core.Domain.Service.Repository
             _repositories = new Dictionary<Type, Type>();
         }
 
-        public IBaseRepository GetRepository<T>()
+        public IBaseRepository GetRepositoryOf<T>()
         {
             return GetRepository(typeof(T));
+        }
+
+        public T2 GetRepository<T2>()
+            where T2 : IBaseRepository
+        {
+            Type entity = GetEntity(typeof(T2));
+            return (T2)GetRepository(entity);
         }
 
         public IBaseRepository GetRepository(Type type)
         {
             if (!_repositories.ContainsKey(type))
                 throw new EntityNotConfiguredException($"Repository could not be found for '{type.AssemblyQualifiedName}'");
-            return (IBaseRepository)Activator.CreateInstance(_repositories[type], _connectionProvider);
+            IBaseRepository baseRepository = (IBaseRepository)Activator.CreateInstance(_repositories[type], _connectionProvider);
+
+            baseRepository.UseRepositoryRegistry(this);
+            return baseRepository;
         }
 
         public void UseAllRepositories(bool ignoreDuplicate, params Assembly[] assemblies)
@@ -99,7 +109,7 @@ namespace SuperORM.Core.Domain.Service.Repository
         }
 
         /// <returns>if some entity repository was replaced</returns>
-        public bool AddRepository(Type type)
+        private bool AddRepository(Type type)
         {
             Type entity = GetEntity(type);
             if (_repositories.ContainsKey(entity))

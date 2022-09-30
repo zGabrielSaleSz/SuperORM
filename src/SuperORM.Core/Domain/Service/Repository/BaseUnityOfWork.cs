@@ -17,6 +17,7 @@ namespace SuperORM.Core.Domain.Service.Repository
         {
 
         }
+
         public void UseTransaction()
         {
             _useTransaction = true;

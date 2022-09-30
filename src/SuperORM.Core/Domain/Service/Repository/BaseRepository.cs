@@ -15,12 +15,14 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public IConnectionProvider ConnectionProvider { get; private set; }
 
-        private IConnection _connection;
         private Expression<Func<Target, PrimaryKeyType>> _primaryKeyExpression;
 
         private readonly ColumnAssimilator<Target> _columnAssimilator;
         private readonly IPropertyConfiguration<Target> _propertyConfiguration;
         private readonly Type _targetType;
+
+        private IRepositoryRegistry repositoryRegistry;
+        private IConnection connection;
 
         public BaseRepository(IConnectionProvider connectionProvider)
         {
@@ -59,11 +61,10 @@ namespace SuperORM.Core.Domain.Service.Repository
             return _targetType;
         }
 
-        
-
         public ISelectable<Target> GetSelectable()
         {
             return new Selectable<Target>(GetConnectionProvider().GetNewConnection(), GetQuerySintax())
+                .UseRepositoryRegistry(repositoryRegistry)
                 .AddColumnAssimilation(_columnAssimilator)
                 .From(TableName);
         }
@@ -91,7 +92,12 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public void UseConnection(IConnection connection)
         {
-            _connection = connection;
+            this.connection = connection;
+        }
+
+        public void UseRepositoryRegistry(IRepositoryRegistry repositoryRegistry)
+        {
+            this.repositoryRegistry = repositoryRegistry;
         }
 
         private IConnectionProvider GetConnectionProvider()
@@ -104,10 +110,10 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         private IConnection GetConnection()
         {
-            if (_connection == null)
+            if (connection == null)
                 return GetConnectionProvider().GetNewConnection();
             else
-                return _connection;
+                return connection;
         }
 
         private IQuerySintax GetQuerySintax()

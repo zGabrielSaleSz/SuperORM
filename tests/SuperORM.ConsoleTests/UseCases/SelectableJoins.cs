@@ -1,6 +1,7 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Repository;
 using SuperORM.TestsResource.Entities;
 using SuperORM.TestsResource.Repositories;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace SuperORM.ConsoleTests.UseCases
 {
     internal class SelectableJoins
     {
-        internal static void Run()
+        internal static void Run(IRepositoryRegistry repositryRegistry)
         {
-            UserRepository userRepository = new UserRepository(Setting.GetInstance().ConnectionProvider);
+            UserRepository userRepository = repositryRegistry.GetRepository<UserRepository>();
 
             ISelectable<User> selectable =
                 userRepository.GetSelectable()
