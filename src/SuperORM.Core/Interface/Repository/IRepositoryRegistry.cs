@@ -7,6 +7,7 @@ namespace SuperORM.Core.Interface.Repository
 {
     public interface IRepositoryRegistry
     {
+        IConnectionProvider GetConnectionProvider();
         IBaseRepository GetRepositoryOf<T>();
         T2 GetRepository<T2>() 
             where T2 : IBaseRepository;

@@ -16,7 +16,6 @@
     <ProjectReference Include="..\..\src\SuperORM.MySql\SuperORM.MySql.csproj" />
     <ProjectReference Include="..\..\src\SuperORM.SqlServer\SuperORM.SqlServer.csproj" />
     <ProjectReference Include="..\..\src\SuperORM.TestsResource\SuperORM.TestsResource.csproj" />
-    <ProjectReference Include="..\..\SuperORM.TestsResource\SuperORM.TestsResource.csproj" />
   </ItemGroup>
 
   <ItemGroup>

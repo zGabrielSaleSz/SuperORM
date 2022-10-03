@@ -125,5 +125,10 @@ namespace SuperORM.Core.Domain.Service.Repository
         {
             return repostoryType.BaseType.GenericTypeArguments[0];
         }
+
+        public IConnectionProvider GetConnectionProvider()
+        {
+            return _connectionProvider;
+        }
     }
 }

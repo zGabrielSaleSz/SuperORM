@@ -11,11 +11,12 @@ namespace SuperORM.Core.Domain.Service.Repository
 {
     public class BaseUnityOfWork : IBaseUnityOfWork
     {
+        private IRepositoryRegistry _repositoryRegistry;
         private IConnection _connection;
         private bool _useTransaction = false;
-        public BaseUnityOfWork()
+        public BaseUnityOfWork(IRepositoryRegistry repositoryRegistry)
         {
-
+            _repositoryRegistry = repositoryRegistry;
         }
 
         public void UseTransaction()
@@ -48,7 +49,9 @@ namespace SuperORM.Core.Domain.Service.Repository
             LoadConnection();
             var repository = new T();
             if (_useTransaction == true)
+            {
                 repository.UseConnection(_connection);
+            }
 
             return repository;
         }
@@ -60,13 +63,17 @@ namespace SuperORM.Core.Domain.Service.Repository
 
             if (_useTransaction)
             {
-                ITransactionConnection transactionConnection = Setting.GetInstance().ConnectionProvider.GetNewTransaction();
+                ITransactionConnection transactionConnection = _repositoryRegistry
+                    .GetConnectionProvider()
+                    .GetNewTransaction();
+
                 transactionConnection.BeginTransaction();
                 _connection = transactionConnection;
             }
             else
             {
-                _connection = Setting.GetInstance().ConnectionProvider.GetNewConnection();
+                _connection = _repositoryRegistry.GetConnectionProvider()
+                    .GetNewConnection();
             }
         }
     }
