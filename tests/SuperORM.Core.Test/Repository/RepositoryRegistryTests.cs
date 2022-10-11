@@ -24,6 +24,7 @@ namespace SuperORM.Core.Test.Repository
         {
             return new RepositoryRegistry(new ConnectionProviderMock());
         }
+
         [Fact]
         public void Should_ReturnNewInstance_When_GetConfiguredRepository()
         {

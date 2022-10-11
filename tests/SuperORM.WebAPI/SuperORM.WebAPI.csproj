@@ -24,8 +24,4 @@
     <ProjectReference Include="..\..\src\SuperORM.TestsResource\SuperORM.TestsResource.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\Model\" />
-  </ItemGroup>
-
 </Project>

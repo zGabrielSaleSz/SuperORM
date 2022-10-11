@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.TestsResource.Entities;
 using SuperORM.TestsResource.Repositories;
+using SuperORM.WebAPI.Domain.Services;
+using SuperORM.WebAPI.DTO.Users;
+using SuperORM.WebAPI.Infrastructure.MySqlImp;
 
 namespace SuperORM.WebAPI.Controllers
 {
@@ -9,18 +12,22 @@ namespace SuperORM.WebAPI.Controllers
     [Route("[controller]/[action]")]
     public class UserController : ControllerBase
     {
-        private readonly IRepositoryRegistry _repositoryRegistry;
+        private readonly IUserService _userService;
 
-        public UserController(IRepositoryRegistry repositoryRegistry)
+        public UserController(IUserService userService)
         {
-            _repositoryRegistry = repositoryRegistry;
+            _userService = userService;
         }
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            return _repositoryRegistry.GetRepository<UserRepository>()
-                .GetSelectable()
-                .AsEnumerable();
+            return _userService.Get();
+        }
+
+        [HttpPost]
+        public User CreateUser(CreateUser createUser)
+        {
+            return _userService.Create(createUser);
         }
     }
 }

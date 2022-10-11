@@ -27,32 +27,30 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public void Commit()
         {
-            if (_useTransaction)
-            {
-                ITransactionConnection currentConnection = _connection as ITransactionConnection;
-                currentConnection.Commit();
-            }
+            if (!_useTransaction)
+                return;
+            
+            ITransactionConnection currentConnection = _connection as ITransactionConnection;
+            currentConnection.Commit();
         }
 
         public void Rollback()
         {
             if (_useTransaction)
-            {
-                ITransactionConnection currentConnection = _connection as ITransactionConnection;
+                return;
 
-                currentConnection.Rollback();
-            }
+            ITransactionConnection currentConnection = _connection as ITransactionConnection;
+            currentConnection.Rollback();
         }
 
-        public T Get<T>() where T : IBaseRepository, new()
+        public T Get<T>() where T : IBaseRepository
         {
             LoadConnection();
-            var repository = new T();
+            var repository = _repositoryRegistry.GetRepository<T>();
             if (_useTransaction == true)
             {
                 repository.UseConnection(_connection);
             }
-
             return repository;
         }
 
@@ -63,18 +61,34 @@ namespace SuperORM.Core.Domain.Service.Repository
 
             if (_useTransaction)
             {
-                ITransactionConnection transactionConnection = _repositoryRegistry
-                    .GetConnectionProvider()
-                    .GetNewTransaction();
-
-                transactionConnection.BeginTransaction();
-                _connection = transactionConnection;
+                ApplyTransactionConnection();
             }
             else
             {
-                _connection = _repositoryRegistry.GetConnectionProvider()
-                    .GetNewConnection();
+                ApplyConnection();
             }
+        }
+
+        private void ApplyConnection()
+        {
+            IConnection connection = GetConnectionProvider()
+                .GetNewConnection();
+
+            _connection = connection;
+        }
+
+        private void ApplyTransactionConnection()
+        {
+            ITransactionConnection transactionConnection = GetConnectionProvider()
+                .GetNewTransaction();
+
+            transactionConnection.BeginTransaction();
+            _connection = transactionConnection;
+        }
+
+        private IConnectionProvider GetConnectionProvider()
+        {
+            return _repositoryRegistry.GetConnectionProvider();
         }
     }
 }

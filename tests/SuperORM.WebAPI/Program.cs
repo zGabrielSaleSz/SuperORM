@@ -4,6 +4,9 @@ using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.MySql;
 using SuperORM.TestsResource.Repositories;
+using SuperORM.WebAPI.Domain.Services;
+using SuperORM.WebAPI.Domain.Services.Implementation;
+using SuperORM.WebAPI.Infrastructure.MySqlImp;
 using System.Reflection;
 
 namespace SuperORM.WebAPI
@@ -61,6 +64,10 @@ namespace SuperORM.WebAPI
             {
                 return repositoryRegistry;
             });
+
+            builder.Services.AddScoped<UnityOfWork>();
+
+            builder.Services.AddScoped<IUserService, UserService>();
         }
     }
 }
