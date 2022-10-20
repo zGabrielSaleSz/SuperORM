@@ -40,7 +40,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public IDeletable<T> From(string tableName)
         {
-            _table.Name = tableName;
+            _table.SetName(tableName);
             _tableAssimilator.SetMainTableName(_table);
             _deletableBuilder.From(_table);
             return this;

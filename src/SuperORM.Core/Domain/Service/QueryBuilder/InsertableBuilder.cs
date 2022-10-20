@@ -29,15 +29,13 @@ namespace SuperORM.Core.Domain.Service.QueryBuilder
 
         public IInsertableBuilder Into(string tableName)
         {
-            _table.Name = tableName;
+            _table.SetName(tableName);
             return this;
         }
 
         public IInsertableBuilder Into(Table table)
         {
-            this._table.Name = table.Name;
-            this._table.Schema = table.Schema;
-            this._table.Alias = table.Schema;
+            this._table.CopyFrom(table);
             return this;
         }
 

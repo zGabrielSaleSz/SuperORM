@@ -90,7 +90,7 @@ namespace SuperORM.Core.Domain.Service.QueryBuilder
 
         public ISelectableBuilder From(string table)
         {
-            _table.Name = table;
+            _table.SetName(table);
             return this;
         }
 

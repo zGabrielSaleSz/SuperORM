@@ -40,7 +40,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public IUpdatable<T> Update(string tableName)
         {
-            _table.Name = tableName;
+            _table.SetName(tableName);
             _tableAssimilator.SetMainTableName(_table);
             _updatableBuilder.Update(_table);
             return this;

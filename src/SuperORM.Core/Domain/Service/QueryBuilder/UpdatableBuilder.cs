@@ -35,7 +35,7 @@ namespace SuperORM.Core.Domain.Service.QueryBuilder
 
         public IUpdatableBuilder Update(string tableName)
         {
-            _table.Name = tableName;
+            _table.SetName(tableName);
             return this;
         }
 

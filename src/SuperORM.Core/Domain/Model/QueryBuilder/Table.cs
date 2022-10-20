@@ -6,9 +6,9 @@ namespace SuperORM.Core.Domain.Model.QueryBuilder
 {
     public class Table
     {
-        public string Name { get; set; }
-        public string Alias { get; set; }
-        public string Schema { get; set; }
+        public string Name { get; private set; }
+        public string Alias { get; private set; }
+        public string Schema { get; private set; }
 
         private IFieldsBuilder FieldsBuilder;
         public Table()
@@ -35,6 +35,11 @@ namespace SuperORM.Core.Domain.Model.QueryBuilder
             this.Alias = table.Alias;
             this.Schema = table.Schema;
             this.FieldsBuilder = table.FieldsBuilder;
+        }
+
+        public void SetName(string name)
+        {
+            this.Name = name;
         }
 
         private void Initialize(string tableName, string schema = null, string alias = null)

@@ -39,7 +39,7 @@ namespace SuperORM.Core.Domain.Service.QueryBuilder
 
         public IDeletableBuilder From(string table)
         {
-            this._table.Name = table;
+            this._table.SetName(table);
             return this;
         }
 

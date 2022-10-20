@@ -18,7 +18,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
 
         internal void SetMainTableName(string tableName)
         {
-            mainTable.Name = tableName;
+            mainTable.SetName(tableName);
         }
 
         internal void SetMainTableName(Table table)
@@ -53,7 +53,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
         internal void SetTableName(Type type, string tableName)
         {
             CheckTableReference(type);
-            tables[type].Name = tableName;
+            tables[type].SetName(tableName);
         }
 
         internal Table GetTableReference(Type type)
