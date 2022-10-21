@@ -95,18 +95,18 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
-        public ISelectable<T> InnerJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => InnerJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+        public ISelectable<T> InnerJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
+            => InnerJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined, alias);
 
-        public ISelectable<T> InnerJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => InnerJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
+        public ISelectable<T> InnerJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
+            => InnerJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined, alias);
 
-        public ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined);
+        public ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
+            => InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined, alias);
         
-        public ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
+        public ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
         {
-            var joinResult = GetJoinFields(tableName, attributeRoot, attributeJoined);
+            var joinResult = GetJoinFields(tableName, attributeRoot, attributeJoined, alias);
             _selectableBuilder.InnerJoin(joinResult.FieldTable, joinResult.FieldTableJoined);
             return this;
         }
@@ -192,7 +192,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
-        private JoinEvaluated GetJoinFields<T1, T2>(string tableName, Expression<Func<T1, object>> expression, Expression<Func<T2, object>> expression1)
+        private JoinEvaluated GetJoinFields<T1, T2>(string tableName, Expression<Func<T1, object>> expression, Expression<Func<T2, object>> expression1, string alias = "")
         {
             JoinEvaluated result = new JoinEvaluated();
             string tableColumn = new SqlExpressionEvaluator(expression.Body, _querySintax).Evaluate();
@@ -200,7 +200,8 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
             Table tableOne = GetTableByType(typeof(T1));
             Table tableTwo = GetTableReferenceOf(typeof(T2), tableName);
-
+            if (!string.IsNullOrWhiteSpace(alias))
+                tableTwo.SetAlias(alias);
             result.FieldTable = GetFieldReferenceOf(tableOne, tableColumn);
             result.FieldTableJoined = GetFieldReferenceOf(tableTwo, joinedTableColumn);
             return result;

@@ -42,6 +42,11 @@ namespace SuperORM.Core.Domain.Model.QueryBuilder
             this.Name = name;
         }
 
+        public void SetAlias(string alias)
+        {
+            this.Alias = alias;
+        }
+
         private void Initialize(string tableName, string schema = null, string alias = null)
         {
             this.Name = tableName;
