@@ -1,12 +1,8 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder;
-using SuperORM.Core.Domain.Service.Repository;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperORM.Core.Domain.Model.Sql
 {
@@ -67,7 +63,7 @@ namespace SuperORM.Core.Domain.Model.Sql
         public int ExecuteNonQuery(CommandContext commandContext)
         {
             int rowsChanged = 0;
-            foreach(ParameterizedQuery parameterizedQuery in commandContext.Queries)
+            foreach (ParameterizedQuery parameterizedQuery in commandContext.Queries)
             {
                 rowsChanged += _transactionConnection.ExecuteNonQueryImplementation(parameterizedQuery);
             }
@@ -79,7 +75,7 @@ namespace SuperORM.Core.Domain.Model.Sql
             ExecuteScalarResult<T> result = new ExecuteScalarResult<T>();
             foreach (ParameterizedQuery parameterizedQuery in commandContext.Queries)
             {
-                result.Add(parameterizedQuery, _transactionConnection.ExecuteScalarImplementation<T>(parameterizedQuery)); 
+                result.Add(parameterizedQuery, _transactionConnection.ExecuteScalarImplementation<T>(parameterizedQuery));
             }
             return result;
         }

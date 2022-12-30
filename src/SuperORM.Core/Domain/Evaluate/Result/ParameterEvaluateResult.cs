@@ -1,7 +1,6 @@
 ﻿using SuperORM.Core.Domain.Model.Common;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
 
-namespace SuperORM.Core.Domain.Model.Evaluate
+namespace SuperORM.Core.Domain.Evaluate.Result
 {
     public class ParameterEvaluateResult : IEvaluateParameter
     {
@@ -30,7 +29,7 @@ namespace SuperORM.Core.Domain.Model.Evaluate
 
         public bool IsNull()
         {
-            return (_content.GetContent() == SqlKeywords.NULL);
+            return _content.GetContent() == SqlKeywords.NULL;
         }
 
         public string GetParameterAsContent()

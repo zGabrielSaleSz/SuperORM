@@ -9,7 +9,6 @@ namespace SuperORM.Core.Domain.Service.Settings
     public class Setting
     {
         private Dictionary<IComparable, IRepositoryRegistry> RepositoryRegisters;
-        private RepositoryRegistry repositoryRegistry;
         public IConnectionProvider ConnectionProvider { get; private set; }
         private static Setting _instance;
         private Setting()

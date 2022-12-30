@@ -1,5 +1,4 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Default;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.Column;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;

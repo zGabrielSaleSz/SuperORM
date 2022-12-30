@@ -41,12 +41,16 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             return !string.IsNullOrWhiteSpace(mainTable.Name);
         }
 
-        internal Table AddTableReference(Type type, string tableName)
+        internal Table AddTableReference(Type type, string tableName, string alias = "")
         {
             if (TableHasReferences(type))
                 throw new TableReferenceException("This type already have a table referenced");
 
-            tables.Add(type, new Table(tableName));
+            Table newTable = new Table(tableName);
+            if (!string.IsNullOrWhiteSpace(alias))
+                newTable.SetAlias(alias);
+
+            tables.Add(type, newTable);
             return tables[type];
         }
 

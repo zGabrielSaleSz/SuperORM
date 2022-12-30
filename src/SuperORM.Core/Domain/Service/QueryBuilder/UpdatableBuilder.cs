@@ -1,9 +1,10 @@
-﻿using SuperORM.Core.Domain.Model.Common;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
+using SuperORM.Core.Domain.Model.Common;
 using SuperORM.Core.Domain.Model.Enum;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
+using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.QueryBuilder;
 using System;
@@ -116,7 +117,7 @@ namespace SuperORM.Core.Domain.Service.QueryBuilder
 
         public void SetWhereCondition<T>(Expression<Func<T, bool>> expression, IEvaluateColumn evaluateColumn)
         {
-            var sqlExpression = new SqlExpressionEvaluator(expression.Body, _querySintax);
+            SqlExpressionEvaluator sqlExpression = new SqlExpressionEvaluator(expression.Body, _querySintax);
             sqlExpression.EvaluateContext.SetColumnEvaluator(evaluateColumn);
             sqlExpression.EvaluateContext.SetParametersBuilder(_parametersBuilder);
             _whereConditions.Add(sqlExpression.EvaluateWithParameters());

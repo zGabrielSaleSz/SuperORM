@@ -1,6 +1,5 @@
+using Microsoft.Extensions.Configuration;
 using SuperORM.Core.Domain.Service.Repository;
-using SuperORM.Core.Domain.Service.Settings;
-using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.MySql;
 using SuperORM.TestsResource.Repositories;
@@ -13,28 +12,23 @@ namespace SuperORM.WebAPI
 {
     public class Program
     {
-        private static IConfigurationRoot Configuration { get; set; }
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
-           
+            WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            Configuration = new ConfigurationBuilder()
+            IConfigurationRoot configuration = new ConfigurationBuilder()
                           .SetBasePath(builder.Environment.ContentRootPath)
                           .AddJsonFile("appsettings.json", false)
                           .Build();
 
-            
-            LoadRepositories(builder);
-           
+            LoadRepositories(configuration, builder);
 
             var app = builder.Build();
-
-           
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -51,9 +45,9 @@ namespace SuperORM.WebAPI
             app.Run();
         }
 
-        private static void LoadRepositories(WebApplicationBuilder builder)
+        private static void LoadRepositories(IConfigurationRoot configuration, WebApplicationBuilder builder)
         {
-            string mySqlConnectionString = Configuration["MySqlConnection"];
+            string mySqlConnectionString = configuration["MySqlConnection"];
             ConnectionProvider connectionProvider = new ConnectionProvider(mySqlConnectionString);
             RepositoryRegistry repositoryRegistry = new RepositoryRegistry(connectionProvider);
 

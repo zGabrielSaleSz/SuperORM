@@ -1,12 +1,11 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
-using SuperORM.Core.Domain.Model.QueryBuilder;
+﻿using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
 using System;
 
-namespace SuperORM.Core.Domain.Model.Evaluate.Default
+namespace SuperORM.Core.Domain.Evaluate.ColumnEvaluation
 {
     internal class EvaluateColumnQueryBuilder<T> : IEvaluateColumn
     {
@@ -15,9 +14,9 @@ namespace SuperORM.Core.Domain.Model.Evaluate.Default
         private readonly ColumnAssimilator _columnAssimilator;
         public EvaluateColumnQueryBuilder(TableAssimilator tableAssimilator, IQuerySintax querySintax, ColumnAssimilator columnAssimilator)
         {
-            this._querySintax = querySintax;
-            this._tableAssimilator = tableAssimilator;
-            this._columnAssimilator = columnAssimilator;
+            _querySintax = querySintax;
+            _tableAssimilator = tableAssimilator;
+            _columnAssimilator = columnAssimilator;
         }
 
         public string GetEquivalentColumn(Type type, string propertyName)

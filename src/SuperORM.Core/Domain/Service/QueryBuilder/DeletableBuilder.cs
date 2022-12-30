@@ -1,9 +1,10 @@
-﻿using SuperORM.Core.Domain.Model.Common;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
+using SuperORM.Core.Domain.Model.Common;
 using SuperORM.Core.Domain.Model.Enum;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
+using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.QueryBuilder;
 using System;

@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.Result;
 
 namespace SuperORM.Core.Domain.Service.Evaluator.Expressions
 {

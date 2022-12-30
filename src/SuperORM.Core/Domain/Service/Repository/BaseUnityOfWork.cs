@@ -1,11 +1,5 @@
-﻿using SuperORM.Core.Domain.Service.Settings;
-using SuperORM.Core.Interface;
+﻿using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperORM.Core.Domain.Service.Repository
 {
@@ -29,7 +23,7 @@ namespace SuperORM.Core.Domain.Service.Repository
         {
             if (!_useTransaction)
                 return;
-            
+
             ITransactionConnection currentConnection = _connection as ITransactionConnection;
             currentConnection.Commit();
         }

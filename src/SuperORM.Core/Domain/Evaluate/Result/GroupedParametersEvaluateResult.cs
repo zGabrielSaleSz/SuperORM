@@ -1,7 +1,6 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace SuperORM.Core.Domain.Model.Evaluate
+namespace SuperORM.Core.Domain.Evaluate.Result
 {
     public class GroupedParametersEvaluateResult : IEvaluateParameter
     {

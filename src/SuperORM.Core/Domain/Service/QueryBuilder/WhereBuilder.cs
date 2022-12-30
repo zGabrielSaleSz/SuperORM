@@ -1,5 +1,5 @@
-﻿using SuperORM.Core.Domain.Model.Enum;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.Result;
+using SuperORM.Core.Domain.Model.Enum;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
 using SuperORM.Core.Domain.Service.Adapters;

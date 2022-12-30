@@ -1,9 +1,9 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
-using SuperORM.Core.Domain.Service;
+﻿using SuperORM.Core.Domain.Evaluate.Result;
+using SuperORM.Core.Domain.Evaluate.Result.Factory;
 using SuperORM.Core.Interface;
 using System;
 
-namespace SuperORM.Core.Domain.Model.Evaluate
+namespace SuperORM.Core.Domain.Evaluate.QuerySintax
 {
     public class QuerySintaxDefault : IQuerySintax
     {
@@ -24,12 +24,12 @@ namespace SuperORM.Core.Domain.Model.Evaluate
 
         public string GetPaginationSintax(uint rowsTake)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public string GetPaginationSintax(uint rowsSkip, uint rowsTake)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public string GetParameterKey(string parameterName)

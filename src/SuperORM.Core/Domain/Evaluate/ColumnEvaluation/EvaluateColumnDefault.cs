@@ -1,7 +1,7 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
 using System;
 
-namespace SuperORM.Core.Domain.Model.Evaluate.Default
+namespace SuperORM.Core.Domain.Evaluate.ColumnColumnEvaluation
 {
     public class EvaluateColumnDefault : IEvaluateColumn
     {

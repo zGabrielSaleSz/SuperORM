@@ -1,7 +1,7 @@
-﻿using SuperORM.Core.Domain.Exceptions;
+﻿using SuperORM.Core.Domain.Evaluate.Column;
+using SuperORM.Core.Domain.Exceptions;
 using SuperORM.Core.Domain.Model.Common;
 using SuperORM.Core.Domain.Model.Enum;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;

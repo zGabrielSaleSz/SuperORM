@@ -1,6 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using SuperORM.Core.Domain.Model.QueryBuilder;
-using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Interface;
 using System;
 using System.Collections.Generic;

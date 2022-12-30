@@ -7,7 +7,7 @@ namespace SuperORM.Core.Domain.Service.Adapters
     {
         public static ExpressionType GetExpressionType(SqlComparator sqlOperator)
         {
-            switch(sqlOperator)
+            switch (sqlOperator)
             {
                 case SqlComparator.Equal:
                     return ExpressionType.Equal;

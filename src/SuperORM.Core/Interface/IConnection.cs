@@ -1,5 +1,4 @@
 ﻿using SuperORM.Core.Domain.Model.Sql;
-using System;
 using System.Collections.Generic;
 
 namespace SuperORM.Core.Interface

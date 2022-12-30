@@ -1,12 +1,11 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
-using SuperORM.Core.Interface.QueryBuilder;
 using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace SuperORM.Core.Interface
+namespace SuperORM.Core.Interface.LinqSQL
 {
     public interface ISelectable<T> : IQueryBuilder
     {

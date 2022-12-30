@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace SuperORM.Core.Domain.Service.Repository
@@ -78,7 +77,7 @@ namespace SuperORM.Core.Domain.Service.Repository
         private string GenerateDuplicatedMessage(Dictionary<Type, Type[]> duplicatedRepositories)
         {
             StringBuilder message = new StringBuilder();
-            foreach(var type in duplicatedRepositories)
+            foreach (var type in duplicatedRepositories)
             {
                 Type entityType = type.Key;
                 Type[] repositoriesForType = type.Value;

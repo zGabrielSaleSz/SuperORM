@@ -1,11 +1,11 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Default;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnColumnEvaluation;
+using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Utilities;
 using System.Linq.Expressions;
 
-namespace SuperORM.Core.Domain.Model.Evaluate
+namespace SuperORM.Core.Domain.Evaluate.Context
 {
     public class EvaluateContext : IEvaluateContext
     {
@@ -18,19 +18,19 @@ namespace SuperORM.Core.Domain.Model.Evaluate
 
         public EvaluateContext(IQuerySintax querySintax, Expression expression, ParametersBuilder parametersBuilder = null, IEvaluateContext parent = null, IEvaluateColumn columnEvaluator = null)
         {
-            this._querySintax = querySintax;
-            this._expression = expression;
-            this._parent = parent;
+            _querySintax = querySintax;
+            _expression = expression;
+            _parent = parent;
 
             if (columnEvaluator == null)
-                this._columnEvaluator = new EvaluateColumnDefault();
+                _columnEvaluator = new EvaluateColumnDefault();
             else
-                this._columnEvaluator = columnEvaluator;
+                _columnEvaluator = columnEvaluator;
 
             if (parametersBuilder == null)
-                this._parametersBuilder = new ParametersBuilder();
+                _parametersBuilder = new ParametersBuilder();
             else
-                this._parametersBuilder = parametersBuilder;
+                _parametersBuilder = parametersBuilder;
         }
 
         public void SetColumnEvaluator(IEvaluateColumn evaluateColumn)
@@ -45,7 +45,7 @@ namespace SuperORM.Core.Domain.Model.Evaluate
 
         public bool IsRoot()
         {
-            return (_parent == null);
+            return _parent == null;
         }
 
         public IEvaluateContext BuildChild<T>(T expressionChild) where T : Expression

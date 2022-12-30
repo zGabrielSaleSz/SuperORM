@@ -1,18 +1,10 @@
-﻿using Moq;
-using SuperORM.Core.Domain.Exceptions;
+﻿using SuperORM.Core.Domain.Exceptions;
 using SuperORM.Core.Domain.Service.Repository;
-using SuperORM.Core.Domain.Service.Settings;
-using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.Core.Test.Complement.Mock;
-using SuperORM.MySql;
 using SuperORM.TestsResource.Entities;
 using SuperORM.TestsResource.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace SuperORM.Core.Test.Repository

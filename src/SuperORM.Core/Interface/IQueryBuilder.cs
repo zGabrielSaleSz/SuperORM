@@ -1,6 +1,6 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder;
 
-namespace SuperORM.Core.Interface.QueryBuilder
+namespace SuperORM.Core.Interface
 {
     public interface IQueryBuilder
     {

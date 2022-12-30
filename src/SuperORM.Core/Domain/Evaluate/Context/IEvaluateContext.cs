@@ -1,9 +1,10 @@
-﻿using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
+using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Utilities;
 using System.Linq.Expressions;
 
-namespace SuperORM.Core.Domain.Model.Evaluate.Interface
+namespace SuperORM.Core.Domain.Evaluate.Context
 {
     public interface IEvaluateContext
     {

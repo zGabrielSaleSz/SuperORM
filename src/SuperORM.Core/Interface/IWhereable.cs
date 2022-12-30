@@ -1,10 +1,10 @@
-﻿using SuperORM.Core.Domain.Model.Enum;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
+using SuperORM.Core.Domain.Model.Enum;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using System;
 using System.Linq.Expressions;
 
-namespace SuperORM.Core.Interface.QueryBuilder
+namespace SuperORM.Core.Interface
 {
     public interface IWhereable<TEntry>
     {

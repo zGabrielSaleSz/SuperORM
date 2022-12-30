@@ -1,10 +1,8 @@
 ﻿using SuperORM.Core.Domain.Model.Common;
-using SuperORM.Core.Domain.Model.Evaluate;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SuperORM.Core.Domain.Service
+namespace SuperORM.Core.Domain.Evaluate.Result.Factory
 {
     public static class EvaluateResultFactory
     {

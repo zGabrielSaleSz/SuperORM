@@ -1,6 +1,7 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.SqlServer;
 using SuperORM.TestsResource.Entities;
 using Xunit;

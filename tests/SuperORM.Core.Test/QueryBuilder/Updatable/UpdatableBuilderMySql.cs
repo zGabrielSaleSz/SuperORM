@@ -6,7 +6,7 @@ using SuperORM.Core.Interface.QueryBuilder;
 using SuperORM.MySql;
 using Xunit;
 
-namespace SuperORM.Core.Test.Complement.QueryBuilder.Updatable
+namespace SuperORM.Core.Test.QueryBuilder.Updatable
 {
     public class UpdatableBuilderMySql
     {

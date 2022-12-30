@@ -1,10 +1,5 @@
-﻿using SuperORM.TestsResource.Repositories;
-using SuperORM.Core.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SuperORM.Core.Interface;
+using SuperORM.TestsResource.Repositories;
 
 namespace SuperORM.ConsoleTests.UseCases
 {
@@ -13,7 +8,7 @@ namespace SuperORM.ConsoleTests.UseCases
         public static void Run(IConnectionProvider connectionProvider)
         {
             UserRepository userRepository = new UserRepository(connectionProvider);
-          
+
             //ISelectable<Document> query = documentRepository.GetSelectable();
             //var result = query.InnerJoin<User>(a => a.idUser = )
             //    //.SelectAll()

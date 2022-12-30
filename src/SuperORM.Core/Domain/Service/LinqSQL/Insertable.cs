@@ -1,6 +1,7 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Insertable;
 using SuperORM.Core.Domain.Model.Sql;
+using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.QueryBuilder;
 using SuperORM.Core.Interface;

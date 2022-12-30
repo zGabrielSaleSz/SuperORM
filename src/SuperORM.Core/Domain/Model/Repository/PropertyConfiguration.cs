@@ -1,12 +1,7 @@
-﻿using SuperORM.Core.Domain.Service;
+﻿using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
-using SuperORM.Core.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperORM.Core.Domain.Model.Repository
 {

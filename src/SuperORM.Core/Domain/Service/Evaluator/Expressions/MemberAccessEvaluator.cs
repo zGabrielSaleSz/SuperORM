@@ -1,4 +1,7 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.Column;
+using SuperORM.Core.Domain.Evaluate.Context;
+using SuperORM.Core.Domain.Evaluate.Result;
+using SuperORM.Core.Domain.Evaluate.Result.Factory;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
 using SuperORM.Core.Utilities;
 using System;

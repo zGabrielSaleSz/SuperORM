@@ -5,9 +5,7 @@ using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.TestsResource.Repositories;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace SuperORM.ConsoleTests

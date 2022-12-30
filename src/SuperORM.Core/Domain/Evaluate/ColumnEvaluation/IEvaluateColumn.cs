@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SuperORM.Core.Domain.Model.Evaluate.Interface
+namespace SuperORM.Core.Domain.Evaluate.ColumnEvaluation
 {
     public interface IEvaluateColumn
     {

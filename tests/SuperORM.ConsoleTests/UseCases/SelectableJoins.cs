@@ -1,7 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
-using SuperORM.Core.Domain.Service.LinqSQL;
-using SuperORM.Core.Domain.Service.Settings;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.TestsResource.Entities;
 using SuperORM.TestsResource.Repositories;

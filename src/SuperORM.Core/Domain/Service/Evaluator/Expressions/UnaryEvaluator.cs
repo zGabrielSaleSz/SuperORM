@@ -1,4 +1,6 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.Context;
+using SuperORM.Core.Domain.Evaluate.Result;
+using SuperORM.Core.Domain.Evaluate.Result.Factory;
 using System.Linq.Expressions;
 
 namespace SuperORM.Core.Domain.Service.Evaluator.Expressions

@@ -1,5 +1,5 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
-using SuperORM.Core.Domain.Service;
+﻿using SuperORM.Core.Domain.Evaluate.Result;
+using SuperORM.Core.Domain.Evaluate.Result.Factory;
 using SuperORM.Core.Interface;
 using System;
 

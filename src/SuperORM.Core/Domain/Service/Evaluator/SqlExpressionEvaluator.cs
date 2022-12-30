@@ -1,10 +1,10 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate;
+﻿using SuperORM.Core.Domain.Evaluate.Context;
+using SuperORM.Core.Domain.Evaluate.QuerySintax;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
-using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Interface;
 using System.Linq.Expressions;
 
-namespace SuperORM.Core.Domain.Service
+namespace SuperORM.Core.Domain.Service.Evaluator
 {
     public class SqlExpressionEvaluator
     {
@@ -13,13 +13,13 @@ namespace SuperORM.Core.Domain.Service
         public EvaluateContext EvaluateContext { get; private set; }
         public SqlExpressionEvaluator(Expression expression, IQuerySintax querySintax = null)
         {
-            this.MainExpression = expression;
+            MainExpression = expression;
 
             if (querySintax == null)
                 QuerySintax = new QuerySintaxDefault();
 
             else
-                this.QuerySintax = querySintax;
+                QuerySintax = querySintax;
 
             EvaluateContext = new EvaluateContext(QuerySintax, MainExpression);
         }

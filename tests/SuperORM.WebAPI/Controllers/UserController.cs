@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using SuperORM.Core.Interface.Repository;
 using SuperORM.TestsResource.Entities;
-using SuperORM.TestsResource.Repositories;
 using SuperORM.WebAPI.Domain.Services;
 using SuperORM.WebAPI.DTO.Users;
-using SuperORM.WebAPI.Infrastructure.MySqlImp;
 
 namespace SuperORM.WebAPI.Controllers
 {

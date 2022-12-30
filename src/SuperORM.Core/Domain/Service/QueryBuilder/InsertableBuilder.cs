@@ -1,5 +1,5 @@
-﻿using SuperORM.Core.Domain.Model.Common;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.Result;
+using SuperORM.Core.Domain.Model.Common;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Insertable;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;

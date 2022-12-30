@@ -1,4 +1,4 @@
-using SuperORM.Core.Domain.Service;
+using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.TestsResource.Entities;
 using System;
 using System.Linq;

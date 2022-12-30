@@ -1,4 +1,4 @@
-﻿namespace SuperORM.Core.Domain.Model.Evaluate.Interface
+﻿namespace SuperORM.Core.Domain.Evaluate.Result
 {
     public interface IEvaluateResult
     {

@@ -37,7 +37,7 @@ namespace SuperORM.Core.Utilities.Reflection
                 return true;
 
             Type propertyType = property.PropertyType;
-            if (!propertyType.IsValueType) 
+            if (!propertyType.IsValueType)
                 return true;
 
             return Nullable.GetUnderlyingType(property.PropertyType) != null;

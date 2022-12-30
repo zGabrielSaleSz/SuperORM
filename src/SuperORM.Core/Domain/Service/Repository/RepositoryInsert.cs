@@ -1,5 +1,4 @@
-﻿using SuperORM.Core.Domain.Model.Sql;
-using SuperORM.Core.Domain.Service.LinqSQL;
+﻿using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Interface;
 using SuperORM.Core.Interface.LinqSQL;

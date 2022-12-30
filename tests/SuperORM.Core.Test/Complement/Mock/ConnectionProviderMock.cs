@@ -1,12 +1,8 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate;
+﻿using SuperORM.Core.Domain.Evaluate.QuerySintax;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Interface;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperORM.Core.Test.Complement.Mock
 {
@@ -54,12 +50,12 @@ namespace SuperORM.Core.Test.Complement.Mock
 
         public void Commit()
         {
-            
+
         }
 
         public void Rollback()
         {
-            
+
         }
     }
 

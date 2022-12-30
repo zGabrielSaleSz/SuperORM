@@ -1,6 +1,4 @@
-﻿using SuperORM.Core.Domain.Model.Sql;
-
-namespace SuperORM.Core.Interface
+﻿namespace SuperORM.Core.Interface
 {
     public interface IConnectionProvider
     {

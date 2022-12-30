@@ -1,12 +1,10 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
-using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Interface.Repository;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace SuperORM.Core.Domain.Service.Repository
 {
@@ -15,8 +13,6 @@ namespace SuperORM.Core.Domain.Service.Repository
         private readonly ISelectable<Target> _selectable;
         private readonly IConnection _connection;
         private readonly IQuerySintax _querySintax;
-
-        private readonly IRepositoryRegistry _repositoryRegistry;
 
         private ColumnAssimilator _columnAssimilator;
 
@@ -35,10 +31,7 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         public RepositorySelect<Target, PrimaryKeyType> Include<T, T2>(T joinEntity, Expression<Func<T, T2>> attribute)
         {
-            IBaseRepository baseRepository = _repositoryRegistry
-                .GetRepositoryOf<T>();
-
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

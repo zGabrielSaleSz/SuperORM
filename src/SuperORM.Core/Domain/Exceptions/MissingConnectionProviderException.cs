@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SuperORM.Core.Domain.Exceptions
+﻿namespace SuperORM.Core.Domain.Exceptions
 {
     public class MissingConnectionProviderException : SuperOrmException
     {

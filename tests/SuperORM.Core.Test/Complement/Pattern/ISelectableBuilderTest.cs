@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace SuperORM.Core.Test.Pattern
+namespace SuperORM.Core.Test.Complement.Pattern
 {
     public interface ISelectableBuilderTest
     {

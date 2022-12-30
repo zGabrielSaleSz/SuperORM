@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SuperORM.Core.Interface.QueryBuilder
+namespace SuperORM.Core.Interface
 {
     public interface IResultAvailable<T>
     {

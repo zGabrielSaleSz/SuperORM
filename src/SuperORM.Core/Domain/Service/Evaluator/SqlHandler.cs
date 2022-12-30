@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.Result;
 using System;
 using System.Linq.Expressions;
 

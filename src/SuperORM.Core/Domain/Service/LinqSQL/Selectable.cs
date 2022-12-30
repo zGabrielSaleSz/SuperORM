@@ -1,16 +1,15 @@
-﻿using SuperORM.Core.Domain.Exceptions;
-using SuperORM.Core.Domain.Model.Evaluate.Default;
-using SuperORM.Core.Domain.Model.Evaluate.Interface;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
+using SuperORM.Core.Domain.Exceptions;
 using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;
 using SuperORM.Core.Domain.Model.Sql;
+using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.QueryBuilder;
-using SuperORM.Core.Domain.Service.Repository;
-using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Interface.QueryBuilder;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.Core.Utilities.Reflection;
@@ -103,7 +102,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
             => InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined, alias);
-        
+
         public ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
         {
             var joinResult = GetJoinFields(tableName, attributeRoot, attributeJoined, alias);
@@ -135,7 +134,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> RightJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => RightJoin<T, T2>(tableName, attributeRoot, attributeJoined);
-        
 
         public ISelectable<T> RightJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
         {
@@ -225,7 +223,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
             ParameterizedQuery parameterizedQuery = GetQueryWithParameters();
             CommandReaderContext readerContext = new CommandReaderContext(parameterizedQuery);
-      
+
             foreach (Dictionary<string, object> columnsAndValues in _connection.ExecuteReader(readerContext))
             {
                 ResultPickerHeader resultPickerHeader = BuildResultPickerHeader(multipleFieldAssimilator, columnsAndValues);
@@ -265,7 +263,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 
         public ISelectable<T> From<T2>()
             => From(GetTableOfType<T2>());
-        
+
 
         public ISelectable<T> Select(string field)
         {
