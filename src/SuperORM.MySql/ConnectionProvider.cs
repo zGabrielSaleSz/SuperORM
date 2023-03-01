@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using SuperORM.Core.Domain.Model.Sql;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 
 namespace SuperORM.MySql
 {

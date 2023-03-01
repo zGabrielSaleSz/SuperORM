@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Interface;
+﻿using SuperORM.Core.Interface.Integration;
 using SuperORM.TestsResource.Repositories;
 
 namespace SuperORM.ConsoleTests.UseCases

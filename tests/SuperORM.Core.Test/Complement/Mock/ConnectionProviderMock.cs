@@ -1,7 +1,7 @@
 ﻿using SuperORM.Core.Domain.Evaluate.QuerySintax;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.Sql;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using System.Collections.Generic;
 
 namespace SuperORM.Core.Test.Complement.Mock

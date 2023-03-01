@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.Sql;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using SuperORM.TestsResource.Entities;
 using SuperORM.TestsResource.Repositories;
 using System;

@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using System.Text;
 
 namespace SuperORM.Core.Domain.Model.QueryBuilder

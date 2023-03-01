@@ -1,9 +1,10 @@
 ﻿using SuperORM.Core.Domain.Model.Enum;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
+using SuperORM.Core.Interface.Integration;
 using System.Collections.Generic;
 
-namespace SuperORM.Core.Interface.QueryBuilder
+namespace SuperORM.Core.Interface.QueryBuilder.SqlOperations
 {
     public interface ISelectableBuilder : IWhereable<ISelectableBuilder>, IQueryBuilder
     {

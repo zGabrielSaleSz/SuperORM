@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Utilities;
 using System.Collections.Generic;
 using System.Data.SqlClient;

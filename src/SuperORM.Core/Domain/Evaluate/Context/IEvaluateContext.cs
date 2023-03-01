@@ -1,6 +1,6 @@
 ﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Utilities;
 using System.Linq.Expressions;
 

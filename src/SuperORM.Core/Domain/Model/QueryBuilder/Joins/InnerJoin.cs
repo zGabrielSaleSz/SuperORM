@@ -1,6 +1,6 @@
 ﻿using SuperORM.Core.Domain.Model.Common;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 
 namespace SuperORM.Core.Domain.Model.QueryBuilder.Joins
 {

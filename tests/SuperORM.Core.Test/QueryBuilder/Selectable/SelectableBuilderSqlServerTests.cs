@@ -3,7 +3,7 @@ using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;
 using SuperORM.Core.Domain.Service.QueryBuilder;
-using SuperORM.Core.Interface.QueryBuilder;
+using SuperORM.Core.Interface.QueryBuilder.SqlOperations;
 using SuperORM.Core.Test.Complement.Pattern;
 using SuperORM.SqlServer;
 using Xunit;

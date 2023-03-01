@@ -1,7 +1,7 @@
 ﻿using SuperORM.Core.Domain.Evaluate.Context;
 using SuperORM.Core.Domain.Evaluate.QuerySintax;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using System.Linq.Expressions;
 
 namespace SuperORM.Core.Domain.Service.Evaluator

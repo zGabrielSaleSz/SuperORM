@@ -1,7 +1,7 @@
 ﻿using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Insertable;
 
-namespace SuperORM.Core.Interface.QueryBuilder
+namespace SuperORM.Core.Interface.QueryBuilder.SqlOperations
 {
     public interface IInsertableBuilder : IQueryBuilder
     {

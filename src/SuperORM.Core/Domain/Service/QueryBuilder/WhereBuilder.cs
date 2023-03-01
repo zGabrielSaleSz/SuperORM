@@ -4,7 +4,7 @@ using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Parameters;
 using SuperORM.Core.Domain.Service.Adapters;
 using SuperORM.Core.Domain.Service.Evaluator;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 
 namespace SuperORM.Core.Domain.Service.QueryBuilder
 {

@@ -1,4 +1,5 @@
 ﻿using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
+using SuperORM.Core.Interface.QueryBuilder;
 using System;
 using System.Linq.Expressions;
 

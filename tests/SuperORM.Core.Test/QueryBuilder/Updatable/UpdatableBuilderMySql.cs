@@ -2,7 +2,7 @@
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;
 using SuperORM.Core.Domain.Service.QueryBuilder;
-using SuperORM.Core.Interface.QueryBuilder;
+using SuperORM.Core.Interface.QueryBuilder.SqlOperations;
 using SuperORM.MySql;
 using Xunit;
 

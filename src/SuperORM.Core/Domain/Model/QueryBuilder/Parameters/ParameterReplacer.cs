@@ -1,6 +1,6 @@
 ﻿using SuperORM.Core.Domain.Evaluate.Result;
 using SuperORM.Core.Domain.Service.Evaluator;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 
 namespace SuperORM.Core.Domain.Model.QueryBuilder.Parameters
 {

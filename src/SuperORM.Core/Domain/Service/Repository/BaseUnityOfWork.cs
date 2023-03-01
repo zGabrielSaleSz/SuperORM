@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Interface;
+﻿using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Interface.Repository;
 
 namespace SuperORM.Core.Domain.Service.Repository

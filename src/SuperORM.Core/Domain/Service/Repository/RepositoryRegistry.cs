@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Exceptions;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;

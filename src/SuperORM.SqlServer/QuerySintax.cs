@@ -1,6 +1,6 @@
 ﻿using SuperORM.Core.Domain.Evaluate.Result;
 using SuperORM.Core.Domain.Evaluate.Result.Factory;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using System;
 
 namespace SuperORM.SqlServer

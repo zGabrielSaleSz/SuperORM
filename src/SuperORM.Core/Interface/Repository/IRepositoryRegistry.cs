@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using SuperORM.Core.Interface.Integration;
 
 namespace SuperORM.Core.Interface.Repository
 {

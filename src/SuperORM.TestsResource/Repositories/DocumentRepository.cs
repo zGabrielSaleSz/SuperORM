@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Service.Repository;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using SuperORM.TestsResource.Entities;
 
 namespace SuperORM.TestsResource.Repositories

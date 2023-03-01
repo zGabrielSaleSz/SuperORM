@@ -3,9 +3,9 @@ using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.Sql;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
 using SuperORM.Core.Domain.Service.QueryBuilder;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Interface.LinqSQL;
-using SuperORM.Core.Interface.QueryBuilder;
+using SuperORM.Core.Interface.QueryBuilder.SqlOperations;
 using System;
 using System.Linq.Expressions;
 

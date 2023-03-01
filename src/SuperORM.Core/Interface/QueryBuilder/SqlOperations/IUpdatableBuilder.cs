@@ -1,8 +1,7 @@
-﻿
-using SuperORM.Core.Domain.Model.QueryBuilder;
+﻿using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 
-namespace SuperORM.Core.Interface.QueryBuilder
+namespace SuperORM.Core.Interface.QueryBuilder.SqlOperations
 {
     public interface IUpdatableBuilder : IQueryBuilder, IWhereable<IUpdatableBuilder>
     {

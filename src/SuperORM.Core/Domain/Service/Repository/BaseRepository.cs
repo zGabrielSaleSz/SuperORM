@@ -3,7 +3,7 @@ using SuperORM.Core.Domain.Model.Repository;
 using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Interface.Repository;
 using System;

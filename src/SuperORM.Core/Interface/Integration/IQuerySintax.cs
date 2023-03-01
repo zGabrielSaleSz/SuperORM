@@ -1,7 +1,7 @@
 ﻿using SuperORM.Core.Domain.Evaluate.Result;
 using System;
 
-namespace SuperORM.Core.Interface
+namespace SuperORM.Core.Interface.Integration
 {
     public interface IQuerySintax
     {

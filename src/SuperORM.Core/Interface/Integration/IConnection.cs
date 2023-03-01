@@ -1,7 +1,7 @@
 ﻿using SuperORM.Core.Domain.Model.Sql;
 using System.Collections.Generic;
 
-namespace SuperORM.Core.Interface
+namespace SuperORM.Core.Interface.Integration
 {
     public interface IConnection
     {

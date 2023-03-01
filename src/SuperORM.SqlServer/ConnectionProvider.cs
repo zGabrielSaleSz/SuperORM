@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Model.Sql;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using System.Data.SqlClient;
 
 namespace SuperORM.SqlServer

@@ -4,7 +4,7 @@ using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using System;
 using System.Linq.Expressions;
 
-namespace SuperORM.Core.Interface
+namespace SuperORM.Core.Interface.QueryBuilder
 {
     public interface IWhereable<TEntry>
     {

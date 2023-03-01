@@ -1,4 +1,5 @@
 ﻿using System;
+using SuperORM.Core.Interface.Integration;
 
 namespace SuperORM.Core.Interface.Repository
 {

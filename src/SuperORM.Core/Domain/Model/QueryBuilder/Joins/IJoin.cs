@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Interface;
+﻿using SuperORM.Core.Interface.Integration;
 
 namespace SuperORM.Core.Domain.Model.QueryBuilder.Joins
 {

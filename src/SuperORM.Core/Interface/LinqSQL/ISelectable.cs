@@ -1,5 +1,6 @@
 ﻿using SuperORM.Core.Domain.Model.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
+using SuperORM.Core.Interface.QueryBuilder;
 using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
-using SuperORM.Core.Interface;
+using SuperORM.Core.Interface.Integration;
 using System;
 
 namespace SuperORM.Core.Domain.Evaluate.ColumnEvaluation

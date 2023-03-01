@@ -1,4 +1,4 @@
-﻿namespace SuperORM.Core.Interface
+﻿namespace SuperORM.Core.Interface.Integration
 {
     public interface ITransactionConnection : IConnection
     {
