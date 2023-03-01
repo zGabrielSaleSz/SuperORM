@@ -64,7 +64,7 @@ namespace SuperORM.Core.Domain.Service.Repository
                     .ToDictionary(k => k.Key, v => v.ToArray());
 
                 if (duplicatedRepositories.Any())
-                    throw new DuplicatedRepositoryImplementation(GenerateDuplicatedMessage(duplicatedRepositories));
+                    throw new DuplicatedRepositoryImplementationException(GenerateDuplicatedMessage(duplicatedRepositories));
             }
 
             foreach (Type type in response)

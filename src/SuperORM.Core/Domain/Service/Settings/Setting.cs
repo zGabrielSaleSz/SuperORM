@@ -32,14 +32,14 @@ namespace SuperORM.Core.Domain.Service.Settings
         public void SetRepositoryRegistry<T>(T key, IRepositoryRegistry repositoryRegistry) where T : IComparable
         {
             if (RepositoryRegisters.ContainsKey(key))
-                throw new Exceptions.DuplicatedRepositoryRegistry();
+                throw new Exceptions.DuplicatedRepositoryRegistryException();
             RepositoryRegisters.Add(key, repositoryRegistry);
         }
 
         public IRepositoryRegistry GetRepositoryRegistry<T>(T key) where T : IComparable
         {
             if (!RepositoryRegisters.ContainsKey(key))
-                throw new Exceptions.NotFoundedRepositoryRegistry();
+                throw new Exceptions.NotFoundedRepositoryRegistryException();
             return RepositoryRegisters[key];
         }
     }

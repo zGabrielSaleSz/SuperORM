@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Domain.Evaluate.Column;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
 using SuperORM.Core.Domain.Model.QueryBuilder;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields;
 using SuperORM.Core.Domain.Model.QueryBuilder.Fields.FieldsArgument;

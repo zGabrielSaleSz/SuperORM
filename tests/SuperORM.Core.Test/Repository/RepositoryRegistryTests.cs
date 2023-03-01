@@ -79,7 +79,7 @@ namespace SuperORM.Core.Test.Repository
             };
 
             // Assert
-            Assert.Throws<DuplicatedRepositoryImplementation>(action);
+            Assert.Throws<DuplicatedRepositoryImplementationException>(action);
         }
 
         [Fact]

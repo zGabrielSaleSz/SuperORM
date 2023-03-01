@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Domain.Evaluate.Column;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
 using SuperORM.Core.Domain.Evaluate.Context;
 using SuperORM.Core.Domain.Evaluate.Result;
 using SuperORM.Core.Domain.Evaluate.Result.Factory;

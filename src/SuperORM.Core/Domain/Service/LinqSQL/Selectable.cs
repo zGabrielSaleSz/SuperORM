@@ -422,7 +422,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         public string GetTableOfType<Type>()
         {
             if (repositoryRegistry == null)
-                throw new NotFoundedRepositoryRegistry();
+                throw new NotFoundedRepositoryRegistryException();
             return repositoryRegistry.GetRepository(typeof(Type)).GetTableName();
         }
     }

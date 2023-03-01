@@ -1,4 +1,4 @@
-﻿using SuperORM.Core.Domain.Evaluate.Column;
+﻿using SuperORM.Core.Domain.Evaluate.ColumnEvaluation;
 using SuperORM.Core.Domain.Exceptions;
 using SuperORM.Core.Domain.Model.Common;
 using SuperORM.Core.Domain.Model.Enum;
