@@ -4,7 +4,7 @@ using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Utilities.Reflection;
 
-namespace SuperORM.Core.Domain.Service.Repository
+namespace SuperORM.Core.Domain.Service.RepositoryUtils
 {
     internal class RepositoryInsert<Target, PrimaryKeyType>
     {

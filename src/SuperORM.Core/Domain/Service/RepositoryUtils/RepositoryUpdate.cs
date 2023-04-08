@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SuperORM.Core.Domain.Service.Repository
+namespace SuperORM.Core.Domain.Service.RepositoryUtils
 {
     internal class RepositoryUpdate<Target, PrimaryKeyType>
     {

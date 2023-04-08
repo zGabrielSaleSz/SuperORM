@@ -1,5 +1,4 @@
-﻿using SuperORM.Core.Domain.Service.Repository;
-using SuperORM.Core.Interface.Integration;
+﻿using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Interface.Repository;
 using System;
 using System.Collections.Generic;

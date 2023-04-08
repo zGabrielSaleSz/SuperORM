@@ -3,6 +3,7 @@ using SuperORM.Core.Domain.Model.Repository;
 using SuperORM.Core.Domain.Service.Evaluator;
 using SuperORM.Core.Domain.Service.LinqSQL;
 using SuperORM.Core.Domain.Service.LinqSQL.SelectableTools;
+using SuperORM.Core.Domain.Service.RepositoryUtils;
 using SuperORM.Core.Interface.Integration;
 using SuperORM.Core.Interface.LinqSQL;
 using SuperORM.Core.Interface.Repository;
@@ -63,12 +64,11 @@ namespace SuperORM.Core.Domain.Service.Repository
             return _targetType;
         }
 
-        public ISelectable<Target> GetSelectable()
+        public ISelectableRepository<Target> GetSelectable()
         {
-            return new Selectable<Target>(GetConnectionProvider().GetNewConnection(), GetQuerySintax())
+            return new SelectableRepository<Target>(TableName, GetConnectionProvider().GetNewConnection(), GetQuerySintax())
                 .UseRepositoryRegistry(repositoryRegistry)
-                .AddColumnAssimilation(_columnAssimilator)
-                .From(TableName);
+                .AddColumnAssimilation(_columnAssimilator);
         }
 
         public void Insert(params Target[] targets)

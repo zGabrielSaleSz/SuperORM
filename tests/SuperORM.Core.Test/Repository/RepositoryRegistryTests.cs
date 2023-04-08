@@ -1,5 +1,5 @@
 ﻿using SuperORM.Core.Domain.Exceptions;
-using SuperORM.Core.Domain.Service.Repository;
+using SuperORM.Core.Domain.Service.RepositoryUtils;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.Core.Test.Complement.Mock;
 using SuperORM.TestsResource.Entities;

@@ -94,14 +94,11 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
-        public ISelectable<T> InnerJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
-            => InnerJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined, alias);
-
-        public ISelectable<T> InnerJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
-            => InnerJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined, alias);
-
         public ISelectable<T> InnerJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
             => InnerJoin<T, T2>(tableName, attributeRoot, attributeJoined, alias);
+
+        public ISelectable<T> InnerJoin<TReference>(Expression<Func<T, object>> attributeRoot, Expression<Func<TReference, object>> attributeJoined, IJoinAdapter<TReference> reference)
+            => InnerJoin<T, TReference>(GetTableOfType<TReference>(), attributeRoot, attributeJoined, reference.GetAlias());
 
         public ISelectable<T> InnerJoin<T1, T2>(string tableName, Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined, string alias = "")
         {
@@ -109,12 +106,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _selectableBuilder.InnerJoin(joinResult.FieldTable, joinResult.FieldTableJoined);
             return this;
         }
-
-        public ISelectable<T> LeftJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => LeftJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
-
-        public ISelectable<T> LeftJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => LeftJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
 
         public ISelectable<T> LeftJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => LeftJoin<T, T2>(tableName, attributeRoot, attributeJoined);
@@ -126,12 +117,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
-        public ISelectable<T> RightJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => RightJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
-
-        public ISelectable<T> RightJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => RightJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
-
         public ISelectable<T> RightJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => RightJoin<T, T2>(tableName, attributeRoot, attributeJoined);
 
@@ -141,12 +126,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _selectableBuilder.RightJoin(joinResult.FieldTable, joinResult.FieldTableJoined);
             return this;
         }
-
-        public ISelectable<T> CrossJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => CrossJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
-
-        public ISelectable<T> CrossJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => CrossJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
 
         public ISelectable<T> CrossJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => CrossJoin<T, T2>(tableName, attributeRoot, attributeJoined);
@@ -158,12 +137,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             return this;
         }
 
-        public ISelectable<T> FullJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => FullJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
-
-        public ISelectable<T> FullJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-           => FullJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
-
         public ISelectable<T> FullJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => FullJoin<T, T2>(tableName, attributeRoot, attributeJoined);
 
@@ -173,12 +146,6 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
             _selectableBuilder.FullJoin(joinResult.FieldTable, joinResult.FieldTableJoined);
             return this;
         }
-
-        public ISelectable<T> SelfJoin<T2>(Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => SelfJoin<T2>(GetTableOfType<T2>(), attributeRoot, attributeJoined);
-
-        public ISelectable<T> SelfJoin<T1, T2>(Expression<Func<T1, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
-            => SelfJoin(GetTableOfType<T2>(), attributeRoot, attributeJoined);
 
         public ISelectable<T> SelfJoin<T2>(string tableName, Expression<Func<T, object>> attributeRoot, Expression<Func<T2, object>> attributeJoined)
             => SelfJoin<T, T2>(tableName, attributeRoot, attributeJoined);

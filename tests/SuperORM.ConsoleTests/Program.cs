@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using SuperORM.ConsoleTests.UseCases;
 using SuperORM.Core.Domain.Service.Repository;
+using SuperORM.Core.Domain.Service.RepositoryUtils;
 using SuperORM.Core.Domain.Service.Settings;
 using SuperORM.Core.Interface.Repository;
 using SuperORM.TestsResource.Repositories;
