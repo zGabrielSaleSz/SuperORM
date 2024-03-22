@@ -48,7 +48,7 @@ namespace SuperORM.Core.Domain.Service.Repository
 
         }
 
-        public ISelectable<Target> GetSelectable()
+        public ISelectable<Target> Select()
         {
             return new Selectable<Target>(GetConnectionProvider().GetNewConnection(), GetQuerySintax())
                 .AddColumnAssimilation(_columnAssimilator)

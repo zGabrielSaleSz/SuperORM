@@ -103,20 +103,5 @@ namespace SuperORM.MySql
         {
             return "SELECT LAST_INSERT_ID();";
         }
-
-        public IEvaluateResult GetValue(decimal value)
-        {
-            return EvaluateResultFactory.AsValue(value.ToString(), value);
-        }
-
-        public IEvaluateResult GetValue(double value)
-        {
-            return EvaluateResultFactory.AsValue(value.ToString(), value);
-        }
-
-        public IEvaluateResult GetValue(float value)
-        {
-            return EvaluateResultFactory.AsValue(value.ToString(), value);
-        }
     }
 }

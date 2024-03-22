@@ -455,3 +455,4 @@ $RECYCLE.BIN/
 
 tests/SuperORM.ConsoleTests/appsettings.json
 .gitignore.bak
+/tests/SuperORM.WebAPI/appsettings.json
