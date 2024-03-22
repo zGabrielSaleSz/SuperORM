@@ -22,7 +22,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
 {
     public class Selectable<T> : ISelectable<T> where T : new()
     {
-        private readonly TableAssimilator _tableAssimilator;
+        private readonly ITableAssimilator _tableAssimilator;
         private readonly IConnection _connection;
         private readonly ISelectableBuilder _selectableBuilder;
         private readonly IQuerySintax _querySintax;

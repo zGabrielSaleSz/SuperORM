@@ -19,12 +19,19 @@ namespace SuperORM.MySql
 
         public void OpenConnection()
         {
-            _mySqlConnection.Open();
+            if (!IsConnectionOpen())
+            {
+                _mySqlConnection.Open();
+            }
         }
 
+        public bool IsConnectionOpen() => _mySqlConnection.State == System.Data.ConnectionState.Open;
         public void CloseConnection()
         {
-            _mySqlConnection.Close();
+            if (IsConnectionOpen())
+            {
+                _mySqlConnection.Close();
+            }
         }
 
         public void OpenTransactionAttachedToConnection()

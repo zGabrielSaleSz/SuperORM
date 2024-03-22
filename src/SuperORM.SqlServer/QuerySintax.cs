@@ -104,5 +104,20 @@ namespace SuperORM.SqlServer
         {
             return "SELECT SCOPE_IDENTITY();";
         }
+
+        public IEvaluateResult GetValue(decimal value)
+        {
+            return EvaluateResultFactory.AsValue(value.ToString(), value);
+        }
+
+        public IEvaluateResult GetValue(double value)
+        {
+            return EvaluateResultFactory.AsValue(value.ToString(), value);
+        }
+
+        public IEvaluateResult GetValue(float value)
+        {
+            return EvaluateResultFactory.AsValue(value.ToString(), value);
+        }
     }
 }

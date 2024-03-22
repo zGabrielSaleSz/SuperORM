@@ -11,9 +11,9 @@ namespace SuperORM.Core.Domain.Model.Evaluate.Default
     internal class EvaluateColumnQueryBuilder<T> : IEvaluateColumn
     {
         private readonly IQuerySintax _querySintax;
-        private readonly TableAssimilator _tableAssimilator;
+        private readonly ITableAssimilator _tableAssimilator;
         private readonly ColumnAssimilator _columnAssimilator;
-        public EvaluateColumnQueryBuilder(TableAssimilator tableAssimilator, IQuerySintax querySintax, ColumnAssimilator columnAssimilator)
+        public EvaluateColumnQueryBuilder(ITableAssimilator tableAssimilator, IQuerySintax querySintax, ColumnAssimilator columnAssimilator)
         {
             this._querySintax = querySintax;
             this._tableAssimilator = tableAssimilator;

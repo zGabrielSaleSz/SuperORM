@@ -6,16 +6,21 @@ namespace SuperORM.SqlServer
 {
     public class ConnectionProvider : BaseConnectionProvider, IConnectionProvider
     {
-        private readonly string _connectionString;
+        private readonly SqlConnection _connectionSqlServer;
+
         public ConnectionProvider(string connectionString)
         {
-            this._connectionString = connectionString;
+            _connectionSqlServer = new SqlConnection(connectionString);
+        }
+
+        public ConnectionProvider(SqlConnection connectionSqlServer)
+        {
+            _connectionSqlServer = connectionSqlServer;
         }
 
         public override IBaseConnection GetBaseConnection()
         {
-            SqlConnection connectionSqlServer = new SqlConnection(this._connectionString);
-            return new Connection(connectionSqlServer);
+            return new Connection(_connectionSqlServer);
         }
 
         public override IQuerySintax GetQuerySintax()

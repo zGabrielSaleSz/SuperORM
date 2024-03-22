@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SuperORM.MySql</id>
-    <version>1.1.2</version>
+    <version>1.2.0</version>
     <title>SuperORM.MySql</title>
     <authors>zGabrielSaleSz</authors>
 	  <icon>assets\super_icon.png</icon>

@@ -18,7 +18,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IDeletableBuilder _deletableBuilder;
         private readonly IQuerySintax _querySintax;
         private readonly Table _table;
-        private readonly TableAssimilator _tableAssimilator;
+        private readonly ITableAssimilator _tableAssimilator;
         private ColumnAssimilator _columnAssimilator;
 
         public Deletable(IConnection connection, IQuerySintax querySintax)

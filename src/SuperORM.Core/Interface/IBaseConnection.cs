@@ -11,6 +11,7 @@ namespace SuperORM.Core.Interface
     {
         void OpenConnection();
         void OpenTransactionAttachedToConnection();
+        bool IsConnectionOpen();
         int ExecuteNonQueryImplementation(ParameterizedQuery query);
         T ExecuteScalarImplementation<T>(ParameterizedQuery query);
         IEnumerable<IDictionary<string, object>> ExecuteReaderImplementation(ParameterizedQuery query);

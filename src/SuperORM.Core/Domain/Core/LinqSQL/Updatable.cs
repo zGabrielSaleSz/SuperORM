@@ -20,7 +20,7 @@ namespace SuperORM.Core.Domain.Service.LinqSQL
         private readonly IUpdatableBuilder _updatableBuilder;
         private readonly IQuerySintax _querySintax;
         private readonly Table _table;
-        private readonly TableAssimilator _tableAssimilator;
+        private readonly ITableAssimilator _tableAssimilator;
         private ColumnAssimilator _columnAssimilator;
         public Updatable(IConnection connection, IQuerySintax querySintax)
         {

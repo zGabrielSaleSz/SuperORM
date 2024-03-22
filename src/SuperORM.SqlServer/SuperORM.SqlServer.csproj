@@ -20,11 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SuperORM.Core" Version="1.2.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SuperORM.Core\SuperORM.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

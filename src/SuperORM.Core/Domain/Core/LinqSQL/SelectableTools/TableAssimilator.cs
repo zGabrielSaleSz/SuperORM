@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
 {
-    internal class TableAssimilator
+    internal class TableAssimilator : ITableAssimilator
     {
         private readonly Table mainTable;
         private readonly Dictionary<Type, Table> tables = new Dictionary<Type, Table>();
@@ -16,32 +16,32 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             tables.Add(typeMainTable, mainTable);
         }
 
-        internal void SetMainTableName(string tableName)
+        public void SetMainTableName(string tableName)
         {
             mainTable.Name = tableName;
         }
 
-        internal void SetMainTableName(Table table)
+        public void SetMainTableName(Table table)
         {
             mainTable.CopyFrom(table);
         }
 
-        internal Table GetMainTable()
+        public Table GetMainTable()
         {
             return mainTable;
         }
 
-        internal Dictionary<Type, Table> GetTablesReference()
+        public Dictionary<Type, Table> GetTablesReference()
         {
             return tables;
         }
 
-        internal bool MainTableHasName()
+        public bool MainTableHasName()
         {
             return !string.IsNullOrWhiteSpace(mainTable.Name);
         }
 
-        internal Table AddTableReference(Type type, string tableName)
+        public Table AddTableReference(Type type, string tableName)
         {
             if (TableHasReferences(type))
                 throw new TableReferenceException("This type already have a table referenced");
@@ -50,24 +50,24 @@ namespace SuperORM.Core.Domain.Service.LinqSQL.SelectableTools
             return tables[type];
         }
 
-        internal void SetTableName(Type type, string tableName)
+        public void SetTableName(Type type, string tableName)
         {
             CheckTableReference(type);
             tables[type].Name = tableName;
         }
 
-        internal Table GetTableReference(Type type)
+        public Table GetTableReference(Type type)
         {
             CheckTableReference(type);
             return tables[type];
         }
 
-        internal Type GetTypeByTable(Table table)
+        public Type GetTypeByTable(Table table)
         {
             return tables.Where(t => t.Value == table).Select(t => t.Key).FirstOrDefault();
         }
 
-        internal bool TableHasReferences(Type type)
+        public bool TableHasReferences(Type type)
         {
             return tables.ContainsKey(type);
         }

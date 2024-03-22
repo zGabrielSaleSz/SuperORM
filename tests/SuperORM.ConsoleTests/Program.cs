@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using SuperORM.ConsoleTests.Repositories;
 using SuperORM.ConsoleTests.UseCases;
 using SuperORM.Core.Domain.Model.LinqSQL;
@@ -26,19 +27,30 @@ namespace SuperORM.ConsoleTests
                             .Build();
 
             string mySqlConnectionString = configuration["MySqlConnection"];
-            MySql.ConnectionProvider connectionProviderMySql = new MySql.ConnectionProvider(mySqlConnectionString);
+            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder
+            {
+                Server = "ec2-user@ec2-54-233-188-132.sa-east-1.compute.amazonaws.com",
+                Port = 3306,
+                UserID = "root",
+                Password = "esvaed16",
+                Database = "zdatabase",
+                SslMode = MySqlSslMode.Required, // Define o modo SSL como obrigatório
+                CertificateFile = @"D:\Users\Gabriel\Desktop\aws\ssh_sql.pem" // Especifique o caminho para o certificado PEM
+            };
 
-            string sqlServerConnectionString = configuration["SqlServerConnection"];
-            SqlServer.ConnectionProvider connectionProviderSqlServer = new SqlServer.ConnectionProvider(sqlServerConnectionString);
+
+
+            MySql.ConnectionProvider connectionProviderMySql = new MySql.ConnectionProvider(builder.ToString());
+
+            //string sqlServerConnectionString = configuration["SqlServerConnection"];
+            //SqlServer.ConnectionProvider connectionProviderSqlServer = new SqlServer.ConnectionProvider(sqlServerConnectionString);
 
             Setting setting = Setting.GetInstance();
             setting.SetConnection(connectionProviderMySql);
 
-            //ColumnAssimilationTests.RunRepository();
-            //SelectableJoins.Run();
-            //TransactionsTests.RunInsertUpdate(connectionProviderSqlServer);
-            //TransactionsTests.RunSelectUpdate(connectionProviderMySql);
-            RepositoryJoins.Run(connectionProviderMySql);
+            ColumnAssimilationTests.RunRepository();
+            SelectableJoins.Run();
+            TransactionsTests.Run(connectionProviderMySql);
         }
     }
 }

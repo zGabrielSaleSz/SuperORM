@@ -25,14 +25,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SuperORM.Core\SuperORM.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\assets\super_icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SuperORM.Core\SuperORM.Core.csproj" />
   </ItemGroup>
 
 </Project>

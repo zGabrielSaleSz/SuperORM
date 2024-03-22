@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SuperORM.SqlServer</id>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <title>SuperORM.SqlServer</title>
     <authors>zGabrielSaleSz</authors>
 	<icon>assets\super_icon.png</icon>
